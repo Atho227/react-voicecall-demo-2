@@ -6,6 +6,7 @@ import { CloseIcon, HeadSet } from '../../../assets/icon/ActionIcons'
 import IconOptionBtn from '../button/iconOptionBtn'
 import BasicSwitch from '../button/switch'
 import DropDown from '../button/Dropdown'
+import PhoneBtnLine from '../div/phoneBtnLine'
 
 const CSCallModal = () => {
     const [showNumpad, setShowNumPad] = useState(true)
@@ -45,6 +46,17 @@ const CSCallModal = () => {
                     <div className="main-content">
                         <div className="call-out-seting">
                             <DropDown />
+                        </div>
+                        <div className="call-out-input">
+                            <DropDown />
+                            <div className="num-pad">
+                                <div className="num-wrapper">
+                                    <PhoneBtnLine line={['1', '2', '3']} />
+                                    <PhoneBtnLine line={['4', '5', '6']} />
+                                    <PhoneBtnLine line={['7', '8', '9']} />
+                                    <PhoneBtnLine line={['*', '0', '#']} />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     : <div className="main-content"></div>}
