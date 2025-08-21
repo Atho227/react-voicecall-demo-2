@@ -14,7 +14,8 @@ const StatusBar = ({ }) => {
 
     return (
         <SmallModal>
-            <BasicSwitch switchStatus={permission} switchText={'Quyền gọi'} onClick={() => setPermission(!permission)} />
+            <BasicSwitch switchStatus={permission} switchText={'Quyền gọi'}
+                onClick={() => csEnableCall()} />
             <div className="online-status modal-item" onClick={() => setOnline(!online)}>
                 <BadgeWrapper>
                     {online ? <Active /> : <Disable />}

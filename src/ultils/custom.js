@@ -53,7 +53,7 @@ function csShowEnableVoice(isEnable) {
 
 function csShowCallStatus(status) {
     console.log(`csShowCallStatus : ${status}`);
-    // Đóng popup hoặc reset UI
+    window.setOnline(status === 'Online')
 }
 function csCustomerAccept() {
     console.log('csCustomerAccept');
