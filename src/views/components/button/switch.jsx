@@ -4,7 +4,8 @@ const BasicSwitch = ({
     switchStatus = true,
     switchText = false,
     style = {},       // prop style
-    className = ''    // prop className bổ sung
+    className = '',  // prop className bổ sung
+    onClick
 }) => {
     const [isActive, setIsActive] = useState(switchStatus);
 
@@ -12,7 +13,15 @@ const BasicSwitch = ({
         <div
             className={`switch-wrapper ${className}`}
             style={style}
-            onClick={() => setIsActive(!isActive)}
+            onClick={() => {
+                try {
+                    if (onClick) onClick();    // chạy hàm từ prop
+                    setIsActive(!isActive);   // chỉ chạy nếu không có lỗi
+                } catch (error) {
+                    console.error("onClick prop error:", error);
+                    // nếu error thì không setIsActive
+                }
+            }}
         >
             <div className={`switch ${isActive ? 'active' : ''}`}>
                 <div className="switch-circle">
@@ -22,7 +31,7 @@ const BasicSwitch = ({
                 </div>
             </div>
             {switchText ? <div className="switch-text">{switchText}</div> : null}
-        </div>
+        </div >
     )
 }
 

@@ -1,6 +1,5 @@
-export const toggleOnlineStatus = (setStatus) => {
-    setStatus(prevStatus => ({
-        ...prevStatus,
-        online: !prevStatus.online,
-    }));
+// utils.js
+
+export const togglePermission = (permission, setPermission) => {
+    setPermission(!permission) //toggle permission
 };

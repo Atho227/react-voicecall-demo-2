@@ -12,7 +12,7 @@ const IconButton = ({ icon, onClick, style, iconStyle }) => {
                 justifyContent: "center",
                 alignItems: "center",
                 gap: "8px",
-                background: "rgba(61, 85, 204, 0.10)",
+                backgroundColor: "rgba(61, 85, 204, 0.10)",
                 ...style
             }}
         >

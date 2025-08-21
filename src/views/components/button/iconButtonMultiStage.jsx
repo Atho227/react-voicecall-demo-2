@@ -8,7 +8,7 @@ import IconWrap from '../other/icon';
  * @param {function} [props.onClick] - callback khi click button
  */
 const IconBtnMultiStages = ({ stage, icons, onClick }) => {
-    const Icon = icons[stage]; // lấy icon theo stage hiện tại
+    const Icon = icons[stage];
 
     return (
         <div onClick={onClick}>

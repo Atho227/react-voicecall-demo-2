@@ -1,43 +1,23 @@
 import React, { useState } from 'react'
 import SmallModal from '../modals/SmallModal'
 import BadgeWrapper from '../other/badge'
-import { toggleOnlineStatus } from '../../../ultils/changeStatus/changeStatus'
+import { togglePermission } from '../../../ultils/changeStatus/changeStatus'
 import BasicSwitch from '../button/switch'
 import IconBtnMultiStages from '../button/iconButtonMultiStage'
 import { PhoneCalling, PhoneNormal, PhoneRestrict, } from '../../../assets/icon/PhoneIcons'
 import { Active, Disable } from '../../../assets/icon/ActiveStatusIcon'
+import { useCall } from '../../../hooks/CallHook/useCall'
+import IconButton from '../button/IconButton'
 
-const StatusBar = ({ status, setStatus }) => {
-    const [callOutStage, setCallOutStage] = useState(2)
-
-    const callOutIcons = {
-        1: PhoneRestrict,
-        2: PhoneNormal,
-        3: PhoneCalling,
-    }
-
-    const toggleCallOutIcon = () => {
-        setCallOutStage(prevStage => {
-            const maxStage = Object.keys(callOutIcons).length;
-            return prevStage >= maxStage ? 1 : prevStage + 1;
-        });
-    };
-
-    const openCSCallModal = () => {
-        if (status.callModal !== true) {
-            setStatus(prevStatus => ({
-                ...prevStatus,
-                callModal: true
-            }));
-        }
-    };
+const StatusBar = ({ }) => {
+    const { permission, online, setPermission, callStatus, setOnline } = useCall();
 
     return (
         <SmallModal>
-            <BasicSwitch switchStatus={status.permission} switchText={'Quyền gọi'} />
-            <div className="online-status modal-item" onClick={() => toggleOnlineStatus(setStatus)}>
+            <BasicSwitch switchStatus={permission} switchText={'Quyền gọi'} onClick={() => setPermission(!permission)} />
+            <div className="online-status modal-item" onClick={() => setOnline(!online)}>
                 <BadgeWrapper>
-                    {status.online ? <Active /> : <Disable />}
+                    {online ? <Active /> : <Disable />}
                 </BadgeWrapper>
                 <div
                     className="online-status-text"
@@ -50,7 +30,7 @@ const StatusBar = ({ status, setStatus }) => {
                     }}
                 >
                     <span className="texxt" style={{
-                        color: status.online ? '#393D4D' : '#979AA8',
+                        color: online ? '#393D4D' : '#979AA8',
                         fontVariantNumeric: "lining-nums tabular-nums",
                         fontFeatureSettings: "'cpsp' on, 'calt' off",
                         fontFamily: "var(--typeface-family-text, Inter)",
@@ -61,7 +41,13 @@ const StatusBar = ({ status, setStatus }) => {
                     }}>Trực tuyến</span>
                 </div>
             </div >
-            <IconBtnMultiStages stage={callOutStage} icons={callOutIcons} onClick={openCSCallModal} />
+            {!permission ?
+                <IconButton icon={PhoneRestrict} style={{ borderRadius: '0', backgroundColor: "auto", }} /> :
+                callStatus === 'initial' ?
+                    < IconButton icon={PhoneNormal} style={{ borderRadius: '0', backgroundColor: "auto", }} /> :
+                    callStatus === 'calling' ?
+                        <IconButton icon={PhoneCalling} style={{ borderRadius: '0', backgroundColor: "auto", }} /> : ''
+            }
         </SmallModal >
     )
 }

@@ -9,8 +9,11 @@ import DropDown from '../button/Dropdown'
 import PhoneBtnLine from '../other/phoneBtnLine'
 import CallInfo from '../parts/callInfo'
 import NormalButton from '../button/NormalButton'
+import { useCall } from '../../../hooks/CallHook/useCall'
 
 const CSCallModal = () => {
+    const { startCall, endCall } = useCall();
+
     const [showNumpad, setShowNumPad] = useState(true)
     const [ringging, setRingging] = useState(false)
     const [callDirection, setCalldireaction] = useState(false)
