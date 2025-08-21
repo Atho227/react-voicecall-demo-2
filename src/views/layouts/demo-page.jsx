@@ -19,7 +19,7 @@ const MainLayout = ({ statusStat = status }) => {
 
     const [showCallingModal, setShowCallingModal] = useState(false)
     return (
-        <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 'auto', gap: '8px', backgroundColor: 'white', color: 'black' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 'auto', gap: '8px', backgroundColor: 'white', color: 'black', position: 'absolute', top: '50px', left: '50%', transform: 'translatex(-50%)' }}>
             <StatusBar status={status} setStatus={setStatus} />
             {status.callModal ? <CSCallModal /> : ''}
             {showCallingModal ? <CallingModal /> : ''}

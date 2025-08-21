@@ -8,14 +8,21 @@ import BasicSwitch from '../button/switch'
 import DropDown from '../button/Dropdown'
 import PhoneBtnLine from '../other/phoneBtnLine'
 import CallInfo from '../parts/callInfo'
+import NormalButton from '../button/NormalButton'
 
 const CSCallModal = () => {
     const [showNumpad, setShowNumPad] = useState(true)
-    const [ringging, setRingging] = useState(true)
-    const [callDirection, setCalldireaction] = useState(true)
+    const [ringging, setRingging] = useState(false)
+    const [callDirection, setCalldireaction] = useState(false)
 
     const toggleNumPad = () => {
         setShowNumPad(!showNumpad)
+    }
+
+    const calOutAction = () => {
+        setCalldireaction(true)
+        setShowNumPad(false)
+        setRingging(true)
     }
     return (
         <div className='CS-Call'>
@@ -61,11 +68,11 @@ const CSCallModal = () => {
                                 </div>
                             </div>
                         </div>
+                        <NormalButton text='Gọi' style={{ color: '#D9E1FC', backgroundColor: '#3D55CC' }} onClick={calOutAction} />
                     </div>
                     : ringging ?
                         <CallInfo callOut={callDirection} />
-                        :
-                        <div style={{ display: 'flex', padding: '64px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '24px', alignSelf: 'stretch' }}>
+                        : <div style={{ display: 'flex', padding: '64px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '24px', alignSelf: 'stretch' }}>
                             <div style={{ display: 'flex', width: '322px', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
                                 <IconWrap icon={PhoneRestrict} fill={'#5C6073'} additionalStyle={{
                                     borderRadius: '999px',

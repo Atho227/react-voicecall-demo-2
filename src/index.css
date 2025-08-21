@@ -26,6 +26,7 @@ body {
   height: 100%;
   min-width: 100vw;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 /* 
@@ -448,10 +449,10 @@ p {
   display: flex;
   height: 36px;
   padding: var(--space-inset-4px, 4px) var(--space-inset-16px, 16px);
+  align-self: stretch;
   justify-content: center;
   align-items: center;
   gap: var(--space-inline-8px, 8px);
-  align-self: stretch;
 
   border-radius: var(--button-radiusCorner, 12px);
   background: var(--button-primary-filledTonal-background-default, rgba(61, 85, 204, 0.10));

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import IconWrap from '../other/icon';
 import { ChervonDown } from '../../../assets/icon/ActionIcons';
 
-const IconOptionBtn = ({ options }) => {
+const IconOptionBtn = ({ options, btnStyle, fill }) => {
     const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState(options[0]); // mặc định chọn option đầu
     const dropdownRef = useRef(null);
@@ -18,13 +18,14 @@ const IconOptionBtn = ({ options }) => {
     }, []);
 
     return (
-        <div className="icon-option-btn" ref={dropdownRef} style={{ position: 'relative', display: 'inline-block' }}>
+        <div className="icon-option-btn" ref={dropdownRef} style={{ position: 'relative', display: 'inline-block', }}>
             <div
                 className="icon-dropdown-btn"
                 onClick={() => setOpen(!open)}
+                style={{ ...btnStyle }}
             >
                 <IconWrap icon={selected.icon} />
-                <IconWrap icon={ChervonDown} />
+                <IconWrap icon={ChervonDown} fill={fill} />
             </div>
 
             {open && (

@@ -3,9 +3,12 @@ import IconWrap from '../other/icon'
 import { CallSignal, UserIcon } from '../../../assets/icon/ActiveStatusIcon'
 import { PhoneDisconnect, PhoneNormal } from '../../../assets/icon/PhoneIcons'
 import NormalButton from '../button/NormalButton'
+import IconOptionBtn from '../button/iconOptionBtn'
+import { CallTransfer, Microphone, Pause } from '../../../assets/icon/ActionIcons'
+import IconButton from '../button/IconButton'
 
-const CallInfo = ({ callOut = true }) => {
-    const callingStage = 'normal' //normal | connecting | ringging | calling |
+const CallInfo = ({ callOut = true, callingStage2 }) => {
+    const callingStage = 'connecting' //normal | connecting | ringging | calling | máy bận
     const time = '00:00'
     return (
         <div style={{
@@ -19,9 +22,9 @@ const CallInfo = ({ callOut = true }) => {
             <div style={{ display: 'flex', padding: '16px', flexDirection: 'column', alignItems: 'flex-start', gap: '16px', alignSelf: 'stretch' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px', alignSelf: 'stretch' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch' }}>
-                        <p className='secondary-text' style={{ flex: '1 0 0' }}>Dịch vụ gọi ra</p>
+                        <p className='secondary-text' style={{ flex: '1 0 0' }}>{callingStage === 'calling' ? 'Đang trong cuộc gọi' : callOut ? 'Dịch vụ gọi ra' : 'Dịch vụ nhận cuộc gọi'}</p>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', }}>
-                            <p className='secondary-text'>{callingStage !== 'normal' ? time : ''}</p>
+                            <p className='secondary-text'>{callingStage === 'calling' ? time : ''}</p>
                             <IconWrap icon={CallSignal} />
                         </div>
                     </div>
@@ -32,9 +35,11 @@ const CallInfo = ({ callOut = true }) => {
                 </div>
                 <div style={{ width: '328px', height: '1px', backgroundColor: '#DADCE5' }}></div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px', alignSelf: 'stretch' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'stretch' }}>
-                        <p className='secondary-text bold' style={{ flex: '1 0 0' }}>Đang kết nối tới...</p>
-                    </div>
+                    {callingStage === 'calling' ? '' :
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'stretch' }}>
+                            <p className='secondary-text bold' style={{ flex: '1 0 0' }}>{callOut ? 'Đang kết nối tới...' : 'Cuộc gọi đến'}</p>
+                        </div>
+                    }
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'stretch' }}>
                         <div style={{ display: 'flex', height: '44px', alignItems: 'center', gap: '16px', flex: '1 0 0' }}>
                             <div style={{ width: '40px', height: '40px', flexShirk: '0', borderRadius: '99px', backgroundColor: '#DADCE5', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -62,10 +67,39 @@ const CallInfo = ({ callOut = true }) => {
                 alignSelf: 'stretch',
                 backgroundColor: '#F5F6FA',
             }}>
-                <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} />
+                {callingStage === 'calling' ?
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch' }}>
+                        <IconOptionBtn options={options} btnStyle={{ borderRadius: '999px', backgroundColor: 'rgba(61, 85, 204, 0.10)' }} fill={'#3D55CC'} />
+                        <IconButton icon={Microphone} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
+                        <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
+                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }} />
+                    </div>
+                    : callOut ?
+                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} /> :
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'flex-start',
+                            gap: 'var(--space-12px, 12px)',
+                            alignSelf: 'stretch',
+                            backgroundColor: '#F5F6FA',
+                        }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: '8px', alignSelf: 'stretch' }}>
+                                <NormalButton text='Bỏ qua' style={{ flex: '1 0 0' }} />
+                                <NormalButton text='Tiếp nhận' style={{ flex: '1 0 0', backgroundColor: '#3D55CC', color: '#D9E1FC' }} />
+                            </div>
+                            <p className='small-text' style={{ textAlign: 'center', color: '#787C91' }}>Cuộc gọi bị bỏ qua sẽ được tự động chuyển tiếp cho một chuyên viên khác.</p>
+                        </div>
+                }
             </div>
         </div >
     )
 }
 
 export default CallInfo
+
+const options = [
+    { icon: CallTransfer, title: 'Trao đổi nội bộ', subtitle: 'Trao đổi với chuyên viên khác' },
+    { icon: CallTransfer, title: 'Chuyển cho chuyên viên', subtitle: 'Chuyển đích danh một chuyên viên cụ thể' },
+    { icon: CallTransfer, title: 'Chuyển theo đầu số', subtitle: 'Chuyển cho một chuyên viên bất kỳ có kỹ năng đầu số' }
+];

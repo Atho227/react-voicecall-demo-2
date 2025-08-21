@@ -1,9 +1,10 @@
 import React from 'react'
 import IconWrap from '../other/icon'
 
-const IconButton = ({ icon }) => {
+const IconButton = ({ icon, onClick, style, iconStyle }) => {
     return (
         <div
+            onClick={onClick}
             style={{
                 borderRadius: "999px",
                 display: "flex",
@@ -12,9 +13,10 @@ const IconButton = ({ icon }) => {
                 alignItems: "center",
                 gap: "8px",
                 background: "rgba(61, 85, 204, 0.10)",
+                ...style
             }}
         >
-            <IconWrap icon={icon} />
+            <IconWrap icon={icon} additionalStyle={{ ...iconStyle }} />
         </div>
     )
 }
