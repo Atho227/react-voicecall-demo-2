@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import IconWrap from '../other/icon'
-import { NumberDial, PhoneNormalFill, PhoneRestrict } from '../../../assets/icon/PhoneIcons'
-import { Active } from '../../../assets/icon/ActiveStatusIcon'
+import { NumberDial, PhoneNormal, PhoneNormalFill, PhoneRestrict } from '../../../assets/icon/PhoneIcons'
+import { Active, Disable } from '../../../assets/icon/ActiveStatusIcon'
 import { CloseIcon, HeadSet } from '../../../assets/icon/ActionIcons'
 import IconOptionBtn from '../button/iconOptionBtn'
 import BasicSwitch from '../button/switch'
@@ -10,13 +10,16 @@ import PhoneBtnLine from '../other/phoneBtnLine'
 import CallInfo from '../parts/callInfo'
 import NormalButton from '../button/NormalButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
+import InputWithIcon from '../input/InputWithIcon'
 
 const CSCallModal = () => {
-    const { startCall, endCall } = useCall();
+    const { online, startCall, endCall } = useCall();
 
     const [showNumpad, setShowNumPad] = useState(true)
     const [ringging, setRingging] = useState(false)
     const [callDirection, setCalldireaction] = useState(false)
+
+    const [phone, setPhone] = useState('')
 
     const toggleNumPad = () => {
         setShowNumPad(!showNumpad)
@@ -27,13 +30,17 @@ const CSCallModal = () => {
         setShowNumPad(false)
         setRingging(true)
     }
+
+    const handlePhoneBtnClick = (val) => {
+        setPhone(prev => prev + val);
+    };
     return (
         <div className='CS-Call'>
             <div className="modal-header">
                 <div className="heading">
                     <IconWrap icon={PhoneNormalFill} />
                     <div className="primary-text">CS Call</div>
-                    <Active />
+                    {online ? <Active /> : <Disable />}
                 </div>
                 <div className="action-btn">
                     <IconWrap icon={CloseIcon} />
@@ -61,13 +68,13 @@ const CSCallModal = () => {
                             <DropDown />
                         </div>
                         <div className="call-out-input">
-                            <DropDown />
+                            <InputWithIcon label={'Tới số'} fIcon={PhoneNormal} updateValue={setPhone} outvalue={phone} />
                             <div className="num-pad">
                                 <div className="num-wrapper">
-                                    <PhoneBtnLine line={['1', '2', '3']} />
-                                    <PhoneBtnLine line={['4', '5', '6']} />
-                                    <PhoneBtnLine line={['7', '8', '9']} />
-                                    <PhoneBtnLine line={['*', '0', '#']} />
+                                    <PhoneBtnLine line={['1', '2', '3']} onClick={handlePhoneBtnClick} />
+                                    <PhoneBtnLine line={['4', '5', '6']} onClick={handlePhoneBtnClick} />
+                                    <PhoneBtnLine line={['7', '8', '9']} onClick={handlePhoneBtnClick} />
+                                    <PhoneBtnLine line={['*', '0', '#']} onClick={handlePhoneBtnClick} />
                                 </div>
                             </div>
                         </div>
