@@ -17,7 +17,7 @@ const MainLayout = ({ statusStat = status }) => {
         console.log('Status changed:', status);
     }, [status]);
 
-    const [showCallingModal, setShowCallingModal] = useState(true)
+    const [showCallingModal, setShowCallingModal] = useState(false)
     return (
         <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 'auto', gap: '8px', backgroundColor: 'white', color: 'black' }}>
             <StatusBar status={status} setStatus={setStatus} />

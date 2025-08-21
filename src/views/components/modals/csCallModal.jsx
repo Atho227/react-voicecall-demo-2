@@ -7,6 +7,7 @@ import IconOptionBtn from '../button/iconOptionBtn'
 import BasicSwitch from '../button/switch'
 import DropDown from '../button/Dropdown'
 import PhoneBtnLine from '../other/phoneBtnLine'
+import CallInfo from '../parts/callInfo'
 
 const CSCallModal = () => {
     const [showNumpad, setShowNumPad] = useState(true)
@@ -71,9 +72,7 @@ const CSCallModal = () => {
                             background: 'var(--background-container, #FFF)',
                         }}>
                             {callDirection ?
-                                <div>
-
-                                </div>
+                                <CallInfo />
                                 : ''}
                         </div> :
                         <div style={{ display: 'flex', padding: '64px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '24px', alignSelf: 'stretch' }}>
