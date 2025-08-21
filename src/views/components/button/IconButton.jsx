@@ -1,5 +1,5 @@
 import React from 'react'
-import IconWrap from '../div/icon'
+import IconWrap from '../other/icon'
 
 const IconButton = ({ icon }) => {
     return (

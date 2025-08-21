@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import SmallModal from '../modals/SmallModal'
-import BadgeWrapper from '../div/badge'
+import BadgeWrapper from '../other/badge'
 import { toggleOnlineStatus } from '../../../ultils/changeStatus/changeStatus'
 import BasicSwitch from '../button/switch'
 import IconBtnMultiStages from '../button/iconButtonMultiStage'

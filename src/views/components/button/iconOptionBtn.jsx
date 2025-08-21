@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import IconWrap from '../div/icon';
+import IconWrap from '../other/icon';
 import { ChervonDown } from '../../../assets/icon/ActionIcons';
 
 const IconOptionBtn = ({ options }) => {

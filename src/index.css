@@ -37,7 +37,8 @@ svg {
   stroke: var(--badge-border, #FFF);
 } */
 input,
-button {
+button,
+p {
   all: unset;
   box-sizing: border-box;
 }
