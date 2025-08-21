@@ -63,18 +63,8 @@ const CSCallModal = () => {
                         </div>
                     </div>
                     : ringging ?
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            alignSelf: 'stretch',
-                            borderTop: '1px solid var(--border-neutral-neutral-light, #DADCE5)',
-                            background: 'var(--background-container, #FFF)',
-                        }}>
-                            {callDirection ?
-                                <CallInfo />
-                                : ''}
-                        </div> :
+                        <CallInfo callOut={callDirection} />
+                        :
                         <div style={{ display: 'flex', padding: '64px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '24px', alignSelf: 'stretch' }}>
                             <div style={{ display: 'flex', width: '322px', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
                                 <IconWrap icon={PhoneRestrict} fill={'#5C6073'} additionalStyle={{
