@@ -60,6 +60,7 @@ const CallInfo = ({ callOut = true }) => {
                 alignItems: 'flex-start',
                 gap: 'var(--space-12px, 12px)',
                 alignSelf: 'stretch',
+                backgroundColor: '#F5F6FA',
             }}>
                 <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} />
             </div>
