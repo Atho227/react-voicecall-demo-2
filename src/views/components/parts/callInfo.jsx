@@ -6,9 +6,10 @@ import NormalButton from '../button/NormalButton'
 import IconOptionBtn from '../button/iconOptionBtn'
 import { CallTransfer, Microphone, Pause } from '../../../assets/icon/ActionIcons'
 import IconButton from '../button/IconButton'
+import { useCall } from '../../../hooks/CallHook/useCall'
 
-const CallInfo = ({ callOut = true, callingStage2 }) => {
-    const callingStage = 'connecting' //normal | connecting | ringging | calling | máy bận
+const CallInfo = ({ }) => {
+    const { callStatus, callDirection, endCall } = useCall()
     const time = '00:00'
     return (
         <div style={{
@@ -22,9 +23,9 @@ const CallInfo = ({ callOut = true, callingStage2 }) => {
             <div style={{ display: 'flex', padding: '16px', flexDirection: 'column', alignItems: 'flex-start', gap: '16px', alignSelf: 'stretch' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px', alignSelf: 'stretch' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch' }}>
-                        <p className='secondary-text' style={{ flex: '1 0 0' }}>{callingStage === 'calling' ? 'Đang trong cuộc gọi' : callOut ? 'Dịch vụ gọi ra' : 'Dịch vụ nhận cuộc gọi'}</p>
+                        <p className='secondary-text' style={{ flex: '1 0 0' }}>{callStatus === 'calling' ? 'Đang trong cuộc gọi' : callDirection === 'out' ? 'Dịch vụ gọi ra' : 'Dịch vụ nhận cuộc gọi'}</p>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', }}>
-                            <p className='secondary-text'>{callingStage === 'calling' ? time : ''}</p>
+                            <p className='secondary-text'>{callStatus === 'calling' ? time : ''}</p>
                             <IconWrap icon={CallSignal} />
                         </div>
                     </div>
@@ -35,9 +36,9 @@ const CallInfo = ({ callOut = true, callingStage2 }) => {
                 </div>
                 <div style={{ width: '328px', height: '1px', backgroundColor: '#DADCE5' }}></div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px', alignSelf: 'stretch' }}>
-                    {callingStage === 'calling' ? '' :
+                    {callStatus === 'calling' ? '' :
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'stretch' }}>
-                            <p className='secondary-text bold' style={{ flex: '1 0 0' }}>{callOut ? 'Đang kết nối tới...' : 'Cuộc gọi đến'}</p>
+                            <p className='secondary-text bold' style={{ flex: '1 0 0' }}>{callDirection === 'out' ? 'Đang kết nối tới...' : 'Cuộc gọi đến'}</p>
                         </div>
                     }
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'stretch' }}>
@@ -67,15 +68,15 @@ const CallInfo = ({ callOut = true, callingStage2 }) => {
                 alignSelf: 'stretch',
                 backgroundColor: '#F5F6FA',
             }}>
-                {callingStage === 'calling' ?
+                {callStatus === 'calling' ?
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch' }}>
                         <IconOptionBtn options={options} btnStyle={{ borderRadius: '999px', backgroundColor: 'rgba(61, 85, 204, 0.10)' }} fill={'#3D55CC'} />
                         <IconButton icon={Microphone} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
                         <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
                         <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }} />
                     </div>
-                    : callOut ?
-                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} /> :
+                    : callDirection === 'out' ?
+                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} onClick={() => endCall()} /> :
                         <div style={{
                             display: 'flex',
                             flexDirection: 'column',

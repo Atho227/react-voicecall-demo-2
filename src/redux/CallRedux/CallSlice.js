@@ -16,7 +16,7 @@ const callSlice = createSlice({
     initialState,
     reducers: {
         startCall: (state, action) => {
-            state.callStatus = 'calling';
+            state.callStatus = 'ringing';
             state.callDirection = 'out';
             state.callInfo = action.payload || {};
         },
