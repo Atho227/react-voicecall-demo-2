@@ -11,7 +11,7 @@ function App() {
     csInit(token, domain)
   }, [])
 
-  const { setPermission, setOnline } = useCall();
+  const { setPermission, setOnline, startCall } = useCall();
   useEffect(() => {
     window.setPermission = setPermission;
     return () => {
@@ -25,6 +25,14 @@ function App() {
       delete window.setOnline;
     };
   }, [setOnline]);
+
+  useEffect(() => {
+    window.startCall = startCall;
+    return () => {
+      delete window.startCall;
+    };
+  }, [startCall]);
+
   return (
     <div>
       <MainLayout />

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { acceptCall, endCall, receiveCall, setBusy, setOnline, setPermission, setService, startCall, toggleHold, toggleMute } from "../../redux/CallRedux/CallSlice";
+import { acceptCall, endCall, receiveCall, setBusy, setOnline, setPermission, setService, startCall, toggleHold, toggleMute, updateCallInfo } from "../../redux/CallRedux/CallSlice";
 
 export const useCall = () => {
     const call = useSelector(state => state.call);
