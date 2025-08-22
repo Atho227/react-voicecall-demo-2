@@ -1,6 +1,8 @@
 import React from 'react'
-import NormalButton from '../button/NormalButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
+import NormalButton from '../button/NormalButton'
+
+import ToggleIconButton from '../button/ToggleIconButton'
 
 const Controller = () => {
     const { receiveCall } = useCall()
@@ -12,6 +14,7 @@ const Controller = () => {
             <NormalButton text='csInit' onClick={() => csInit(token, domain)} />
             <NormalButton text='Kích hoạt thoại' onClick={() => csEnableCall()} />
             <NormalButton text='Gọi đến' onClick={() => receiveCall()} />
+            <ToggleIconButton />
         </div>
     )
 }
