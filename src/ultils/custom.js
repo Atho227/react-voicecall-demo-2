@@ -10,6 +10,7 @@ window.unload = function () {
 
 // custom.js - Implement các hàm callback từ tài liệu
 function csCallRinging(phone) {
+    console.log(`ringing csVoice : ${JSON.stringify(window.csVoice, null, 2)}`);
     console.log(`csCallRinging: ${phone}`);
     const phoneInfo = { name: phone, phone: phone }
     window.receiveCall()
