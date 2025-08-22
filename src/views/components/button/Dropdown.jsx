@@ -11,14 +11,16 @@ const DropDown = ({ options }) => {
             <div className="label"><span className='small-text'>Gọi từ dịch vụ</span></div>
             <div className="input-wrapper">
                 <IconWrap icon={PhoneCallOut} />
-                <input disabled className='input-area' type="text" value={'Dịch vụ mặc định'} />
+                <p className='input-area' >
+                    Dịch vụ mặc định</p>
                 <IconWrap icon={ChervonDown} />
             </div>
-            {showMenu ?
-                <OptionsMenu style={{ width: '100%' }} />
-                : ''
+            {
+                showMenu ?
+                    <OptionsMenu style={{ width: '100%' }} />
+                    : ''
             }
-        </div>
+        </div >
     )
 }
 

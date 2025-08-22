@@ -18,8 +18,8 @@ const Controller = () => {
         console.log(services);
     }
     return (
-        <div style={{ position: 'absolute', top: '50px', left: '50px', display: 'flex', gap: '8px', flexWrap: 'wrap', maxWidth: '150px' }}>
-            <NormalButton text='csInit' onClick={() => onReloaded()} />
+        <div style={{ position: 'absolute', top: '50px', left: '50px', display: 'flex', gap: '8px', flexWrap: 'wrap', maxWidth: '150px', width: '360px' }}>
+            {/* <NormalButton text='csInit' onClick={() => onReloaded()} />
             <NormalButton text='Kích hoạt thoại' onClick={() => csEnableCall()} />
             <NormalButton text='Gọi đến' onClick={() => receiveCall()} />
             <ToggleIconButton
@@ -28,7 +28,7 @@ const Controller = () => {
                 IconInitial={Microphone}
                 IconAfter={MicrophoneSlash}
                 mainColor='#67BF7F'
-            />
+            /> */}
             <DropDown options={services} />
         </div>
     )
