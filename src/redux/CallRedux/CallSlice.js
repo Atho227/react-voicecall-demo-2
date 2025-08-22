@@ -15,15 +15,19 @@ const callSlice = createSlice({
     name: 'call',
     initialState,
     reducers: {
-        startCall: (state, action) => {
+        startCall: (state) => {
             state.callStatus = 'ringing';
             state.callDirection = 'out';
-            state.callInfo = action.payload || {};
         },
-        receiveCall: (state, action) => {
+        receiveCall: (state) => {
             state.callStatus = 'ringing';
             state.callDirection = 'in';
-            state.callInfo = action.payload || {};
+        },
+        updateCallInfo: (state, action) => {
+            state.callInfo = {
+                ...state.callInfo,
+                ...action.payload
+            };
         },
         acceptCall: (state) => {
             state.callStatus = 'calling';
@@ -63,7 +67,7 @@ export const {
     toggleHold,
     setPermission,
     setOnline,
-    setService
+    setService, updateCallInfo,
 } = callSlice.actions;
 
 export default callSlice.reducer;

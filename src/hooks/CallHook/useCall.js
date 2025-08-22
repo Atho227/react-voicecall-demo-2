@@ -7,8 +7,8 @@ export const useCall = () => {
 
     return {
         ...call,
-        startCall: (info) => dispatch(startCall(info)),       // info: {id, number...}
-        receiveCall: (info) => dispatch(receiveCall(info)),   // info: {callerId...}
+        startCall: () => dispatch(startCall()),
+        receiveCall: () => dispatch(receiveCall()),   // info: {callerId...}
         acceptCall: () => dispatch(acceptCall()),
         endCall: () => dispatch(endCall()),
         setBusy: () => dispatch(setBusy()),
@@ -16,6 +16,7 @@ export const useCall = () => {
         toggleHold: () => dispatch(toggleHold()),
         setPermission: (val) => dispatch(setPermission(val)), // val: true/false
         setOnline: (val) => dispatch(setOnline(val)),         // val: true/false
-        setService: (id) => dispatch(setService(id)),         // val: true/false
+        setService: (id) => dispatch(setService(id)),         // ví dụ: 'zoom'
+        updateCallInfo: (info) => dispatch(updateCallInfo(info)), // info: {key: value}
     };
 };

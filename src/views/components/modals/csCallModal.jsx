@@ -13,11 +13,9 @@ import { useCall } from '../../../hooks/CallHook/useCall'
 import InputWithIcon from '../input/InputWithIcon'
 
 const CSCallModal = () => {
-    const { online, callStatus, startCall } = useCall();
+    const { online, callStatus, updateCallInfo } = useCall();
 
     const [showNumpad, setShowNumPad] = useState(true)
-    const [callDirection, setCalldireaction] = useState(false)
-
     const [phone, setPhone] = useState('')
 
     const toggleNumPad = () => {
@@ -28,14 +26,22 @@ const CSCallModal = () => {
             setShowNumPad(false);
         }
     }, [callStatus]);
+
     const calOutAction = () => {
         setShowNumPad(false)
-        startCall()
+        const phoneInfo = {
+            name: phone,
+            phone: phone,
+        }
+        // console.log('Phone Info:', phoneInfo);
+        updateCallInfo(phoneInfo)
+        csCallout(phone)
     }
 
     const handlePhoneBtnClick = (val) => {
         setPhone(prev => prev + val);
     };
+
     return (
         <div className='CS-Call'>
             <div className="modal-header">

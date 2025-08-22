@@ -9,7 +9,7 @@ import IconButton from '../button/IconButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 
 const CallInfo = ({ }) => {
-    const { callStatus, callDirection, endCall } = useCall()
+    const { callStatus, callDirection, endCall, callInfo } = useCall()
     const time = '00:00'
     return (
         <div style={{
@@ -48,11 +48,11 @@ const CallInfo = ({ }) => {
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    <p className='secondary-text bold'>User Name</p>
+                                    <p className='secondary-text bold'>{callInfo.name}</p>
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                                     <IconWrap icon={PhoneNormal} fill={'#5C6073'} additionalStyle={{ width: '16px', height: '16px' }} />
-                                    <p className='small-text'>0987654321</p>
+                                    <p className='small-text'>{callInfo.phone}</p>
                                 </div>
                             </div>
                         </div>

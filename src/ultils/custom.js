@@ -16,7 +16,6 @@ function csCallRinging(phone) {
 
 function csAcceptCall() {
     console.log('Cuộc gọi được chấp nhận');
-    // Cập nhật UI (ví dụ: hiển thị thời gian gọi)
 }
 
 function csEndCall() {
@@ -37,7 +36,7 @@ function csUnHoldCall() {
 }
 
 function showCalloutInfo(number) {
-    console.log('showCalloutInfo');
+    console.log(`showCalloutInfo : ${number}`);
     // Đóng popup hoặc reset UI
 }
 
