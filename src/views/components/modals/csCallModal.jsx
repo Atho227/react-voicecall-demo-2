@@ -88,7 +88,7 @@ const CSCallModal = () => {
                         </div>
                         <NormalButton text='Gọi' style={{ color: '#D9E1FC', backgroundColor: '#3D55CC' }} onClick={calOutAction} />
                     </div>
-                    : callStatus === 'ringing' ?
+                    : callStatus !== 'initial' ?
                         <CallInfo />
                         : <div style={{ display: 'flex', padding: '64px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '24px', alignSelf: 'stretch' }}>
                             <div style={{ display: 'flex', width: '322px', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>

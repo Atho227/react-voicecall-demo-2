@@ -57,7 +57,7 @@ function csShowCallStatus(status) {
 }
 function csCustomerAccept() {
     console.log('csCustomerAccept');
-    // Đóng popup hoặc reset UI
+    window.acceptCall()
 }
 function csShowDeviceType(type) {
     console.log(`csShowDeviceType : ${type}`);
