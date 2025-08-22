@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { doStartCall } from "../../ultils/helper";
 
 const initialState = {
     permission: false,
@@ -16,14 +17,17 @@ const callSlice = createSlice({
     initialState,
     reducers: {
         startCall: (state) => {
-            state.callStatus = 'ringing';
-            state.callDirection = 'out';
+            if (state.callDirection === 'out') {
+                doStartCall(state)
+            } else {
+                state.callStatus = 'calling';
+            }
         },
         receiveCall: (state) => {
             if (Object.keys(state.callInfo).length === 0) {
                 state.callStatus = 'ringing';
                 state.callDirection = 'in';
-            }
+            } else { doStartCall(state) }
         },
         updateCallInfo: (state, action) => {
             state.callInfo = {
@@ -36,6 +40,7 @@ const callSlice = createSlice({
         },
         CallEnded: (state) => {
             state.callStatus = 'initial';
+            state.callDirection = 'out';
             state.callInfo = {};
         },
         setBusy: (state) => {

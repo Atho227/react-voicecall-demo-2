@@ -86,8 +86,8 @@ const CallInfo = ({ }) => {
                             backgroundColor: '#F5F6FA',
                         }}>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: '8px', alignSelf: 'stretch' }}>
-                                <NormalButton text='Bỏ qua' style={{ flex: '1 0 0' }} />
-                                <NormalButton text='Tiếp nhận' style={{ flex: '1 0 0', backgroundColor: '#3D55CC', color: '#D9E1FC' }} />
+                                <NormalButton text='Bỏ qua' style={{ flex: '1 0 0' }} onClick={() => endCall()} />
+                                <NormalButton text='Tiếp nhận' style={{ flex: '1 0 0', backgroundColor: '#3D55CC', color: '#D9E1FC' }} onClick={() => onAcceptCall()} />
                             </div>
                             <p className='small-text' style={{ textAlign: 'center', color: '#787C91' }}>Cuộc gọi bị bỏ qua sẽ được tự động chuyển tiếp cho một chuyên viên khác.</p>
                         </div>

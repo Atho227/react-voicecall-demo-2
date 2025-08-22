@@ -1,5 +1,4 @@
-import { store } from '../redux/store';
-
-export function dispatchCallAction(action, payload) {
-    store.dispatch(action(payload));
-}
+export const doStartCall = (state) => {
+    console.log('debug', state.callDirection);
+    state.callStatus = 'ringing';
+};

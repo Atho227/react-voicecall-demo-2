@@ -17,8 +17,9 @@ function csCallRinging(phone) {
 }
 
 function csAcceptCall() {
-    console.log('Cuộc gọi đ ược chấp nhận');
+    console.log('Cuộc gọi được chấp nhận');
     window.startCall()
+    // window.acceptCall()
 }
 
 function csEndCall() {
