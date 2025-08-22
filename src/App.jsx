@@ -11,7 +11,7 @@ function App() {
     csInit(token, domain)
   }, [])
 
-  const { setPermission, setOnline, startCall, acceptCall, CallEnded, receiveCall, updateCallInfo, toggleMute } = useCall();
+  const { setPermission, setOnline, startCall, acceptCall, CallEnded, receiveCall, updateCallInfo, toggleMute, toggleHold } = useCall();
   useEffect(() => {
     window.setPermission = setPermission;
     return () => {
@@ -68,6 +68,12 @@ function App() {
       delete window.toggleMute;
     };
   }, [toggleMute]);
+  useEffect(() => {
+    window.toggleHold = toggleHold;
+    return () => {
+      delete window.toggleHold;
+    };
+  }, [toggleHold]);
 
   return (
     <div>

@@ -38,11 +38,12 @@ function csUnMuteCall() {
 }
 function csHoldCall() {
     console.log('gọi được hold');
-    // Đóng popup hoặc reset UI
+    window.toggleHold(true)
 }
+
 function csUnHoldCall() {
     console.log('gọi bị unhold');
-    // Đóng popup hoặc reset UI
+    window.toggleHold(false)
 }
 
 function showCalloutInfo(number) {

@@ -13,7 +13,7 @@ export const useCall = () => {
         CallEnded: () => dispatch(CallEnded()),
         setBusy: () => dispatch(setBusy()),
         toggleMute: (bol) => dispatch(toggleMute(bol)),
-        toggleHold: () => dispatch(toggleHold()),
+        toggleHold: (bol) => dispatch(toggleHold(bol)),
         setPermission: (val) => dispatch(setPermission(val)), // val: true/false
         setOnline: (val) => dispatch(setOnline(val)),         // val: true/false
         setService: (id) => dispatch(setService(id)),         // ví dụ: 'zoom'

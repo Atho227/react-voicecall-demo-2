@@ -51,8 +51,8 @@ const callSlice = createSlice({
         toggleMute: (state, action) => {
             state.mute = action.payload;
         },
-        toggleHold: (state) => {
-            state.hold = !state.hold;
+        toggleHold: (state, action) => {
+            state.hold = action.payload;
         },
         setPermission: (state, action) => {
             state.permission = action.payload;

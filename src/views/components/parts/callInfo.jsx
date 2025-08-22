@@ -74,7 +74,9 @@ const CallInfo = ({ }) => {
 
                         {!mute ? <IconButton icon={Microphone} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => muteCall()} /> :
                             <IconButton icon={MicrophoneSplash} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center', }} style={{ backgroundColor: '#3D55CC' }} onClick={() => muteCall()} />}
-                        <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
+                        {hold ? <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} style={{ backgroundColor: '#3D55CC' }} onClick={() => holdCall()} /> :
+                            <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => holdCall()} />
+                        }
                         <NormalButton text='Kết thúc' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }} onClick={() => endCall()} />
                     </div>
                     : callDirection === 'out' ?
