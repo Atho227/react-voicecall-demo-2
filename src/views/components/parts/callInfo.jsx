@@ -73,10 +73,10 @@ const CallInfo = ({ }) => {
                         <IconOptionBtn options={options} btnStyle={{ borderRadius: '999px', backgroundColor: 'rgba(61, 85, 204, 0.10)' }} fill={'#3D55CC'} />
                         <IconButton icon={Microphone} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
                         <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
-                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }} />
+                        <NormalButton text='Kết thúc' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }} onClick={() => endCall()} />
                     </div>
                     : callDirection === 'out' ?
-                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} onClick={() => CallEnded()} /> :
+                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} onClick={() => endCall()} /> :
                         <div style={{
                             display: 'flex',
                             flexDirection: 'column',
