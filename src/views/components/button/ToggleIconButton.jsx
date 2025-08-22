@@ -1,16 +1,28 @@
 import React, { useState } from 'react'
 import { StarFill, StarOutline } from '../../../assets/icon/NewStyleIcon'
+import { hexToRgb } from '../../../ultils/renderComponentUtils';
 
 const ToggleIconButton = ({
     mainColor = '#3D55CC',
-    secColor = 'rgba(61, 85, 204, 0.10)',
     IconInitial = StarOutline,
     IconAfter = StarFill,
     isToggle = false,
+    onClick,
+    style,
 }) => {
+    const [isHover, setIsHover] = useState(false);
+    let bgColor;
+    if (isToggle) {
+        bgColor = mainColor;
+    } else {
+        bgColor = isHover ? hexToRgb(mainColor, 0.2) : hexToRgb(mainColor, 0.1);
+    }
+
     return (
         <button
-            onClick={onclick}
+            onClick={onClick}
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
             style={{
                 display: 'inline-flex',
                 justifyContent: 'center',
@@ -19,11 +31,15 @@ const ToggleIconButton = ({
                 gap: '8px',
                 borderRadius: '999px',
                 width: '40px', height: '40px',
-                backgroundColor: isToggle ? mainColor : secColor,
+                backgroundColor: bgColor,
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
-            }}>
-            {isToggle ? <IconAfter size='20' fill={'#F5F6FA'} /> : <IconInitial size='20' fill={mainColor} />}
+                ...style,
+            }}
+        >
+            {isToggle
+                ? <IconAfter size="20" fill={'#F5F6FA'} />
+                : <IconInitial size="20" fill={mainColor} />}
         </button>
     )
 }
