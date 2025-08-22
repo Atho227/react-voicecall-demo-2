@@ -10,8 +10,8 @@ window.unload = function () {
 
 // custom.js - Implement các hàm callback từ tài liệu
 function csCallRinging(phone) {
-    const phoneInfo = { name: phone, phone: phone }
     console.log(`csCallRinging: ${phone}`);
+    const phoneInfo = { name: phone, phone: phone }
     window.receiveCall()
     window.updateCallInfo(phoneInfo)
 }

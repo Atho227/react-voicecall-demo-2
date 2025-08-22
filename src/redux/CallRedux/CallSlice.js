@@ -30,10 +30,12 @@ const callSlice = createSlice({
             } else { doStartCall(state) }
         },
         updateCallInfo: (state, action) => {
-            state.callInfo = {
-                ...state.callInfo,
-                ...action.payload
-            };
+            if (Object.keys(state.callInfo).length === 0) {
+                state.callInfo = {
+                    ...state.callInfo,
+                    ...action.payload
+                };
+            }
         },
         acceptCall: (state) => {
             state.callStatus = 'calling';

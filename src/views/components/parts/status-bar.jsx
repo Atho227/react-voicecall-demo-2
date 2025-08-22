@@ -46,7 +46,7 @@ const StatusBar = ({ }) => {
                 <IconButton icon={PhoneRestrict} style={{ borderRadius: '0', backgroundColor: "auto", }} /> :
                 callStatus === 'initial' ?
                     < IconButton icon={PhoneNormal} style={{ borderRadius: '0', backgroundColor: "auto", }} /> :
-                    callStatus === 'calling' ?
+                    callStatus === 'calling' || callStatus === 'ringing' ?
                         <IconButton icon={PhoneCalling} style={{ borderRadius: '0', backgroundColor: "auto", }} /> : ''
             }
         </SmallModal >
