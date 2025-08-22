@@ -32,7 +32,7 @@ const callSlice = createSlice({
         acceptCall: (state) => {
             state.callStatus = 'calling';
         },
-        endCall: (state) => {
+        CallEnded: (state) => {
             state.callStatus = 'initial';
             state.callInfo = {};
         },
@@ -61,7 +61,7 @@ export const {
     startCall,
     receiveCall,
     acceptCall,
-    endCall,
+    CallEnded,
     setBusy,
     toggleMute,
     toggleHold,

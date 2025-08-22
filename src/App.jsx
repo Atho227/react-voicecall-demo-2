@@ -11,7 +11,7 @@ function App() {
     csInit(token, domain)
   }, [])
 
-  const { setPermission, setOnline, startCall, acceptCall } = useCall();
+  const { setPermission, setOnline, startCall, acceptCall, CallEnded } = useCall();
   useEffect(() => {
     window.setPermission = setPermission;
     return () => {
@@ -44,6 +44,12 @@ function App() {
       delete window.startCall;
     };
   }, [startCall]);
+  useEffect(() => {
+    window.CallEnded = CallEnded;
+    return () => {
+      delete window.CallEnded;
+    };
+  }, [CallEnded]);
 
   return (
     <div>

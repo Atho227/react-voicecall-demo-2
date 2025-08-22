@@ -14,7 +14,7 @@ import { useCall } from '../../hooks/CallHook/useCall'
 
 const MainLayout = ({ }) => {
     // const [status, setStatus] = useState(statusStat)
-    const { startCall, endCall } = useCall();
+    const { startCall, CallEnded } = useCall();
 
     const [showCallingModal, setShowCallingModal] = useState(false)
     const [showNumdial, setShowNumdial] = useState(true)

@@ -9,7 +9,7 @@ import IconButton from '../button/IconButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 
 const CallInfo = ({ }) => {
-    const { callStatus, callDirection, endCall, callInfo } = useCall()
+    const { callStatus, callDirection, CallEnded, callInfo } = useCall()
     const time = '00:00'
     return (
         <div style={{
@@ -76,7 +76,7 @@ const CallInfo = ({ }) => {
                         <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }} />
                     </div>
                     : callDirection === 'out' ?
-                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} onClick={() => endCall()} /> :
+                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} onClick={() => CallEnded()} /> :
                         <div style={{
                             display: 'flex',
                             flexDirection: 'column',

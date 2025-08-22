@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { acceptCall, endCall, receiveCall, setBusy, setOnline, setPermission, setService, startCall, toggleHold, toggleMute, updateCallInfo } from "../../redux/CallRedux/CallSlice";
+import { acceptCall, CallEnded, receiveCall, setBusy, setOnline, setPermission, setService, startCall, toggleHold, toggleMute, updateCallInfo } from "../../redux/CallRedux/CallSlice";
 
 export const useCall = () => {
     const call = useSelector(state => state.call);
@@ -10,7 +10,7 @@ export const useCall = () => {
         startCall: () => dispatch(startCall()),
         receiveCall: () => dispatch(receiveCall()),   // info: {callerId...}
         acceptCall: () => dispatch(acceptCall()),
-        endCall: () => dispatch(endCall()),
+        CallEnded: () => dispatch(CallEnded()),
         setBusy: () => dispatch(setBusy()),
         toggleMute: () => dispatch(toggleMute()),
         toggleHold: () => dispatch(toggleHold()),

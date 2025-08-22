@@ -21,8 +21,9 @@ function csAcceptCall() {
 
 function csEndCall() {
     console.log('Cuộc gọi kết thúc');
-    // Đóng popup hoặc reset UI
+    window.CallEnded()
 }
+
 function csUnMuteCall() {
     console.log('gọi bị unMute');
     // Đóng popup hoặc reset UI
