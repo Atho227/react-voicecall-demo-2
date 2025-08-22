@@ -20,8 +20,10 @@ const callSlice = createSlice({
             state.callDirection = 'out';
         },
         receiveCall: (state) => {
-            state.callStatus = 'ringing';
-            state.callDirection = 'in';
+            if (Object.keys(state.callInfo).length === 0) {
+                state.callStatus = 'ringing';
+                state.callDirection = 'in';
+            }
         },
         updateCallInfo: (state, action) => {
             state.callInfo = {

@@ -10,8 +10,10 @@ window.unload = function () {
 
 // custom.js - Implement các hàm callback từ tài liệu
 function csCallRinging(phone) {
-    console.log(`Cuộc gọi đến từ: ${phone}`);
-    // Hiển thị popup hoặc UI thông báo cuộc gọi đến
+    const phoneInfo = { name: phone, phone: phone }
+    console.log(`csCallRinging: ${phone}`);
+    window.receiveCall()
+    window.updateCallInfo(phoneInfo)
 }
 
 function csAcceptCall() {
@@ -65,7 +67,7 @@ function csShowDeviceType(type) {
     // Đóng popup hoặc reset UI
 }
 function csCurrentCallId(callId) {
-    console.log('csCurrentCallId');
+    console.log(`csCurrentCallId : ${callId}`);
     // Đóng popup hoặc reset UI
 }
 
