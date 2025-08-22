@@ -1,17 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import IconWrap from '../other/icon'
 import { PhoneCallOut } from '../../../assets/icon/PhoneIcons'
 import { ChervonDown } from '../../../assets/icon/ActionIcons'
+import OptionsMenu from '../modals/Menu'
 
 const DropDown = ({ options }) => {
+    const [showMenu, setShowMenu] = useState(false)
     return (
-        <div className='input'>
+        <div className='input' style={{ position: 'relative' }} onClick={() => setShowMenu(!showMenu)}>
             <div className="label"><span className='small-text'>Gọi từ dịch vụ</span></div>
             <div className="input-wrapper">
                 <IconWrap icon={PhoneCallOut} />
                 <input disabled className='input-area' type="text" value={'Dịch vụ mặc định'} />
                 <IconWrap icon={ChervonDown} />
             </div>
+            {showMenu ?
+                <OptionsMenu style={{ width: '100%' }} />
+                : ''
+            }
         </div>
     )
 }

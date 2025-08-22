@@ -32,7 +32,6 @@ const CSCallModal = () => {
             name: phone,
             phone: phone,
         }
-        // console.log('Phone Info:', phoneInfo);
         updateCallInfo(phoneInfo)
         csCallout(phone)
     }

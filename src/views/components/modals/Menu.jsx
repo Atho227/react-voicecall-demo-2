@@ -1,0 +1,30 @@
+import React from 'react'
+import { UserCirle } from '../../../assets/icon/NewStyleIcon'
+
+const OptionsMenu = ({ data = defaultData, style }) => {
+    return (
+        <div style={{ position: 'absolute', top: 'calc(100% + 2px)', left: '50%', transform: 'translateX(-50%)', display: 'flex', width: '248px', padding: '8px', alignItems: 'flex-start', gap: '8px', borderRadius: '8px', backgroundColor: '#FFF', boxShadow: '0 1px 8px 0 rgba(0, 0, 0, 0.12)', ...style }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', flex: '1 0 0' }}>
+                {data.map((item) => {
+                    return (
+                        <div style={{ display: 'flex', padding: '4px 12px', alignItems: 'center', gap: '12px', alignSelf: 'stretch' }}>
+                            <item.icon />
+                            <p>{item.title}</p>
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
+    )
+}
+
+export default OptionsMenu
+
+const defaultData = [
+    { id: 1, icon: UserCirle, title: '0987654321' },
+    { id: 2, icon: UserCirle, title: '0987654321' },
+    { id: 3, icon: UserCirle, title: '0987654321' },
+    { id: 4, icon: UserCirle, title: '0987654321' },
+    { id: 5, icon: UserCirle, title: '0987654321' },
+    { id: 6, icon: UserCirle, title: '0987654321' },
+]
