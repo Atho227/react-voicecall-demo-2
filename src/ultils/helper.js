@@ -3,7 +3,6 @@ export const doStartCall = (state) => {
     state.callStatus = 'ringing';
 };
 
-
 export const onReloaded = () => {
     const token = import.meta.env.VITE_SIGN_TOKEN
     const domain = import.meta.env.VITE_DOMAIN

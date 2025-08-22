@@ -3,75 +3,36 @@ import MainLayout from './views/layouts/demo-page'
 import Controller from './views/components/other/controller'
 import { useCall } from './hooks/CallHook/useCall'
 import { onReloaded } from './ultils/helper'
+import { useExposeToWindow } from './hooks/useExposeToWindow'
 
 function App() {
   useEffect(() => {
     onReloaded();
   }, [])
 
-  const { setPermission, setOnline, startCall, acceptCall, CallEnded, receiveCall, updateCallInfo, toggleMute, toggleHold } = useCall();
-  useEffect(() => {
-    window.setPermission = setPermission;
-    return () => {
-      delete window.setPermission;
-    };
-  }, [setPermission]);
+  const {
+    setPermission,
+    setOnline,
+    startCall,
+    acceptCall,
+    CallEnded,
+    receiveCall,
+    updateCallInfo,
+    toggleMute,
+    toggleHold
+  } = useCall();
 
-  useEffect(() => {
-    window.setOnline = setOnline;
-    return () => {
-      delete window.setOnline;
-    };
-  }, [setOnline]);
-
-  useEffect(() => {
-    window.startCall = startCall;
-    return () => {
-      delete window.startCall;
-    };
-  }, [startCall]);
-  useEffect(() => {
-    window.acceptCall = acceptCall;
-    return () => {
-      delete window.acceptCall;
-    };
-  }, [acceptCall]);
-  useEffect(() => {
-    window.startCall = startCall;
-    return () => {
-      delete window.startCall;
-    };
-  }, [startCall]);
-  useEffect(() => {
-    window.CallEnded = CallEnded;
-    return () => {
-      delete window.CallEnded;
-    };
-  }, [CallEnded]);
-  useEffect(() => {
-    window.receiveCall = receiveCall;
-    return () => {
-      delete window.receiveCall;
-    };
-  }, [receiveCall]);
-  useEffect(() => {
-    window.updateCallInfo = updateCallInfo;
-    return () => {
-      delete window.updateCallInfo;
-    };
-  }, [updateCallInfo]);
-  useEffect(() => {
-    window.toggleMute = toggleMute;
-    return () => {
-      delete window.toggleMute;
-    };
-  }, [toggleMute]);
-  useEffect(() => {
-    window.toggleHold = toggleHold;
-    return () => {
-      delete window.toggleHold;
-    };
-  }, [toggleHold]);
+  useExposeToWindow({
+    setPermission,
+    setOnline,
+    startCall,
+    acceptCall,
+    CallEnded,
+    receiveCall,
+    updateCallInfo,
+    toggleMute,
+    toggleHold
+  });
 
   return (
     <div>
