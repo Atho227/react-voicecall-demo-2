@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import IconWrap from '../other/icon'
 import { CallSignal, UserIcon } from '../../../assets/icon/ActiveStatusIcon'
-import { PhoneDisconnect, PhoneNormal } from '../../../assets/icon/PhoneIcons'
+import { PhoneDisconnect, PhoneNormal, PhoneRestrict } from '../../../assets/icon/PhoneIcons'
 import NormalButton from '../button/NormalButton'
 import IconOptionBtn from '../button/iconOptionBtn'
 import { CallTransfer, Microphone, MicrophoneSplash, Pause, PauseFill } from '../../../assets/icon/ActionIcons'
@@ -9,9 +9,10 @@ import IconButton from '../button/IconButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 
 const CallInfo = ({ }) => {
-    const { callStatus, callDirection, CallEnded, callInfo, mute, hold } = useCall()
+    const { callStatus, callDirection, callInfo, mute, hold, isCall, isRinging, isCallOut, isAnswer } = useCall()
     const time = '00:00'
-    return (
+
+    return (isCall ?
         <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -19,26 +20,26 @@ const CallInfo = ({ }) => {
             alignSelf: 'stretch',
             borderTop: '1px solid var(--border-neutral-neutral-light, #DADCE5)',
             background: 'var(--background-container, #FFF)',
-        }}>
+        }} >
             <div style={{ display: 'flex', padding: '16px', flexDirection: 'column', alignItems: 'flex-start', gap: '16px', alignSelf: 'stretch' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px', alignSelf: 'stretch' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch' }}>
-                        <p className='secondary-text' style={{ flex: '1 0 0' }}>{callStatus === 'calling' ? 'Đang trong cuộc gọi' : callDirection === 'out' ? 'Dịch vụ gọi ra' : 'Dịch vụ nhận cuộc gọi'}</p>
+                        <p className='secondary-text' style={{ flex: '1 0 0' }}>{isRinging ? isCallOut ? 'Dịch vụ gọi ra' : isAnswer ? 'Dịch vụ nhận cuộc gọi' : 'Lỗi ' : 'Đang trong cuộc gọi'}</p>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', }}>
-                            <p className='secondary-text'>{callStatus === 'calling' ? time : ''}</p>
+                            <p className='secondary-text'>{isRinging ? '' : time}</p>
                             <IconWrap icon={CallSignal} />
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <IconWrap icon={PhoneNormal} fill={'#5C6073'} />
-                        <p className='secondary-text bold' style={{}}>Dịch vụ mặc định</p>
+                        <p className='secondary-text bold' >Dịch vụ mặc định</p>
                     </div>
                 </div>
                 <div style={{ width: '328px', height: '1px', backgroundColor: '#DADCE5' }}></div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px', alignSelf: 'stretch' }}>
-                    {callStatus === 'calling' ? '' :
+                    {!isRinging ? '' :
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'stretch' }}>
-                            <p className='secondary-text bold' style={{ flex: '1 0 0' }}>{callDirection === 'out' ? 'Đang kết nối tới...' : 'Cuộc gọi đến'}</p>
+                            <p className='secondary-text bold' style={{ flex: '1 0 0' }}>{isCallOut ? 'Đang kết nối tới...' : isAnswer ? 'Cuộc gọi đến' : 'Lỗi'}</p>
                         </div>
                     }
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'stretch' }}>
@@ -48,11 +49,11 @@ const CallInfo = ({ }) => {
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    <p className='secondary-text bold'>{callInfo.name}</p>
+                                    <p className='secondary-text bold'>{callInfo?.name}</p>
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                                     <IconWrap icon={PhoneNormal} fill={'#5C6073'} additionalStyle={{ width: '16px', height: '16px' }} />
-                                    <p className='small-text'>{callInfo.phone}</p>
+                                    <p className='small-text'>{callInfo?.phone}</p>
                                 </div>
                             </div>
                         </div>
@@ -98,6 +99,27 @@ const CallInfo = ({ }) => {
                 }
             </div>
         </div >
+        : <div style={{ display: 'flex', padding: '64px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '24px', alignSelf: 'stretch' }}>
+            <div style={{ display: 'flex', width: '322px', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
+                <IconWrap icon={PhoneRestrict} fill={'#5C6073'} additionalStyle={{
+                    borderRadius: '999px',
+                    display: 'flex',
+                    padding: 'var(--space-16px, 16px)',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '8px',
+                    backgroundColor: 'rgba(151, 154, 168, 0.10)',
+                    cursor: 'default'
+                }} />
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: 'var(--space-4px, 4px)',
+                    alignSelf: 'stretch'
+                }}><p className='primary-text'>Không có cuộc gọi đến</p></div>
+            </div>
+        </div>
     )
 }
 

@@ -13,7 +13,7 @@ import { useCall } from '../../../hooks/CallHook/useCall'
 import InputWithIcon from '../input/InputWithIcon'
 
 const CSCallModal = () => {
-    const { online, callStatus, updateCallInfo } = useCall();
+    const { online, isCall, updateCallInfo } = useCall();
 
     const [showNumpad, setShowNumPad] = useState(true)
     const [phone, setPhone] = useState('')
@@ -21,11 +21,10 @@ const CSCallModal = () => {
     const toggleNumPad = () => {
         setShowNumPad(!showNumpad)
     }
+
     useEffect(() => {
-        if (callStatus !== 'initial') {
-            setShowNumPad(false);
-        }
-    }, [callStatus]);
+        if (isCall) { setShowNumPad(false); }
+    }, [isCall]);
 
     const calOutAction = () => {
         setShowNumPad(false)
@@ -88,29 +87,7 @@ const CSCallModal = () => {
                         </div>
                         <NormalButton text='Gọi' style={{ color: '#D9E1FC', backgroundColor: '#3D55CC' }} onClick={calOutAction} />
                     </div>
-                    : callStatus !== 'initial' ?
-                        <CallInfo />
-                        : <div style={{ display: 'flex', padding: '64px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '24px', alignSelf: 'stretch' }}>
-                            <div style={{ display: 'flex', width: '322px', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
-                                <IconWrap icon={PhoneRestrict} fill={'#5C6073'} additionalStyle={{
-                                    borderRadius: '999px',
-                                    display: 'flex',
-                                    padding: 'var(--space-16px, 16px)',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    gap: '8px',
-                                    backgroundColor: 'rgba(151, 154, 168, 0.10)',
-                                    cursor: 'default'
-                                }} />
-                                <div style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: 'var(--space-4px, 4px)',
-                                    alignSelf: 'stretch'
-                                }}><p className='primary-text'>Không có cuộc gọi đến</p></div>
-                            </div>
-                        </div>}
+                    : <CallInfo />}
             </div >
         </div >
     )
