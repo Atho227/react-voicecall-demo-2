@@ -2,13 +2,11 @@ import { useEffect, useState } from 'react'
 import MainLayout from './views/layouts/demo-page'
 import Controller from './views/components/other/controller'
 import { useCall } from './hooks/CallHook/useCall'
+import { onReloaded } from './ultils/helper'
 
 function App() {
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpcHBob25lIjoiNTAwMCJ9.HppfyaTz5mxaKac9W_hpPjd0aziLiHFNOhzKsggI66A"
-  const domain = "vi2"
-
   useEffect(() => {
-    csInit(token, domain)
+    onReloaded();
   }, [])
 
   const { setPermission, setOnline, startCall, acceptCall, CallEnded, receiveCall, updateCallInfo, toggleMute, toggleHold } = useCall();
