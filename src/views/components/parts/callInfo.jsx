@@ -4,12 +4,12 @@ import { CallSignal, UserIcon } from '../../../assets/icon/ActiveStatusIcon'
 import { PhoneDisconnect, PhoneNormal } from '../../../assets/icon/PhoneIcons'
 import NormalButton from '../button/NormalButton'
 import IconOptionBtn from '../button/iconOptionBtn'
-import { CallTransfer, Microphone, Pause } from '../../../assets/icon/ActionIcons'
+import { CallTransfer, Microphone, MicrophoneSplash, Pause } from '../../../assets/icon/ActionIcons'
 import IconButton from '../button/IconButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 
 const CallInfo = ({ }) => {
-    const { callStatus, callDirection, CallEnded, callInfo } = useCall()
+    const { callStatus, callDirection, CallEnded, callInfo, mute, hold } = useCall()
     const time = '00:00'
     return (
         <div style={{
@@ -71,7 +71,9 @@ const CallInfo = ({ }) => {
                 {callStatus === 'calling' ?
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch' }}>
                         <IconOptionBtn options={options} btnStyle={{ borderRadius: '999px', backgroundColor: 'rgba(61, 85, 204, 0.10)' }} fill={'#3D55CC'} />
-                        <IconButton icon={Microphone} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
+
+                        {!mute ? <IconButton icon={Microphone} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => muteCall()} /> :
+                            <IconButton icon={MicrophoneSplash} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center', }} style={{ backgroundColor: '#3D55CC' }} onClick={() => muteCall()} />}
                         <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
                         <NormalButton text='Kết thúc' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }} onClick={() => endCall()} />
                     </div>

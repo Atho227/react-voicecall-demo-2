@@ -48,8 +48,8 @@ const callSlice = createSlice({
         setBusy: (state) => {
             state.callStatus = 'busy';
         },
-        toggleMute: (state) => {
-            state.mute = !state.mute;
+        toggleMute: (state, action) => {
+            state.mute = action.payload;
         },
         toggleHold: (state) => {
             state.hold = !state.hold;

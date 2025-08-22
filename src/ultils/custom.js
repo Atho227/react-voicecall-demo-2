@@ -27,9 +27,14 @@ function csEndCall() {
     window.CallEnded()
 }
 
+function csMuteCall() {
+    console.log('csMuteCall');
+    window.toggleMute(true)
+}
+
 function csUnMuteCall() {
-    console.log('gọi bị unMute');
-    // Đóng popup hoặc reset UI
+    console.log('csUnMuteCall');
+    window.toggleMute(false)
 }
 function csHoldCall() {
     console.log('gọi được hold');

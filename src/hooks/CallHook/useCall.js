@@ -12,7 +12,7 @@ export const useCall = () => {
         acceptCall: () => dispatch(acceptCall()),
         CallEnded: () => dispatch(CallEnded()),
         setBusy: () => dispatch(setBusy()),
-        toggleMute: () => dispatch(toggleMute()),
+        toggleMute: (bol) => dispatch(toggleMute(bol)),
         toggleHold: () => dispatch(toggleHold()),
         setPermission: (val) => dispatch(setPermission(val)), // val: true/false
         setOnline: (val) => dispatch(setOnline(val)),         // val: true/false
