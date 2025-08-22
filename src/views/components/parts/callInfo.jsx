@@ -4,7 +4,7 @@ import { CallSignal, UserIcon } from '../../../assets/icon/ActiveStatusIcon'
 import { PhoneDisconnect, PhoneNormal } from '../../../assets/icon/PhoneIcons'
 import NormalButton from '../button/NormalButton'
 import IconOptionBtn from '../button/iconOptionBtn'
-import { CallTransfer, Microphone, MicrophoneSplash, Pause } from '../../../assets/icon/ActionIcons'
+import { CallTransfer, Microphone, MicrophoneSplash, Pause, PauseFill } from '../../../assets/icon/ActionIcons'
 import IconButton from '../button/IconButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 
@@ -74,7 +74,7 @@ const CallInfo = ({ }) => {
 
                         {!mute ? <IconButton icon={Microphone} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => muteCall()} /> :
                             <IconButton icon={MicrophoneSplash} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center', }} style={{ backgroundColor: '#3D55CC' }} onClick={() => muteCall()} />}
-                        {hold ? <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} style={{ backgroundColor: '#3D55CC' }} onClick={() => holdCall()} /> :
+                        {hold ? <IconButton icon={PauseFill} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} style={{ backgroundColor: '#3D55CC' }} onClick={() => holdCall()} /> :
                             <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => holdCall()} />
                         }
                         <NormalButton text='Kết thúc' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }} onClick={() => endCall()} />
