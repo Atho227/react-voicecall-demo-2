@@ -6,7 +6,7 @@ const initialState = {
     online: false,
     service: 'id',
     callInfo: {},
-    callStatus: 'initial',   // hide | initial | ringing | calling | busy
+    callStatus: 'ringing',   // hide | initial | ringing | calling | busy
     callDirection: 'out',    // out | in
     mute: false,
     hold: false,
