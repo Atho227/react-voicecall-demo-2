@@ -8,3 +8,9 @@ export const onReloaded = () => {
     const domain = import.meta.env.VITE_DOMAIN
     csInit(token, domain)
 }
+
+const firstLoadPage = () => {
+    window.store.dispatch({ type: "call/setServiceList", payload: window.csVoice.getCalloutServices() })
+}
+
+window.firstLoadPage = firstLoadPage

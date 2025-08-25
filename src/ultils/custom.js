@@ -85,6 +85,7 @@ function csInitError(errorCode) {
 
 function csInitComplete() {
     console.log('Kết nối thành công');
+    window.firstLoadPage()
 }
 function csListTransferAgent(listTransferAgent) {
     console.log('csListTransferAgent');

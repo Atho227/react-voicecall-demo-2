@@ -12,12 +12,13 @@ const DropDown = ({ options }) => {
             <div className="input-wrapper">
                 <IconWrap icon={PhoneCallOut} />
                 <p className='input-area' >
-                    Dịch vụ mặc định</p>
+                    Dịch vụ mặc định
+                </p>
                 <IconWrap icon={ChervonDown} />
             </div>
             {
                 showMenu ?
-                    <OptionsMenu style={{ width: '100%' }} />
+                    <OptionsMenu style={{ width: '100%' }} data={options} />
                     : ''
             }
         </div >
