@@ -4,7 +4,7 @@ import { ChervonDown } from '../../../assets/icon/ActionIcons'
 import OptionsMenu from '../modals/Menu'
 import { PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
 
-const DropDown = ({ options }) => {
+const DropDown = ({ options, setCurrent }) => {
     const [showMenu, setShowMenu] = useState(false)
     const isLoading = !options // chỉ cần check thẳng prop
     return (
@@ -25,7 +25,7 @@ const DropDown = ({ options }) => {
             </div>
 
             {showMenu && !isLoading && (
-                <OptionsMenu style={{ width: '100%' }} data={options} />
+                <OptionsMenu style={{ width: '100%' }} data={options} setCurrent={setCurrent} />
             )}
         </div>
     )
