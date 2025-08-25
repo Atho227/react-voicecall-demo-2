@@ -17,7 +17,7 @@ import { deviceTypes } from '../../../assets/object/data'
 import { ChervonDown } from '../../../assets/icon/NewStyleIcon'
 
 const CSCallModal = () => {
-    const { online, isCall, updateCallInfo, serviceList, currentDevice } = useCall();
+    const { online, isCall, updateCallInfo, serviceList, currentDevice, currentServiceId } = useCall();
 
     const [showNumpad, setShowNumPad] = useState(true)
     const [phone, setPhone] = useState('')
@@ -37,7 +37,7 @@ const CSCallModal = () => {
             phone: phone,
         }
         updateCallInfo(phoneInfo)
-        csCallout(phone, 2005289)
+        csCallout(phone, currentServiceId ?? null)
     }
 
     const handlePhoneBtnClick = (val) => {
