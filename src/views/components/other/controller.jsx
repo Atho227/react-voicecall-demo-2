@@ -21,7 +21,10 @@ const Controller = () => {
             <NormalButton text='Kích hoạt thoại' onClick={() => csEnableCall()} />
             <NormalButton text='Gọi đến' onClick={() => receiveCall()} />
             <ToggleIconButton
-                onClick={() => setIconToggle(!iconToggle)}
+                onClick={() => {
+                    holdCall()
+                    setIconToggle(!iconToggle)
+                }}
                 isToggle={iconToggle}
                 IconInitial={Microphone}
                 IconAfter={MicrophoneSlash}

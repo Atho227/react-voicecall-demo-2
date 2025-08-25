@@ -27,7 +27,6 @@ function csCallRinging(phone) {
 
 function csAcceptCall() {
     console.log('Cuộc gọi được chấp nhận');
-    window.startCall()
     // window.acceptCall()
 }
 
@@ -38,7 +37,7 @@ function csEndCall() {
 
 function csMuteCall() {
     console.log('csMuteCall');
-    window.toggleMute(true)
+    // window.toggleMute(true)
 }
 
 function csUnMuteCall() {
@@ -46,11 +45,12 @@ function csUnMuteCall() {
 }
 function csHoldCall() {
     console.log('gọi được hold');
+    window.store.dispatch({ type: "call/isHolding", payload: true })
 }
 
 function csUnHoldCall() {
     console.log('gọi bị unhold');
-    window.toggleHold(false)
+    window.store.dispatch({ type: "call/isHolding", payload: false })
 }
 
 function showCalloutInfo(number) {
@@ -59,7 +59,7 @@ function showCalloutInfo(number) {
 }
 
 function showCalloutError(errorCode, sipCode) {
-    console.log('showCalloutError');
+    console.log('showCalloutError:', errorCode, sipCode);
     // Đóng popup hoặc reset UI
 }
 

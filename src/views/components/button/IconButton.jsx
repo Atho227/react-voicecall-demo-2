@@ -4,7 +4,7 @@ import IconWrap from '../other/icon'
 const IconButton = ({ icon, onClick, style, iconStyle }) => {
     return (
         <div
-            onClick={onClick}
+            onClick={() => onClick()}
             style={{
                 borderRadius: "999px",
                 display: "flex",

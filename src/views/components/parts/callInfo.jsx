@@ -77,19 +77,21 @@ const CallInfo = ({ }) => {
                         {isHolding ?
                             <IconButton icon={PauseFill} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} style={{ backgroundColor: '#3D55CC' }}
                                 onClick={() => {
-                                    console.log('DEBUG clicked 1');
-                                    window.holdCall()
+                                    holdCall();
                                 }} /> :
                             <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                                 onClick={() => {
-                                    console.log('DEBUG clicked 2');
-                                    window.holdCall()
+                                    holdCall();
                                 }} />
                         }
-                        <NormalButton text='Kết thúc' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }} onClick={() => endCall()} />
+                        <NormalButton text='Kết thúc' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }}
+                            onClick={() => {
+                                endCall()
+                            }} />
                     </div>
                     : isCallOut ?
-                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} onClick={() => endCall()} />
+                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }}
+                            onClick={() => endCall()} />
                         : isAnswer ? <div style={{
                             display: 'flex',
                             flexDirection: 'column',
