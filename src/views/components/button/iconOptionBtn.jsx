@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import IconWrap from '../other/icon';
-import { ChervonDown } from '../../../assets/icon/ActionIcons';
+import MenuVariant2 from '../modals/MenuVariant2';
 
 const DropDownV2 = ({ options, onSelect, children }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +22,7 @@ const DropDownV2 = ({ options, onSelect, children }) => {
     }, [])
 
     const handleSelect = (option) => {
+        console.log('DEBUG đã chọn', option);
         setSelected(option);
         setIsOpen(false);
         onSelect?.(option);
@@ -30,37 +30,12 @@ const DropDownV2 = ({ options, onSelect, children }) => {
 
     return (
         <div ref={ref} style={{ position: "relative", display: "inline-block" }}>
-            {/* renderTrigger → children dạng function */}
             {children({ isOpen, selected, toggle: () => setIsOpen(!isOpen) })}
 
             {isOpen && (
-                <ul
-                    style={{
-                        position: "absolute",
-                        top: "100%",
-                        left: 0,
-                        border: "1px solid #ccc",
-                        background: "#fff",
-                        listStyle: "none",
-                        margin: 0,
-                        padding: 0,
-                        minWidth: "120px",
-                    }}
-                >
-                    {options.map((opt) => (
-                        <li
-                            key={opt.type}
-                            onClick={() => handleSelect(opt)}
-                            style={{
-                                padding: "8px",
-                                cursor: "pointer",
-                                background: selected?.id === opt.id ? "#eee" : "#fff",
-                            }}
-                        >
-                            {opt.label}
-                        </li>
-                    ))}
-                </ul>
+                <MenuVariant2
+                    data={options}
+                    onSelectOption={handleSelect} />
             )}
         </div>
     );

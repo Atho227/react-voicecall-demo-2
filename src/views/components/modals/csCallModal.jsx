@@ -13,6 +13,8 @@ import { useCall } from '../../../hooks/CallHook/useCall'
 import InputWithIcon from '../input/InputWithIcon'
 import { setCurrent } from '../../../ultils/helper'
 import DropDownV2 from '../button/iconOptionBtn'
+import { deviceTypes } from '../../../assets/object/data'
+import { ChervonDown } from '../../../assets/icon/NewStyleIcon'
 
 const CSCallModal = () => {
     const { online, isCall, updateCallInfo, serviceList } = useCall();
@@ -62,8 +64,20 @@ const CSCallModal = () => {
             <div className="modal-content">
                 <div className="sub-content">
                     <div className="left-side">
-                        {/* <DropDownV2 >1</DropDownV2> */}
-                        <div className="detail">
+                        <DropDownV2
+                            options={deviceTypes}
+                            onSelect={(opt) => console.log("Chọn:", opt)}
+                        >
+                            {({ selected, toggle, isOpen }) => (
+                                <button
+                                    className="icon-dropdown-btn"
+                                    onClick={toggle}
+                                >
+                                    {selected && <selected.icon size={20} />}
+                                    <ChervonDown />
+                                </button>
+                            )}
+                        </DropDownV2>                        <div className="detail">
                             <div className="line"></div>
                             <BasicSwitch switchStatus={false} switchText={'Tự động tiếp nhận'} />
                         </div>

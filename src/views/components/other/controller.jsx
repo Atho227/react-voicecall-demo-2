@@ -4,8 +4,7 @@ import { useCall } from '../../../hooks/CallHook/useCall'
 import NormalButton from '../button/NormalButton'
 import ToggleIconButton from '../button/ToggleIconButton'
 import { onReloaded, setCurrent } from '../../../ultils/helper'
-import { Microphone, MicrophoneSlash } from '../../../assets/icon/NewStyleIcon'
-import DropDown from '../button/Dropdown'
+import { ChervonDown, Microphone, MicrophoneSlash } from '../../../assets/icon/NewStyleIcon'
 import DropDownV2 from '../button/iconOptionBtn'
 import { deviceTypes } from '../../../assets/object/data'
 
@@ -29,24 +28,6 @@ const Controller = () => {
                 IconAfter={MicrophoneSlash}
                 mainColor='#67BF7F'
             />
-            <DropDownV2
-                options={deviceTypes}
-                onSelect={(opt) => console.log("Chọn:", opt)}
-            >
-                {({ selected, toggle, isOpen }) => (
-                    <button
-                        onClick={toggle}
-                        style={{
-                            padding: "8px 12px",
-                            border: "1px solid #aaa",
-                            borderRadius: "6px",
-                            background: isOpen ? "#f0f0f0" : "white",
-                        }}
-                    >
-                        {selected ? <selected.icon /> : "Chọn món ăn"} ▼
-                    </button>
-                )}
-            </DropDownV2>
         </div>
     )
 }
