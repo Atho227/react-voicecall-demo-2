@@ -43,11 +43,9 @@ function csMuteCall() {
 
 function csUnMuteCall() {
     console.log('csUnMuteCall');
-    window.toggleMute(false)
 }
 function csHoldCall() {
     console.log('gọi được hold');
-    window.toggleHold(true)
 }
 
 function csUnHoldCall() {
@@ -76,6 +74,7 @@ function csShowCallStatus(status) {
 }
 function csCustomerAccept() {
     console.log('csCustomerAccept');
+    window.store.dispatch({ type: "call/isRinging", payload: false })
 }
 function csShowDeviceType(type) {
     console.log(`csShowDeviceType : ${type}`);

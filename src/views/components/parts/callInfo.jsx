@@ -9,7 +9,7 @@ import IconButton from '../button/IconButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 
 const CallInfo = ({ }) => {
-    const { callInfo, mute, hold, isCall, isRinging, isCallOut, isAnswer } = useCall()
+    const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer } = useCall()
     const time = '00:00'
 
     return (isCall ?
@@ -69,20 +69,28 @@ const CallInfo = ({ }) => {
                 alignSelf: 'stretch',
                 backgroundColor: '#F5F6FA',
             }}>
-                {isCall ?
+                {!isRinging ?
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch' }}>
-                        <IconOptionBtn options={options} btnStyle={{ borderRadius: '999px', backgroundColor: 'rgba(61, 85, 204, 0.10)' }} fill={'#3D55CC'} />
-
-                        {!mute ? <IconButton icon={Microphone} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => muteCall()} /> :
+                        {/* <IconOptionBtn options={options} btnStyle={{ borderRadius: '999px', backgroundColor: 'rgba(61, 85, 204, 0.10)' }} fill={'#3D55CC'} /> */}
+                        {!isMuting ? <IconButton icon={Microphone} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => muteCall()} /> :
                             <IconButton icon={MicrophoneSplash} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center', }} style={{ backgroundColor: '#3D55CC' }} onClick={() => muteCall()} />}
-                        {hold ? <IconButton icon={PauseFill} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} style={{ backgroundColor: '#3D55CC' }} onClick={() => holdCall()} /> :
-                            <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => holdCall()} />
+                        {isHolding ?
+                            <IconButton icon={PauseFill} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} style={{ backgroundColor: '#3D55CC' }}
+                                onClick={() => {
+                                    console.log('DEBUG clicked 1');
+                                    window.holdCall()
+                                }} /> :
+                            <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                                onClick={() => {
+                                    console.log('DEBUG clicked 2');
+                                    window.holdCall()
+                                }} />
                         }
                         <NormalButton text='Kết thúc' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }} onClick={() => endCall()} />
                     </div>
                     : isCallOut ?
-                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} onClick={() => endCall()} /> :
-                        <div style={{
+                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} onClick={() => endCall()} />
+                        : isAnswer ? <div style={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'flex-start',
@@ -95,7 +103,7 @@ const CallInfo = ({ }) => {
                                 <NormalButton text='Tiếp nhận' style={{ flex: '1 0 0', backgroundColor: '#3D55CC', color: '#D9E1FC' }} onClick={() => onAcceptCall()} />
                             </div>
                             <p className='small-text' style={{ textAlign: 'center', color: '#787C91' }}>Cuộc gọi bị bỏ qua sẽ được tự động chuyển tiếp cho một chuyên viên khác.</p>
-                        </div>
+                        </div> : 'Error'
                 }
             </div>
         </div >
