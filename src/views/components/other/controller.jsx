@@ -8,12 +8,12 @@ import { Microphone, MicrophoneSlash } from '../../../assets/icon/NewStyleIcon'
 import DropDown from '../button/Dropdown'
 
 const Controller = () => {
-    const { receiveCall, serviceList } = useCall()
+    const { receiveCall, serviceList, currentService } = useCall()
     const [iconToggle, setIconToggle] = useState(false)
 
     return (
         <div style={{ position: 'absolute', top: '50px', left: '50px', display: 'flex', gap: '8px', flexWrap: 'wrap', maxWidth: '150px', width: '360px' }}>
-            <DropDown options={serviceList} />
+            <DropDown options={serviceList} currentOp={currentService} />
         </div>
     )
 }

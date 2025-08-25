@@ -10,7 +10,16 @@ export const onReloaded = () => {
 }
 
 const firstLoadPage = () => {
-    window.store.dispatch({ type: "call/setServiceList", payload: window.csVoice.getCalloutServices() })
+    const services = window.csVoice.getCalloutServices(); // array
+    const defaultService = services.find(s => s.is_default === 1);
+
+    window.store.dispatch({ type: "call/setServiceList", payload: services })
+    if (defaultService) {
+        window.store.dispatch({
+            type: "call/currentService",
+            payload: defaultService,
+        });
+    }
 }
 
 window.firstLoadPage = firstLoadPage

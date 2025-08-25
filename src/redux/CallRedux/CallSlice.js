@@ -9,7 +9,7 @@ const initialState = {
     isCallOut: false,
     isAnswer: true,
     serviceList: [],
-    currentServiceId: 0,
+    currentService: {},
     callInfo: {},
     callStatus: 'initial',   // hide | initial | ringing | calling | busy
     callDirection: 'out',    // out | in
@@ -23,6 +23,9 @@ const callSlice = createSlice({
     reducers: {
         setServiceList: (state, action) => {
             state.serviceList = action.payload;
+        },
+        currentService: (state, action) => {
+            state.currentService = action.payload;
         },
         startCall: (state) => {
             if (state.callDirection === 'out') {

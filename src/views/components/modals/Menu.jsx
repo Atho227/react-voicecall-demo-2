@@ -1,23 +1,22 @@
 import React, { useEffect } from 'react'
-import { UserCirle } from '../../../assets/icon/NewStyleIcon'
+import { PhoneCallOut, UserCirle } from '../../../assets/icon/NewStyleIcon'
 
-const OptionsMenu = ({ data = defaultData, style }) => {
-
-    useEffect(() => {
-        console.log('Debug', data);
-    }, [data])
-
+const OptionsMenu = ({ data, style }) => {
+    const isLoading = !data // chỉ cần check thẳng prop
+    console.log('DEBUG', data);
     return (
         <div style={{ position: 'absolute', top: 'calc(100% + 2px)', left: '50%', transform: 'translateX(-50%)', display: 'flex', width: '248px', padding: '8px', alignItems: 'flex-start', gap: '8px', borderRadius: '8px', backgroundColor: '#FFF', boxShadow: '0 1px 8px 0 rgba(0, 0, 0, 0.12)', ...style }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', flex: '1 0 0' }}>
-                {data.map((item, i) => {
-                    return (
-                        <div key={i} style={{ display: 'flex', padding: '4px 12px', alignItems: 'center', gap: '12px', alignSelf: 'stretch' }}>
-                            {/* <item.icon /> */}
-                            <p>{item.description}</p>
-                        </div>
-                    )
-                })}
+                {isLoading ? 'Loading' :
+                    data.map((item, i) => {
+                        return (
+                            <div key={i} style={{ display: 'flex', padding: '4px 12px', alignItems: 'center', gap: '12px', alignSelf: 'stretch' }}>
+                                <PhoneCallOut />
+                                <p>{item.descriptions}</p>
+                            </div>
+                        )
+                    })
+                }
             </div>
         </div>
     )
