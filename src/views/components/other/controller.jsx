@@ -12,7 +12,11 @@ const Controller = () => {
     const [iconToggle, setIconToggle] = useState(false)
 
     return (
-        <div style={{ position: 'absolute', top: '50px', left: '50px', display: 'flex', gap: '8px', flexWrap: 'wrap', maxWidth: '150px', width: '360px' }}>
+        <div style={{
+            position: 'absolute', top: '50px', left: '50px', display: 'flex', gap: '8px', flexWrap: 'wrap',
+            // maxWidth: '150px',
+            width: '360px',
+        }}>
             <DropDown options={serviceList} currentOp={currentService} />
         </div>
     )

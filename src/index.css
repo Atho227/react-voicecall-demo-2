@@ -530,3 +530,12 @@ p {
 .bold {
   font-weight: 600;
 }
+
+.hover {
+  transition: all 0.2s ease
+}
+
+.hover:hover {
+  background-color: #F5F6FA;
+  cursor: pointer;
+}

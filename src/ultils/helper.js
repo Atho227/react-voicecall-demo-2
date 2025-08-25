@@ -9,8 +9,19 @@ export const onReloaded = () => {
     csInit(token, domain)
 }
 
+export const serviceObjectFit = (obj) => {
+    if (!obj) return null;
+
+    return {
+        id: obj.callout_id,
+        descriptions: obj.descriptions,
+        curent: obj.is_default === 1
+    };
+};
+
 const firstLoadPage = () => {
-    const services = window.csVoice.getCalloutServices(); // array
+    const rawServices = window.csVoice.getCalloutServices(); // array
+    const services = rawServices.map((item) => serviceObjectFit(item))
     const defaultService = services.find(s => s.is_default === 1);
 
     window.store.dispatch({ type: "call/setServiceList", payload: services })
@@ -21,5 +32,16 @@ const firstLoadPage = () => {
         });
     }
 }
-
 window.firstLoadPage = firstLoadPage
+
+export function setCurrent(arr, id) {
+    return arr.map(item => {
+        if (item.id === id) {
+            if (item.curent === true) {
+                return item;
+            }
+            return { ...item, curent: true };
+        }
+        return { ...item, curent: false };
+    });
+}

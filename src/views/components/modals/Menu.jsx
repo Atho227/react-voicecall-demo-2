@@ -10,9 +10,13 @@ const OptionsMenu = ({ data, style }) => {
                 {isLoading ? 'Loading' :
                     data.map((item, i) => {
                         return (
-                            <div key={i} style={{ display: 'flex', padding: '4px 12px', alignItems: 'center', gap: '12px', alignSelf: 'stretch' }}>
+                            <div key={i} className='hover' style={{
+                                display: 'flex', padding: '4px 12px', alignItems: 'center', gap: '12px', alignSelf: 'stretch',
+                                borderRadius: '12px',
+                                backgroundColor: item.curent ? '#F5F6FA' : '',
+                            }}>
                                 <PhoneCallOut />
-                                <p>{item.descriptions}</p>
+                                <p className='small-text bold' style={{ color: item.curent ? '#3D55CC' : '', }}>{item.descriptions}</p>
                             </div>
                         )
                     })

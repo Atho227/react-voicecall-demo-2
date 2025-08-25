@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import IconWrap from '../other/icon'
-import { PhoneCallOut } from '../../../assets/icon/PhoneIcons'
 import { ChervonDown } from '../../../assets/icon/ActionIcons'
 import OptionsMenu from '../modals/Menu'
+import { PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
 
-const DropDown = ({ options, currentOp }) => {
+const DropDown = ({ options }) => {
     const [showMenu, setShowMenu] = useState(false)
     const isLoading = !options // chỉ cần check thẳng prop
     return (
@@ -18,7 +18,7 @@ const DropDown = ({ options, currentOp }) => {
                 <p className='input-area'>
                     {isLoading
                         ? 'Đang tải...'
-                        : currentOp?.descriptions || 'Chưa có dịch vụ'
+                        : options?.find(s => s.curent)?.descriptions || 'Chưa có dịch vụ'
                     }
                 </p>
                 <IconWrap icon={ChervonDown} />
