@@ -11,9 +11,10 @@ import CallInfo from '../parts/callInfo'
 import NormalButton from '../button/NormalButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 import InputWithIcon from '../input/InputWithIcon'
+import { setCurrent } from '../../../ultils/helper'
 
 const CSCallModal = () => {
-    const { online, isCall, updateCallInfo } = useCall();
+    const { online, isCall, updateCallInfo, serviceList } = useCall();
 
     const [showNumpad, setShowNumPad] = useState(true)
     const [phone, setPhone] = useState('')
@@ -40,6 +41,11 @@ const CSCallModal = () => {
         setPhone(prev => prev + val);
     };
 
+    const chooseCurrentById = (id) => {
+        const newService = setCurrent(serviceList, id)
+        window.store.dispatch({ type: "call/setServiceList", payload: newService })
+        console.log('DEBUG', id);
+    }
     return (
         <div className='CS-Call'>
             <div className="modal-header">
@@ -71,7 +77,7 @@ const CSCallModal = () => {
                 {showNumpad ?
                     <div className="main-content">
                         <div className="call-out-seting">
-                            <DropDown />
+                            <DropDown options={serviceList} setCurrent={chooseCurrentById} />
                         </div>
                         <div className="call-out-input">
                             <InputWithIcon label={'Tới số'} fIcon={PhoneNormal} updateValue={setPhone} outvalue={phone} />

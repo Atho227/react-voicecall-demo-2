@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useCall } from '../../../hooks/CallHook/useCall'
-import NormalButton from '../button/NormalButton'
 
+import NormalButton from '../button/NormalButton'
 import ToggleIconButton from '../button/ToggleIconButton'
 import { onReloaded, setCurrent } from '../../../ultils/helper'
 import { Microphone, MicrophoneSlash } from '../../../assets/icon/NewStyleIcon'
 import DropDown from '../button/Dropdown'
 
 const Controller = () => {
-    const { receiveCall, serviceList, currentService } = useCall()
+    const { receiveCall, serviceList } = useCall()
     const [iconToggle, setIconToggle] = useState(false)
     const [service, setService] = useState()
 
@@ -28,7 +28,7 @@ const Controller = () => {
             // maxWidth: '150px',
             width: '360px',
         }}>
-            <DropDown options={service} currentOp={currentService} setCurrent={chooseCurrentById} />
+            <DropDown options={service} setCurrent={chooseCurrentById} />
         </div>
     )
 }
