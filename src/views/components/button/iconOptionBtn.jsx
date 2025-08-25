@@ -2,74 +2,68 @@ import React, { useState, useRef, useEffect } from 'react';
 import IconWrap from '../other/icon';
 import { ChervonDown } from '../../../assets/icon/ActionIcons';
 
-const IconOptionBtn = ({ options, btnStyle, fill }) => {
-    const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState(options[0]); // mặc định chọn option đầu
-    const dropdownRef = useRef(null);
+const DropDownV2 = ({ options, onSelect, children }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selected, setSelected] = useState(null);
+    const ref = useRef(null);
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setOpen(false);
+        const handleClickOutside = (e) => {
+            if (ref.current && !ref.current.contains(e.target)) {
+                setIsOpen(false);
             }
         };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
     }, []);
 
-    return (
-        <div className="icon-option-btn" ref={dropdownRef} style={{ position: 'relative', display: 'inline-block', }}>
-            <div
-                className="icon-dropdown-btn"
-                onClick={() => setOpen(!open)}
-                style={{ ...btnStyle }}
-            >
-                <IconWrap icon={selected.icon} />
-                <IconWrap icon={ChervonDown} fill={fill} />
-            </div>
+    useEffect(() => {
+        const selected = options?.find(s => s.choosen)
+        setSelected(selected)
+    }, [])
 
-            {open && (
-                <div
-                    className="dropdown-menu"
+    const handleSelect = (option) => {
+        setSelected(option);
+        setIsOpen(false);
+        onSelect?.(option);
+    };
+
+    return (
+        <div ref={ref} style={{ position: "relative", display: "inline-block" }}>
+            {/* renderTrigger → children dạng function */}
+            {children({ isOpen, selected, toggle: () => setIsOpen(!isOpen) })}
+
+            {isOpen && (
+                <ul
                     style={{
-                        position: 'absolute',
-                        top: '100%',
+                        position: "absolute",
+                        top: "100%",
                         left: 0,
-                        backgroundColor: '#fff',
-                        border: '1px solid #ccc',
-                        borderRadius: '4px',
-                        marginTop: '5px',
-                        minWidth: '200px',
-                        boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
-                        zIndex: 10
+                        border: "1px solid #ccc",
+                        background: "#fff",
+                        listStyle: "none",
+                        margin: 0,
+                        padding: 0,
+                        minWidth: "120px",
                     }}
                 >
-                    {options.map((option, index) => (
-                        <div
-                            key={index}
-                            onClick={() => {
-                                setSelected(option);
-                                setOpen(false);
-                            }}
+                    {options.map((opt) => (
+                        <li
+                            key={opt.type}
+                            onClick={() => handleSelect(opt)}
                             style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                padding: '5px 10px',
-                                cursor: 'pointer',
-                                gap: '8px'
+                                padding: "8px",
+                                cursor: "pointer",
+                                background: selected?.id === opt.id ? "#eee" : "#fff",
                             }}
                         >
-                            <IconWrap icon={option.icon} />
-                            <div className="option-text">
-                                <div className="title">{option.title}</div>
-                                {option.subtitle && <div className="subtitle" style={{ fontSize: '12px', color: '#666' }}>{option.subtitle}</div>}
-                            </div>
-                        </div>
+                            {opt.label}
+                        </li>
                     ))}
-                </div>
+                </ul>
             )}
         </div>
     );
 };
 
-export default IconOptionBtn;
+export default DropDownV2;

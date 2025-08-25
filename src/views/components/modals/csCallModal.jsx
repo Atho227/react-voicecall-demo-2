@@ -12,6 +12,7 @@ import NormalButton from '../button/NormalButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 import InputWithIcon from '../input/InputWithIcon'
 import { setCurrent } from '../../../ultils/helper'
+import DropDownV2 from '../button/iconOptionBtn'
 
 const CSCallModal = () => {
     const { online, isCall, updateCallInfo, serviceList } = useCall();
@@ -61,7 +62,7 @@ const CSCallModal = () => {
             <div className="modal-content">
                 <div className="sub-content">
                     <div className="left-side">
-                        <IconOptionBtn options={options} />
+                        {/* <DropDownV2 >1</DropDownV2> */}
                         <div className="detail">
                             <div className="line"></div>
                             <BasicSwitch switchStatus={false} switchText={'Tự động tiếp nhận'} />
