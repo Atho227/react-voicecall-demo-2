@@ -11,23 +11,36 @@ window.unload = function () {
 // custom.js - Implement các hàm callback từ tài liệu
 function csCallRinging(phone) {
     console.log(`csCallRinging: ${phone}`);
-    const phoneInfo = {
-        name: window.csVoice.callInfo.callerName,
-        phone: window.csVoice.callInfo.caller,
-    }
-    const isCallout = window.csVoice.isCallout;
+    const callInfo = JSON.stringify(window.csVoice?.callInfo);
 
-    window.store.dispatch({ type: "call/isCall", payload: true })
-    window.store.dispatch({ type: "call/callInfo", payload: phoneInfo })
-    window.store.dispatch({ type: "call/isRinging", payload: true })
+    if (!callInfo) {
+        console.warn("callInfo chưa sẵn sàng:", callInfo);
+        return;
+    }
+    const phoneInfo = {
+        name: callInfo.callerName || phone,
+        phone: callInfo.caller || phone,
+    };
+
+    const isCallout = window.csVoice?.isCallout;
     if (isCallout) {
-        window.store.dispatch({ type: "call/isCallOut", payload: true })
-    } else window.store.dispatch({ type: "call/isAnswer", payload: true })
+        console.warn("isCallout:", isCallout);
+        window.store.dispatch({ type: "call/isCallOut", payload: true });
+    } else {
+        console.warn("isCallout:", isCallout);
+        window.store.dispatch({ type: "call/isAnswer", payload: true });
+    }
+    window.store.dispatch({ type: "call/isCall", payload: true });
+    window.store.dispatch({ type: "call/isRinging", payload: true });
+    window.store.dispatch({ type: "call/callInfo", payload: phoneInfo });
 }
+
 
 function csAcceptCall() {
     console.log('Cuộc gọi được chấp nhận');
-    // window.acceptCall()
+    if (!window.csVoice.isCallout) {
+        window.store.dispatch({ type: "call/isRinging", payload: false })
+    }
 }
 
 function csEndCall() {
@@ -91,6 +104,7 @@ function csInitError(errorCode) {
 
 function csInitComplete() {
     console.log('Kết nối thành công');
+    // console.log('csVoice ban đầu:', JSON.stringify(window.csVoice.callInfo))
     window.firstLoadPage()
 }
 function csListTransferAgent(listTransferAgent) {
