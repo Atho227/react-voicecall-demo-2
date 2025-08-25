@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { PhoneCallOut, UserCirle } from '../../../assets/icon/NewStyleIcon'
 
-const OptionsMenu = ({ data, setCurrent, style }) => {
+const OptionsMenu = ({ data, setCurrent, style, setShowMenu }) => {
     const isLoading = !data // chỉ cần check thẳng prop
     return (
         <div style={{ position: 'absolute', top: 'calc(100% + 2px)', left: '50%', transform: 'translateX(-50%)', display: 'flex', width: '248px', padding: '8px', alignItems: 'flex-start', gap: '8px', borderRadius: '8px', backgroundColor: '#FFF', boxShadow: '0 1px 8px 0 rgba(0, 0, 0, 0.12)', ...style }}>
@@ -10,7 +10,10 @@ const OptionsMenu = ({ data, setCurrent, style }) => {
                     data.map((item, i) => {
                         return (
                             <div key={i}
-                                onClick={() => setCurrent(item.id)}
+                                onClick={() => {
+                                    setShowMenu(false)
+                                    setCurrent(item.id)
+                                }}
                                 className='hover' style={{
                                     display: 'flex', padding: '4px 12px', alignItems: 'center', gap: '12px', alignSelf: 'stretch',
                                     borderRadius: '12px',

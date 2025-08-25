@@ -25,7 +25,7 @@ const DropDown = ({ options, setCurrent }) => {
             </div>
 
             {showMenu && !isLoading && (
-                <OptionsMenu style={{ width: '100%' }} data={options} setCurrent={setCurrent} />
+                <OptionsMenu style={{ width: '100%' }} data={options} setCurrent={setCurrent} setShowMenu={setShowMenu} />
             )}
         </div>
     )
