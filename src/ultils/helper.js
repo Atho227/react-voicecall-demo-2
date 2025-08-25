@@ -22,13 +22,14 @@ export const serviceObjectFit = (obj) => {
 const firstLoadPage = () => {
     const rawServices = window.csVoice.getCalloutServices(); // array
     const services = rawServices.map((item) => serviceObjectFit(item))
-    const defaultService = services.find(s => s.is_default === 1);
+    const defaultServiceId = services.find(s => s.isCurrent).id;
 
     window.store.dispatch({ type: "call/setServiceList", payload: services })
-    if (defaultService) {
+
+    if (defaultServiceId) {
         window.store.dispatch({
-            type: "call/currentService",
-            payload: defaultService,
+            type: "call/currentServiceId",
+            payload: defaultServiceId,
         });
     }
 }

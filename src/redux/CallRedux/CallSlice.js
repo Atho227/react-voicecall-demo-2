@@ -10,7 +10,7 @@ const initialState = {
     isAnswer: true,
     callInfo: {},
     serviceList: [],
-    currentService: {},
+    currentServiceId: null,
     currentDevice: 1,
     callStatus: 'initial',   // hide | initial | ringing | calling | busy
     callDirection: 'out',    // out | in
@@ -25,8 +25,8 @@ const callSlice = createSlice({
         setServiceList: (state, action) => {
             state.serviceList = action.payload;
         },
-        currentService: (state, action) => {
-            state.currentService = action.payload;
+        currentServiceId: (state, action) => {
+            state.currentServiceId = action.payload;
         },
         currentDevice: (state, action) => {
             state.currentDevice = action.payload;
