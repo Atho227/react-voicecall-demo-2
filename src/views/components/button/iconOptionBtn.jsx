@@ -18,7 +18,6 @@ const DropDownV2 = ({ options, onSelect, currentType, children }) => {
 
     useEffect(() => {
         const selected = options?.find(s => s.type === currentType)
-        console.log('DEBUG đã chọn', selected);
         setSelected(selected)
     }, [currentType])
 
@@ -31,7 +30,6 @@ const DropDownV2 = ({ options, onSelect, currentType, children }) => {
     return (
         <div ref={ref} style={{ position: "relative", display: "inline-block" }}>
             {children({ isOpen, selected, toggle: () => setIsOpen(!isOpen) })}
-
             {isOpen && (
                 <MenuVariant2
                     data={options}

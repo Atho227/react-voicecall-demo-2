@@ -9,31 +9,6 @@ function App() {
   useEffect(() => {
     onReloaded();
   }, [])
-
-  const {
-    setPermission,
-    setOnline,
-    startCall,
-    acceptCall,
-    CallEnded,
-    receiveCall,
-    updateCallInfo,
-    toggleMute,
-    toggleHold
-  } = useCall();
-
-  useExposeToWindow({
-    setPermission,
-    setOnline,
-    startCall,
-    acceptCall,
-    CallEnded,
-    receiveCall,
-    updateCallInfo,
-    toggleMute,
-    toggleHold
-  });
-
   return (
     <div>
       <MainLayout />

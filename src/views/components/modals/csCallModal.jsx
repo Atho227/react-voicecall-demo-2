@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import IconWrap from '../other/icon'
-import { NumberDial, PhoneNormal, PhoneNormalFill, PhoneRestrict } from '../../../assets/icon/PhoneIcons'
+import { NumberDial, PhoneNormal, PhoneNormalFill } from '../../../assets/icon/PhoneIcons'
 import { Active, Disable } from '../../../assets/icon/ActiveStatusIcon'
 import { CloseIcon, HeadSet } from '../../../assets/icon/ActionIcons'
-import IconOptionBtn from '../button/iconOptionBtn'
 import BasicSwitch from '../button/switch'
 import DropDown from '../button/Dropdown'
 import PhoneBtnLine from '../other/phoneBtnLine'
@@ -32,11 +31,6 @@ const CSCallModal = () => {
 
     const calOutAction = () => {
         setShowNumPad(false)
-        const phoneInfo = {
-            name: phone,
-            phone: phone,
-        }
-        updateCallInfo(phoneInfo)
         csCallout(phone, currentServiceId ?? null)
     }
 
@@ -75,7 +69,7 @@ const CSCallModal = () => {
                                     className="icon-dropdown-btn"
                                     onClick={toggle}
                                 >
-                                    {selected && <selected.icon size={20} />}
+                                    {selected && React.createElement(selected.icon, { size: 20 })}
                                     <ChervonDown />
                                 </button>
                             )}

@@ -10,11 +10,19 @@ window.unload = function () {
 
 // custom.js - Implement các hàm callback từ tài liệu
 function csCallRinging(phone) {
-    console.log(`ringing csVoice : ${JSON.stringify(window.csVoice, null, 2)}`);
     console.log(`csCallRinging: ${phone}`);
-    const phoneInfo = { name: phone, phone: phone }
-    window.receiveCall()
-    window.updateCallInfo(phoneInfo)
+    const phoneInfo = {
+        name: window.csVoice.callInfo.callerName,
+        phone: window.csVoice.callInfo.caller,
+    }
+    const isCallout = window.csVoice.isCallout;
+
+    window.store.dispatch({ type: "call/isCall", payload: true })
+    window.store.dispatch({ type: "call/callInfo", payload: phoneInfo })
+    window.store.dispatch({ type: "call/isRinging", payload: true })
+    if (isCallout) {
+        window.store.dispatch({ type: "call/isCallOut", payload: true })
+    } else window.store.dispatch({ type: "call/isAnswer", payload: true })
 }
 
 function csAcceptCall() {
@@ -59,16 +67,15 @@ function showCalloutError(errorCode, sipCode) {
 
 function csShowEnableVoice(isEnable) {
     console.log(`csShowEnableVoice : ${isEnable}`);
-    window.setPermission(isEnable)
+    window.store.dispatch({ type: "call/permission", payload: isEnable })
 }
 
 function csShowCallStatus(status) {
     console.log(`csShowCallStatus : ${status}`);
-    window.setOnline(status === 'Online')
+    window.store.dispatch({ type: "call/online", payload: status === 'Online' })
 }
 function csCustomerAccept() {
     console.log('csCustomerAccept');
-    window.acceptCall()
 }
 function csShowDeviceType(type) {
     console.log(`csShowDeviceType : ${type}`);
@@ -88,7 +95,7 @@ function csInitComplete() {
     window.firstLoadPage()
 }
 function csListTransferAgent(listTransferAgent) {
-    console.log('csListTransferAgent');
+    console.log(`csListTransferAgent : ${JSON.stringify(listTransferAgent)}`);
 }
 function csTransferCallError(error, tranferedAgentInfo) {
     console.log('csTransferCallError');

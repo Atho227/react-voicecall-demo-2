@@ -9,7 +9,7 @@ import IconButton from '../button/IconButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 
 const CallInfo = ({ }) => {
-    const { callStatus, callDirection, callInfo, mute, hold, isCall, isRinging, isCallOut, isAnswer } = useCall()
+    const { callInfo, mute, hold, isCall, isRinging, isCallOut, isAnswer } = useCall()
     const time = '00:00'
 
     return (isCall ?
@@ -37,10 +37,10 @@ const CallInfo = ({ }) => {
                 </div>
                 <div style={{ width: '328px', height: '1px', backgroundColor: '#DADCE5' }}></div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px', alignSelf: 'stretch' }}>
-                    {!isRinging ? '' :
+                    {isRinging ?
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'stretch' }}>
                             <p className='secondary-text bold' style={{ flex: '1 0 0' }}>{isCallOut ? 'Đang kết nối tới...' : isAnswer ? 'Cuộc gọi đến' : 'Lỗi'}</p>
-                        </div>
+                        </div> : ''
                     }
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'stretch' }}>
                         <div style={{ display: 'flex', height: '44px', alignItems: 'center', gap: '16px', flex: '1 0 0' }}>
@@ -69,7 +69,7 @@ const CallInfo = ({ }) => {
                 alignSelf: 'stretch',
                 backgroundColor: '#F5F6FA',
             }}>
-                {callStatus === 'calling' ?
+                {isCall ?
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch' }}>
                         <IconOptionBtn options={options} btnStyle={{ borderRadius: '999px', backgroundColor: 'rgba(61, 85, 204, 0.10)' }} fill={'#3D55CC'} />
 
@@ -80,7 +80,7 @@ const CallInfo = ({ }) => {
                         }
                         <NormalButton text='Kết thúc' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }} onClick={() => endCall()} />
                     </div>
-                    : callDirection === 'out' ?
+                    : isCallOut ?
                         <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }} onClick={() => endCall()} /> :
                         <div style={{
                             display: 'flex',
