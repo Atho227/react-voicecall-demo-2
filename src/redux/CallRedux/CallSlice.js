@@ -8,9 +8,10 @@ const initialState = {
     isRinging: false,
     isCallOut: false,
     isAnswer: true,
+    callInfo: {},
     serviceList: [],
     currentService: {},
-    callInfo: {},
+    currentDevice: 1,
     callStatus: 'initial',   // hide | initial | ringing | calling | busy
     callDirection: 'out',    // out | in
     mute: false,
@@ -26,6 +27,9 @@ const callSlice = createSlice({
         },
         currentService: (state, action) => {
             state.currentService = action.payload;
+        },
+        currentDevice: (state, action) => {
+            state.currentDevice = action.payload;
         },
         startCall: (state) => {
             if (state.callDirection === 'out') {

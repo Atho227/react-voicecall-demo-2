@@ -17,7 +17,7 @@ import { deviceTypes } from '../../../assets/object/data'
 import { ChervonDown } from '../../../assets/icon/NewStyleIcon'
 
 const CSCallModal = () => {
-    const { online, isCall, updateCallInfo, serviceList } = useCall();
+    const { online, isCall, updateCallInfo, serviceList, currentDevice } = useCall();
 
     const [showNumpad, setShowNumPad] = useState(true)
     const [phone, setPhone] = useState('')
@@ -49,6 +49,7 @@ const CSCallModal = () => {
         window.store.dispatch({ type: "call/setServiceList", payload: newService })
         console.log('DEBUG', id);
     }
+
     return (
         <div className='CS-Call'>
             <div className="modal-header">
@@ -66,7 +67,8 @@ const CSCallModal = () => {
                     <div className="left-side">
                         <DropDownV2
                             options={deviceTypes}
-                            onSelect={(opt) => console.log("Chọn:", opt)}
+                            currentType={currentDevice}
+                            onSelect={(opt) => changeDevice(opt.type)}
                         >
                             {({ selected, toggle, isOpen }) => (
                                 <button
@@ -77,7 +79,8 @@ const CSCallModal = () => {
                                     <ChervonDown />
                                 </button>
                             )}
-                        </DropDownV2>                        <div className="detail">
+                        </DropDownV2>
+                        <div className="detail">
                             <div className="line"></div>
                             <BasicSwitch switchStatus={false} switchText={'Tự động tiếp nhận'} />
                         </div>

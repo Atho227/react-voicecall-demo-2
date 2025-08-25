@@ -72,7 +72,7 @@ function csCustomerAccept() {
 }
 function csShowDeviceType(type) {
     console.log(`csShowDeviceType : ${type}`);
-    // Đóng popup hoặc reset UI
+    window.store.dispatch({ type: "call/currentDevice", payload: type })
 }
 function csCurrentCallId(callId) {
     console.log(`csCurrentCallId : ${callId}`);

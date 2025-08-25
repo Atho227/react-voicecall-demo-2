@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import MenuVariant2 from '../modals/MenuVariant2';
 
-const DropDownV2 = ({ options, onSelect, children }) => {
+const DropDownV2 = ({ options, onSelect, currentType, children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState(null);
     const ref = useRef(null);
@@ -17,12 +17,12 @@ const DropDownV2 = ({ options, onSelect, children }) => {
     }, []);
 
     useEffect(() => {
-        const selected = options?.find(s => s.choosen)
+        const selected = options?.find(s => s.type === currentType)
+        console.log('DEBUG đã chọn', selected);
         setSelected(selected)
-    }, [])
+    }, [currentType])
 
     const handleSelect = (option) => {
-        console.log('DEBUG đã chọn', option);
         setSelected(option);
         setIsOpen(false);
         onSelect?.(option);
