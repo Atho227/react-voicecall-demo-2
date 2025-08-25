@@ -11,28 +11,35 @@ window.unload = function () {
 // custom.js - Implement các hàm callback từ tài liệu
 function csCallRinging(phone) {
     console.log(`csCallRinging: ${phone}`);
-    const callInfo = JSON.stringify(window.csVoice?.callInfo);
-
-    if (!callInfo) {
-        console.warn("callInfo chưa sẵn sàng:", callInfo);
-        return;
-    }
-    const phoneInfo = {
-        name: callInfo.callerName || phone,
-        phone: callInfo.caller || phone,
-    };
 
     const isCallout = window.csVoice?.isCallout;
     if (isCallout) {
         console.warn("isCallout:", isCallout);
         window.store.dispatch({ type: "call/isCallOut", payload: true });
+        const callInfo = window.csVoice?.callInfo;
+        if (!callInfo || callInfo === undefined) {
+            console.warn("callInfo chưa sẵn sàng:", callInfo);
+            return;
+        }
+        console.log("callInfo sẵn sàng 1:", callInfo);
+        console.log("callInfo sẵn sàng 2:", callInfo.callerName);
+        const phoneInfo = {
+            name: callInfo.callerName,
+            phone: callInfo.caller,
+        };
+        window.store.dispatch({ type: "call/callInfo", payload: phoneInfo });
     } else {
         console.warn("isCallout:", isCallout);
         window.store.dispatch({ type: "call/isAnswer", payload: true });
+        window.store.dispatch({
+            type: "call/callInfo", payload: {
+                name: phone,
+                phone: phone,
+            }
+        });
     }
     window.store.dispatch({ type: "call/isCall", payload: true });
     window.store.dispatch({ type: "call/isRinging", payload: true });
-    window.store.dispatch({ type: "call/callInfo", payload: phoneInfo });
 }
 
 
