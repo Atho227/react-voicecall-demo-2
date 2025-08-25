@@ -27,9 +27,18 @@ const DropDownV2 = ({ options, onSelect, currentType, children }) => {
         onSelect?.(option);
     };
 
+    if (typeof children !== "function") {
+        console.error(
+            "DropDownV2: expected a function-as-children, but got:",
+            children
+        );
+        console.trace(); // hiện stack để biết được nó render từ component nào
+    }
     return (
         <div ref={ref} style={{ position: "relative", display: "inline-block" }}>
-            {children({ isOpen, selected, toggle: () => setIsOpen(!isOpen) })}
+            {typeof children === "function"
+                ? children({ isOpen, selected, toggle: () => setIsOpen(!isOpen) })
+                : null}
             {isOpen && (
                 <MenuVariant2
                     data={options}

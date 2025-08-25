@@ -5,7 +5,6 @@ import NormalButton from '../button/NormalButton'
 import ToggleIconButton from '../button/ToggleIconButton'
 import { onReloaded, setCurrent } from '../../../ultils/helper'
 import { ChervonDown, Microphone, MicrophoneSlash } from '../../../assets/icon/NewStyleIcon'
-import DropDownV2 from '../button/iconOptionBtn'
 import { deviceTypes } from '../../../assets/object/data'
 
 const Controller = () => {

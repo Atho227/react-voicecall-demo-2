@@ -16,7 +16,7 @@ import { deviceTypes } from '../../../assets/object/data'
 import { ChervonDown } from '../../../assets/icon/NewStyleIcon'
 
 const CSCallModal = () => {
-    const { online, isCall, updateCallInfo, serviceList, currentDevice, currentServiceId } = useCall();
+    const { online, isCall, serviceList, currentDevice, currentServiceId } = useCall();
 
     const [showNumpad, setShowNumPad] = useState(true)
     const [phone, setPhone] = useState('')
@@ -30,8 +30,8 @@ const CSCallModal = () => {
     }, [isCall]);
 
     const calOutAction = () => {
-        setShowNumPad(false)
-        csCallout(phone, currentServiceId ?? null)
+        csCallout(phone, currentServiceId)
+        // setShowNumPad(false)
     }
 
     const handlePhoneBtnClick = (val) => {
@@ -41,7 +41,6 @@ const CSCallModal = () => {
     const chooseCurrentById = (id) => {
         const newService = setCurrent(serviceList, id)
         window.store.dispatch({ type: "call/setServiceList", payload: newService })
-        console.log('DEBUG', id);
     }
 
     return (
@@ -69,7 +68,7 @@ const CSCallModal = () => {
                                     className="icon-dropdown-btn"
                                     onClick={toggle}
                                 >
-                                    {selected && React.createElement(selected.icon, { size: 20 })}
+                                    {selected && <selected.icon size={20} />}
                                     <ChervonDown />
                                 </button>
                             )}

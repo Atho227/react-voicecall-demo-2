@@ -1,5 +1,4 @@
 import React from 'react'
-import { PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
 
 const MenuVariant2 = ({ data, onSelectOption }) => {
     const isLoading = !data // chỉ cần check thẳng prop
@@ -22,7 +21,8 @@ const MenuVariant2 = ({ data, onSelectOption }) => {
             {isLoading ? 'Loading' :
                 data.map((item, i) => {
                     return (
-                        <div key={item.id}
+                        <div
+                            key={item.type}
                             onClick={() => onSelectOption(item)}
                             className='hover' style={{
                                 display: 'flex',

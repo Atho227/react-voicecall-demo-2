@@ -33,7 +33,7 @@ function csAcceptCall() {
 
 function csEndCall() {
     console.log('Cuộc gọi kết thúc');
-    window.CallEnded()
+    window.store.dispatch({ type: "call/endCall" })
 }
 
 function csMuteCall() {
