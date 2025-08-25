@@ -15,7 +15,7 @@ export const serviceObjectFit = (obj) => {
     return {
         id: obj.callout_id,
         descriptions: obj.descriptions,
-        curent: obj.is_default === 1
+        isCurrent: obj.is_default === 1
     };
 };
 
@@ -37,11 +37,11 @@ window.firstLoadPage = firstLoadPage
 export function setCurrent(arr, id) {
     return arr.map(item => {
         if (item.id === id) {
-            if (item.curent === true) {
+            if (item.isCurrent === true) {
                 return item;
             }
-            return { ...item, curent: true };
+            return { ...item, isCurrent: true };
         }
-        return { ...item, curent: false };
+        return { ...item, isCurrent: false };
     });
 }

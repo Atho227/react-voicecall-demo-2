@@ -18,7 +18,7 @@ const DropDown = ({ options, setCurrent }) => {
                 <p className='input-area'>
                     {isLoading
                         ? 'Đang tải...'
-                        : options?.find(s => s.curent)?.descriptions || 'Chưa có dịch vụ'
+                        : options?.find(s => s.isCurrent)?.descriptions || 'Chưa có dịch vụ'
                     }
                 </p>
                 <IconWrap icon={ChervonDown} />
