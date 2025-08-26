@@ -9,7 +9,7 @@ const NormalInput = ({ style, label = false }) => {
             <div style={{ display: 'flex', height: '20px', alignItems: 'center', gap: '4px' }}>
                 <p className='small-text'>{label}</p>
             </div>
-            <div style={{ display: 'flex', maxHeight: '40px', padding: '12px', alignItems: 'center', alignSelf: 'stretch', borderRadius: '12px', border: '1px solid #DBDBDB' }}>
+            <div className='input-style' style={{ display: 'flex', maxHeight: '40px', padding: '12px', alignItems: 'center', alignSelf: 'stretch', borderRadius: '12px' }}>
                 <input type="text" className='secondary-text' style={{ width: "100%" }} />
             </div>
         </div>

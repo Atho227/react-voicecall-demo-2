@@ -546,3 +546,17 @@ button {
   background-color: #F5F6FA;
   cursor: pointer;
 }
+
+.input-style {
+  border: 1px solid #DBDBDB;
+  transition: all 0.2s ease;
+}
+
+.input-style:hover {
+  border-color: #3D55CC;
+}
+
+.input-style:has(input:focus) {
+  border-color: #3D55CC;
+  background-color: #F5F5F5;
+}

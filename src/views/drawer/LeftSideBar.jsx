@@ -65,7 +65,9 @@ const LeftSideBar = () => {
             </div>
             {isExpanded &&
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '12px 20px' }}>
-                    <NormalInput label='Token' />
+                    <div>
+                        <NormalInput label='Nhập Token để đăng nhập' />
+                    </div>
                 </div>
             }
         </div>
