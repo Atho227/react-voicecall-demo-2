@@ -522,6 +522,8 @@ button {
 .secondary-text {
   color: var(--foreground-neutral-neutral-darkest, #393D4D);
   font-feature-settings: 'calt' off;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   /* Secondary-text-14/Regular */
   font-family: var(--typeface-family-text, Inter);

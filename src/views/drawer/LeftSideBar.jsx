@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { List, Plugs, PlugsConnected } from '../../assets/icon/NewStyleIcon'
 import NormalButton from '../components/button/NormalButton'
+import InputWithIcon from '../components/input/InputWithIcon';
+import NormalInput from '../components/input/Input';
 
 const LeftSideBar = () => {
     const [isExpanded, setIsExpanded] = useState(true);
@@ -63,7 +65,7 @@ const LeftSideBar = () => {
             </div>
             {isExpanded &&
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '12px 20px' }}>
-                    helo
+                    <NormalInput label='Token' />
                 </div>
             }
         </div>
