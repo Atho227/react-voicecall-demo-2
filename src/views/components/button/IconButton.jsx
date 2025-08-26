@@ -1,7 +1,7 @@
 import React from 'react'
 import IconWrap from '../other/icon'
 
-const IconButton = ({ icon, onClick, style, iconStyle }) => {
+const IconButton = ({ icon, onClick, style, iconStyle, fill, size }) => {
     return (
         <div
             onClick={() => onClick()}
@@ -16,7 +16,7 @@ const IconButton = ({ icon, onClick, style, iconStyle }) => {
                 ...style
             }}
         >
-            <IconWrap icon={icon} additionalStyle={{ ...iconStyle }} />
+            <IconWrap icon={icon} additionalStyle={{ ...iconStyle }} fill={fill} size={size} />
         </div>
     )
 }

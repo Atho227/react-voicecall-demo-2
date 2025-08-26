@@ -44,6 +44,11 @@ p {
   box-sizing: border-box;
 }
 
+button {
+  cursor: pointer;
+}
+
+
 .status-modal>* {
   padding: 8px 12px !important;
 }
