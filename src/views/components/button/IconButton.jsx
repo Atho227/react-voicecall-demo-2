@@ -9,7 +9,7 @@ const IconButton = ({ Icon, size = 24, fill = "#3D55CC", style = {}, ...props })
                 alignItems: "center",
                 padding: "8px",
                 borderRadius: "999px",
-                backgroundColor: "rgba(61, 85, 204, 0.10)",
+                // backgroundColor: "rgba(61, 85, 204, 0.10)",
                 border: "none",
                 cursor: "pointer",
                 ...style   // 👈 dòng này cho phép override

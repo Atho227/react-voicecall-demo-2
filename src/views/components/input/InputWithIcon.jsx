@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import IconWrap from '../other/icon';
-import { Backspace } from '../../../assets/icon/ActionIcons';
 import IconButton from '../button/IconButton';
+import { BackspaceIcon } from '../../../assets/icon/NewStyleIcon';
 
 const InputWithIcon = ({ label, fIcon, updateValue, outvalue }) => {
     const [value, setValue] = useState(outvalue);
@@ -31,11 +31,10 @@ const InputWithIcon = ({ label, fIcon, updateValue, outvalue }) => {
                     }}
                 />
                 <IconButton
-                    Icon={Backspace}
+                    Icon={BackspaceIcon}
                     onClick={handleBackspace}
-                    style={{
-                        width: '24px', height: '24px', backgroundColor: "",
-                    }} />
+                    fill='#5C6073'
+                />
             </div>
         </div>
     )
