@@ -4,6 +4,7 @@ import NormalButton from '../components/button/NormalButton'
 import NormalInput from '../components/input/Input';
 import { generateToken } from '../../ultils/helper';
 import { useLocalStorage } from '../../hooks/useLocalstorage';
+import { LoginApi } from '../../ultils/api/VoiceLoginApi';
 
 const LeftSideBar = () => {
     const [isExpanded, setIsExpanded] = useState(true);
@@ -21,13 +22,6 @@ const LeftSideBar = () => {
     const [createTokenForm, setCreateTokenForm] = useState({
         agent_id: '', secret: ''
     })
-
-    // useEffect(() => {
-    //     (async () => {
-    //         const token = await generateToken("12345", "mysecret");
-    //         console.log("Generated token:", token);
-    //     })();
-    // }, []);
 
     const handleChangeLoginInfo = (e) => {
         setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
@@ -54,6 +48,14 @@ const LeftSideBar = () => {
 
     const onLogin = () => {
         setLoadedInfo(loginInfo)
+        LoginApi(loginInfo.domain, loginInfo.token)
+            .then(data => {
+                console.log("Login response:", data);
+            })
+            .catch(err => {
+                console.error("Login failed:", err);
+            });
+        // csInit(loginInfo.token, loginInfo.domain)
     }
     return (
         <div
