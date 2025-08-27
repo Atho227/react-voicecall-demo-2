@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { List, Plugs, PlugsConnected } from '../../assets/icon/NewStyleIcon'
 import NormalButton from '../components/button/NormalButton'
-import InputWithIcon from '../components/input/InputWithIcon';
 import NormalInput from '../components/input/Input';
 
 const LeftSideBar = () => {
@@ -13,38 +12,36 @@ const LeftSideBar = () => {
             className="sidebar"
             style={{
                 width: isExpanded ? "225px" : "64px",
-                border: "1px solid #DADCE5",
                 backgroundColor: "#FFF",
                 display: "flex",
                 flexDirection: "column",
                 height: "100vh",
                 minHeight: "730px",
+                border: "1px solid #DADCE5",
             }}
         >
-            {/* Header */}
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "20px",
-                    height: "64px",
-                    padding: "20px",
-                    borderBottom: "1px solid #ccc",
-                }}
+            <div style={{
+                height: "64px",
+                display: "flex",
+                alignItems: "center",
+                gap: "20px",
+                borderBottom: "1px solid #ccc",
+            }}
             >
-                <button aria-label="Toggle sidebar" onClick={() => setIsExpanded(!isExpanded)}>
+                <button aria-label="Toggle sidebar"
+                    style={{ height: '64px', padding: '20px' }}
+                    onClick={() => setIsExpanded(!isExpanded)}>
                     <List size={24} />
                 </button>
                 {isExpanded && <p style={{ flex: 1, textAlign: "center" }}>Side Panel</p>}
             </div>
-
-            {/* Login Section */}
+            <div style={{ flex: '1 0 0', borderBottom: "1px solid #ccc", }}>Mid</div>
             <div
                 style={{
                     display: "flex",
                     alignItems: "center",
                     gap: "20px",
-                    height: "80px",
+                    height: '64px',
                     padding: "20px",
                 }}
             >
@@ -53,23 +50,17 @@ const LeftSideBar = () => {
                 </button>
                 {isExpanded && (
                     <NormalButton
-                        text={isLoggedIn ? "Logged In" : "Login"}
+                        text={isLoggedIn ? "Đã đăng nhập" : "Chưa đăng nhập"}
                         style={{
                             backgroundColor: isLoggedIn ? "#4BCC2E" : "#3D55CC",
                             color: "#FFF",
                             width: "100%",
+                            alignSelf: 'auto',
                         }}
                         onClick={() => setIsLoggedIn(!isLoggedIn)}
                     />
                 )}
             </div>
-            {isExpanded &&
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '12px 20px' }}>
-                    <div>
-                        <NormalInput label='Nhập Token để đăng nhập' />
-                    </div>
-                </div>
-            }
         </div>
     );
 };
