@@ -37,6 +37,17 @@ const LeftSideBar = () => {
         setTokenCreated(true)
         setToken(tokenGenerated)
     }
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(token)
+            .then(() => {
+                console.log("Copied:", token);
+            })
+            .catch((err) => {
+                console.error("Failed to copy: ", err);
+            });
+    };
+
     return (
         <div
             className="sidebar"
@@ -116,7 +127,8 @@ const LeftSideBar = () => {
                                 {tokenCreated &&
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
                                         <NormalInput label={'Token của bạn'} value={token} disabled />
-                                        <span className='small-text bold link-text' style={{ position: 'absolute', top: '0', right: '4px' }}>Copy</span>
+                                        <span className='small-text bold link-text' style={{ position: 'absolute', top: '0', right: '4px' }}
+                                            onClick={() => handleCopy()}>Copy</span>
                                     </div>
                                 }
                             </div>
