@@ -9,3 +9,12 @@ export async function generateJWT(payload, secret) {
 
     return token;
 }
+
+export const getLocalstorage = (key, defaultValue) => {
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : defaultValue;
+};
+
+export const setLocalstorage = (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
+};

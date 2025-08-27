@@ -3,6 +3,7 @@ import { KeyIcon, List, Plugs, PlugsConnected } from '../../assets/icon/NewStyle
 import NormalButton from '../components/button/NormalButton'
 import NormalInput from '../components/input/Input';
 import { generateToken } from '../../ultils/helper';
+import { useLocalStorage } from '../../hooks/useLocalstorage';
 
 const LeftSideBar = () => {
     const [isExpanded, setIsExpanded] = useState(true);
@@ -11,8 +12,11 @@ const LeftSideBar = () => {
     const [tokenCreated, setTokenCreated] = useState(false)
 
     const [token, setToken] = useState('')
-    const [loginInfo, setLoginInfo] = useState({
+    const [loadedInfo, setLoadedInfo] = useLocalStorage('csInitInfo', {
         domain: '', token: ''
+    })
+    const [loginInfo, setLoginInfo] = useState({
+        domain: loadedInfo.domain, token: loadedInfo.token
     })
     const [createTokenForm, setCreateTokenForm] = useState({
         agent_id: '', secret: ''
@@ -48,6 +52,9 @@ const LeftSideBar = () => {
             });
     };
 
+    const onLogin = () => {
+        setLoadedInfo(loginInfo)
+    }
     return (
         <div
             className="sidebar"
@@ -101,7 +108,7 @@ const LeftSideBar = () => {
                                 onChange={handleChangeLoginInfo}
                             />
                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '8px', width: '100%' }}>
-                                <NormalButton text='Đăng nhập' onClick={() => console.log(loginInfo)} />
+                                <NormalButton text='Đăng nhập' onClick={() => onLogin()} />
                                 {/* <NormalButton text='Tạo Token' onClick={() => setIsTokenCreation(!isTokenCreation)} /> */}
                                 <p className='small-text'>Chưa có token ? <span className='bold link-text' onClick={() => setIsTokenCreation(!isTokenCreation)}>Tạo ngay</span></p>
                             </div>
