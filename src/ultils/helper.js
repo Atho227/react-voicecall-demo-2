@@ -46,3 +46,21 @@ export function setCurrent(arr, id) {
         return { ...item, isCurrent: false };
     });
 }
+
+export function transformSVGtoJSX(svgString) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(svgString, "image/svg+xml");
+    const svg = doc.querySelector("svg");
+    if (!svg) {
+        console.log("Không tìm thấy <svg>");
+        return;
+    }
+    svg.setAttribute("width", "{size}");
+    svg.setAttribute("height", "{size}");
+    let svgOpenTag = svg.outerHTML.match(/^<svg[^>]*>/)[0];
+    svgOpenTag = svgOpenTag.replace(/>$/, " {...props}>");
+    let inner = svg.innerHTML;
+    inner = inner.replace(/fill="[^"]*"/g, 'fill={fill}');
+    const result = svgOpenTag + inner + "</svg>";
+    console.log(result);
+}
