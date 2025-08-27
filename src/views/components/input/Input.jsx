@@ -1,19 +1,46 @@
-import React from 'react'
+import React from 'react';
 
-const NormalInput = ({ style, label = false }) => {
+const NormalInput = ({ label, id, style, ...props }) => {
     return (
-        <div style={{
-            display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px', width: '100%',
-            ...style,
-        }}>
-            <div style={{ display: 'flex', height: '20px', alignItems: 'center', gap: '4px' }}>
-                <p className='small-text'>{label}</p>
-            </div>
-            <div className='input-style' style={{ display: 'flex', maxHeight: '40px', padding: '12px', alignItems: 'center', alignSelf: 'stretch', borderRadius: '12px' }}>
-                <input type="text" className='secondary-text' style={{ width: "100%" }} />
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+                width: '100%',
+                ...style,
+            }}
+        >
+            {label && (
+                <label
+                    htmlFor={id}
+                    style={{ fontSize: '12px', color: '#555' }}
+                >
+                    {label}
+                </label>
+            )}
+            <div
+                style={{
+                    display: 'flex',
+                    padding: '12px',
+                    alignItems: 'center',
+                    borderRadius: '12px',
+                    border: '1px solid #DADCE5',
+                    height: '40px',
+                }}
+            >
+                <input
+                    id={id}
+                    style={{
+                        width: '100%',
+                        border: 'none',
+                        outline: 'none',
+                    }}
+                    {...props}
+                />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default NormalInput
+export default NormalInput;

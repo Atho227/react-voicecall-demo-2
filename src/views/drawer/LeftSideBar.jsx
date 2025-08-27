@@ -9,6 +9,7 @@ const LeftSideBar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isTokenCreation, setIsTokenCreation] = useState(false)
     const [tokenCreated, setTokenCreated] = useState(false)
+    const [token, setToken] = useState()
 
     useEffect(() => {
         (async () => {
@@ -65,14 +66,15 @@ const LeftSideBar = () => {
                             </div>
                         </div>
                         {isTokenCreation &&
-                            <div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                                 <p className='primary-text bold'>Tạo Token</p>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
                                     <NormalInput label='Agent Id' />
                                     <NormalInput label='Voice API Key' />
                                     <NormalButton text='Tạo Token ngay' onClick={() => setIsTokenCreation(!isTokenCreation)} />
                                 </div>
-                                <NormalInput />
+                                <NormalInput label={'Token của bạn'} value={token} disabled />
+                                <NormalButton text='copy' />
                             </div>
                         }
                     </div>
