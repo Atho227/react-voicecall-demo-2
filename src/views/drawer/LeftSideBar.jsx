@@ -1,17 +1,27 @@
-import React, { useState } from 'react'
-import { List, Plugs, PlugsConnected } from '../../assets/icon/NewStyleIcon'
+import React, { useEffect, useState } from 'react'
+import { KeyIcon, List, Plugs, PlugsConnected } from '../../assets/icon/NewStyleIcon'
 import NormalButton from '../components/button/NormalButton'
 import NormalInput from '../components/input/Input';
+import { generateToken } from '../../ultils/helper';
 
 const LeftSideBar = () => {
     const [isExpanded, setIsExpanded] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isTokenCreation, setIsTokenCreation] = useState(false)
+    const [tokenCreated, setTokenCreated] = useState(false)
+
+    useEffect(() => {
+        (async () => {
+            const token = await generateToken("12345", "mysecret");
+            console.log("Generated token:", token);
+        })();
+    }, []);
 
     return (
         <div
             className="sidebar"
             style={{
-                width: isExpanded ? "225px" : "64px",
+                width: isExpanded ? "250px" : "64px",
                 backgroundColor: "#FFF",
                 display: "flex",
                 flexDirection: "column",
@@ -33,9 +43,41 @@ const LeftSideBar = () => {
                     onClick={() => setIsExpanded(!isExpanded)}>
                     <List size={24} />
                 </button>
-                {isExpanded && <p style={{ flex: 1, textAlign: "center" }}>Side Panel</p>}
+                {isExpanded && <p style={{ flex: 1, textAlign: "center" }} className='primary-text bold'>Side Panel</p>}
             </div>
-            <div style={{ flex: '1 0 0', borderBottom: "1px solid #ccc", }}>Mid</div>
+            <div style={{ flex: '1 0 0', borderBottom: "1px solid #ccc", display: 'flex', flexDirection: 'column', gap: '8px', padding: '20px' }}>
+                <div style={{ display: 'flex', gap: '20px', alignItems: "center", }}>
+                    <KeyIcon />
+                    {isExpanded &&
+                        <div style={{ flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
+                            <p className='primary-text bold'>Thông tin đăng nhập</p>
+                        </div>
+                    }
+                </div>
+                {isExpanded &&
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
+                            <NormalInput label='Domain' />
+                            <NormalInput label='Đăng nhập Token' />
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', width: '100%' }}>
+                                <NormalButton text='Đăng nhập' style={{ flex: '1 0 0' }} />
+                                <NormalButton text='Tạo Token' style={{ flex: '1 0 0' }} onClick={() => setIsTokenCreation(!isTokenCreation)} />
+                            </div>
+                        </div>
+                        {isTokenCreation &&
+                            <div>
+                                <p className='primary-text bold'>Tạo Token</p>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
+                                    <NormalInput label='Agent Id' />
+                                    <NormalInput label='Voice API Key' />
+                                    <NormalButton text='Tạo Token ngay' onClick={() => setIsTokenCreation(!isTokenCreation)} />
+                                </div>
+                                <NormalInput />
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
             <div
                 style={{
                     display: "flex",

@@ -1,3 +1,5 @@
+import { generateJWT } from "./mainUltils";
+
 export const doStartCall = (state) => {
     console.log('debug', state.callDirection);
     state.callStatus = 'ringing';
@@ -63,4 +65,12 @@ export function transformSVGtoJSX(svgString) {
     inner = inner.replace(/fill="[^"]*"/g, 'fill={fill}');
     const result = svgOpenTag + inner + "</svg>";
     console.log(result);
+}
+
+export function generateToken(aggentId, secret) {
+    return generateJWT(createPayload(aggentId), secret)
+}
+
+export function createPayload(id) {
+    return { "ipphone": id };
 }
