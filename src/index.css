@@ -560,3 +560,13 @@ button {
   border-color: #3D55CC;
   background-color: #F5F5F5;
 }
+
+.link-text {
+  color: #3D55CC;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.link-text:hover {
+  text-decoration: underline;
+}

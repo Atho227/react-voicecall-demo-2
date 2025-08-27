@@ -9,15 +9,34 @@ const LeftSideBar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isTokenCreation, setIsTokenCreation] = useState(false)
     const [tokenCreated, setTokenCreated] = useState(false)
-    const [token, setToken] = useState()
 
-    useEffect(() => {
-        (async () => {
-            const token = await generateToken("12345", "mysecret");
-            console.log("Generated token:", token);
-        })();
-    }, []);
+    const [token, setToken] = useState('')
+    const [loginInfo, setLoginInfo] = useState({
+        domain: '', token: ''
+    })
+    const [createTokenForm, setCreateTokenForm] = useState({
+        agent_id: '', secret: ''
+    })
 
+    // useEffect(() => {
+    //     (async () => {
+    //         const token = await generateToken("12345", "mysecret");
+    //         console.log("Generated token:", token);
+    //     })();
+    // }, []);
+
+    const handleChangeLoginInfo = (e) => {
+        setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
+    };
+    const handleChangeCreateTokenForm = (e) => {
+        setCreateTokenForm({ ...createTokenForm, [e.target.name]: e.target.value });
+    };
+
+    async function createToken() {
+        const tokenGenerated = await generateToken(createTokenForm.agent_id, createTokenForm.secret)
+        setTokenCreated(true)
+        setToken(tokenGenerated)
+    }
     return (
         <div
             className="sidebar"
@@ -46,7 +65,7 @@ const LeftSideBar = () => {
                 </button>
                 {isExpanded && <p style={{ flex: 1, textAlign: "center" }} className='primary-text bold'>Side Panel</p>}
             </div>
-            <div style={{ flex: '1 0 0', borderBottom: "1px solid #ccc", display: 'flex', flexDirection: 'column', gap: '8px', padding: '20px' }}>
+            <div style={{ flex: '1 0 0', overflowY: 'auto', borderBottom: "1px solid #ccc", display: 'flex', flexDirection: 'column', gap: '8px', padding: '20px' }}>
                 <div style={{ display: 'flex', gap: '20px', alignItems: "center", }}>
                     <KeyIcon />
                     {isExpanded &&
@@ -58,23 +77,48 @@ const LeftSideBar = () => {
                 {isExpanded &&
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
-                            <NormalInput label='Domain' />
-                            <NormalInput label='Đăng nhập Token' />
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', width: '100%' }}>
-                                <NormalButton text='Đăng nhập' style={{ flex: '1 0 0' }} />
-                                <NormalButton text='Tạo Token' style={{ flex: '1 0 0' }} onClick={() => setIsTokenCreation(!isTokenCreation)} />
+                            <NormalInput
+                                label='Domain'
+                                name='domain'
+                                value={loginInfo.domain}
+                                onChange={handleChangeLoginInfo}
+                            />
+                            <NormalInput
+                                label='Đăng nhập Token'
+                                name='token'
+                                value={loginInfo.token}
+                                onChange={handleChangeLoginInfo}
+                            />
+                            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '8px', width: '100%' }}>
+                                <NormalButton text='Đăng nhập' onClick={() => console.log(loginInfo)} />
+                                {/* <NormalButton text='Tạo Token' onClick={() => setIsTokenCreation(!isTokenCreation)} /> */}
+                                <p className='small-text'>Chưa có token ? <span className='bold link-text' onClick={() => setIsTokenCreation(!isTokenCreation)}>Tạo ngay</span></p>
                             </div>
                         </div>
                         {isTokenCreation &&
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                                 <p className='primary-text bold'>Tạo Token</p>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
-                                    <NormalInput label='Agent Id' />
-                                    <NormalInput label='Voice API Key' />
-                                    <NormalButton text='Tạo Token ngay' onClick={() => setIsTokenCreation(!isTokenCreation)} />
+                                    <NormalInput
+                                        label='Agent Id'
+                                        name='agent_id'
+                                        value={createTokenForm.agent_id}
+                                        onChange={handleChangeCreateTokenForm}
+                                    />
+                                    <NormalInput
+                                        label='Voice API Key'
+                                        name='secret'
+                                        value={createTokenForm.secret}
+                                        onChange={handleChangeCreateTokenForm}
+                                    />
+                                    <NormalButton text='Tạo Token ngay' onClick={createToken} />
                                 </div>
-                                <NormalInput label={'Token của bạn'} value={token} disabled />
-                                <NormalButton text='copy' />
+                                {tokenCreated &&
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+                                        <NormalInput label={'Token của bạn'} value={token} disabled />
+                                        <span className='small-text bold link-text' style={{ position: 'absolute', top: '0', right: '4px' }}>Copy</span>
+                                    </div>
+                                }
                             </div>
                         }
                     </div>
