@@ -4,79 +4,86 @@ import { doStartCall } from "../../ultils/helper";
 const initialState = {
     permission: false,
     online: false,
-    service: 'id',
+    isCall: false,
+    isRinging: false,
+    isCallOut: false,
+    isAnswer: true,
     callInfo: {},
-    callStatus: 'ringing',   // hide | initial | ringing | calling | busy
-    callDirection: 'out',    // out | in
-    mute: false,
-    hold: false,
+    serviceList: [],
+    currentServiceId: null,
+    currentDevice: 1,
+    isMuting: false,
+    isHolding: false,
 };
 
 const callSlice = createSlice({
     name: 'call',
     initialState,
     reducers: {
-        startCall: (state) => {
-            if (state.callDirection === 'out') {
-                doStartCall(state)
-            } else {
-                state.callStatus = 'calling';
-            }
-        },
-        receiveCall: (state) => {
-            if (Object.keys(state.callInfo).length === 0) {
-                state.callStatus = 'ringing';
-                state.callDirection = 'in';
-            } else { doStartCall(state) }
-        },
-        updateCallInfo: (state, action) => {
-            if (Object.keys(state.callInfo).length === 0) {
-                state.callInfo = {
-                    ...state.callInfo,
-                    ...action.payload
-                };
-            }
-        },
-        acceptCall: (state) => {
-            state.callStatus = 'calling';
-        },
-        CallEnded: (state) => {
-            state.callStatus = 'initial';
-            state.callDirection = 'out';
-            state.callInfo = {};
-        },
-        setBusy: (state) => {
-            state.callStatus = 'busy';
-        },
-        toggleMute: (state, action) => {
-            state.mute = action.payload;
-        },
-        toggleHold: (state, action) => {
-            state.hold = action.payload;
-        },
-        setPermission: (state, action) => {
+        permission: (state, action) => {
             state.permission = action.payload;
         },
-        setOnline: (state, action) => {
+        online: (state, action) => {
             state.online = action.payload;
         },
-        setService: (state, action) => {
-            state.service = action.payload; // ví dụ: 'id', 'skype', 'zoom'
+        isCall: (state, action) => {
+            state.isCall = action.payload;
+        },
+        isRinging: (state, action) => {
+            state.isRinging = action.payload;
+        },
+        isCallOut: (state, action) => {
+            state.isCallOut = action.payload;
+            state.isAnswer = false
+        },
+        isAnswer: (state, action) => {
+            state.isAnswer = action.payload;
+            state.isCallOut = false
+        },
+        callInfo: (state, action) => {
+            state.callInfo = action.payload;
+        },
+        setServiceList: (state, action) => {
+            state.serviceList = action.payload;
+        },
+        currentServiceId: (state, action) => {
+            state.currentServiceId = action.payload;
+        },
+        currentDevice: (state, action) => {
+            state.currentDevice = action.payload;
+        },
+        isMuting: (state, action) => {
+            state.isMuting = action.payload;
+        },
+        isHolding: (state, action) => {
+            state.isHolding = action.payload;
+        },
+        endCall: (state) => {
+            state.isCall = false
+            state.isRinging = false
+            state.isCallOut = false
+            state.isAnswer = false
+            state.callInfo = {}
+            state.isMuting = false
+            state.isHolding = false
         },
     },
 });
 
 export const {
-    startCall,
-    receiveCall,
-    acceptCall,
-    CallEnded,
-    setBusy,
-    toggleMute,
-    toggleHold,
-    setPermission,
-    setOnline,
-    setService, updateCallInfo,
+    permission,
+    online,
+    isCall,
+    isRinging,
+    isCallOut,
+    isAnswer,
+    callInfo,
+    setServiceList,
+    currentServiceId,
+    currentDevice,
+    isMuting,
+    isHolding,
+    endCall
 } = callSlice.actions;
 
 export default callSlice.reducer;

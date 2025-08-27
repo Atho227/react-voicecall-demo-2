@@ -44,6 +44,11 @@ p {
   box-sizing: border-box;
 }
 
+button {
+  cursor: pointer;
+}
+
+
 .status-modal>* {
   padding: 8px 12px !important;
 }
@@ -517,6 +522,8 @@ p {
 .secondary-text {
   color: var(--foreground-neutral-neutral-darkest, #393D4D);
   font-feature-settings: 'calt' off;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   /* Secondary-text-14/Regular */
   font-family: var(--typeface-family-text, Inter);
@@ -529,4 +536,37 @@ p {
 
 .bold {
   font-weight: 600;
+}
+
+.hover {
+  transition: all 0.2s ease
+}
+
+.hover:hover {
+  background-color: #F5F6FA;
+  cursor: pointer;
+}
+
+.input-style {
+  border: 1px solid #DBDBDB;
+  transition: all 0.2s ease;
+}
+
+.input-style:hover {
+  border-color: #3D55CC;
+}
+
+.input-style:has(input:focus) {
+  border-color: #3D55CC;
+  background-color: #F5F5F5;
+}
+
+.link-text {
+  color: #3D55CC;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.link-text:hover {
+  text-decoration: underline;
 }

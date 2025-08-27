@@ -27,9 +27,9 @@ const CallingModal = () => {
                             </div>
                         </div>
                         <div className="btn-group">
-                            <IconButton icon={PhoneNormalFill} />
-                            <IconButton icon={PhoneNormalFill} />
-                            <IconButton icon={PhoneNormalFill} />
+                            <IconButton Icon={PhoneNormalFill} />
+                            <IconButton Icon={PhoneNormalFill} />
+                            <IconButton Icon={PhoneNormalFill} />
                         </div>
                     </div>
                 </div>

@@ -1,75 +1,51 @@
 import React, { useState, useRef, useEffect } from 'react';
-import IconWrap from '../other/icon';
-import { ChervonDown } from '../../../assets/icon/ActionIcons';
+import MenuVariant2 from '../modals/MenuVariant2';
 
-const IconOptionBtn = ({ options, btnStyle, fill }) => {
-    const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState(options[0]); // mặc định chọn option đầu
-    const dropdownRef = useRef(null);
+const DropDownV2 = ({ options, onSelect, currentType, children }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selected, setSelected] = useState(null);
+    const ref = useRef(null);
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setOpen(false);
+        const handleClickOutside = (e) => {
+            if (ref.current && !ref.current.contains(e.target)) {
+                setIsOpen(false);
             }
         };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
     }, []);
 
-    return (
-        <div className="icon-option-btn" ref={dropdownRef} style={{ position: 'relative', display: 'inline-block', }}>
-            <div
-                className="icon-dropdown-btn"
-                onClick={() => setOpen(!open)}
-                style={{ ...btnStyle }}
-            >
-                <IconWrap icon={selected.icon} />
-                <IconWrap icon={ChervonDown} fill={fill} />
-            </div>
+    useEffect(() => {
+        const selected = options?.find(s => s.type === currentType)
+        setSelected(selected)
+    }, [currentType])
 
-            {open && (
-                <div
-                    className="dropdown-menu"
-                    style={{
-                        position: 'absolute',
-                        top: '100%',
-                        left: 0,
-                        backgroundColor: '#fff',
-                        border: '1px solid #ccc',
-                        borderRadius: '4px',
-                        marginTop: '5px',
-                        minWidth: '200px',
-                        boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
-                        zIndex: 10
-                    }}
-                >
-                    {options.map((option, index) => (
-                        <div
-                            key={index}
-                            onClick={() => {
-                                setSelected(option);
-                                setOpen(false);
-                            }}
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                padding: '5px 10px',
-                                cursor: 'pointer',
-                                gap: '8px'
-                            }}
-                        >
-                            <IconWrap icon={option.icon} />
-                            <div className="option-text">
-                                <div className="title">{option.title}</div>
-                                {option.subtitle && <div className="subtitle" style={{ fontSize: '12px', color: '#666' }}>{option.subtitle}</div>}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+    const handleSelect = (option) => {
+        setSelected(option);
+        setIsOpen(false);
+        onSelect?.(option);
+    };
+
+    if (typeof children !== "function") {
+        console.error(
+            "DropDownV2: expected a function-as-children, but got:",
+            children
+        );
+        console.trace(); // hiện stack để biết được nó render từ component nào
+    }
+    return (
+        <div ref={ref} style={{ position: "relative", display: "inline-block" }}>
+            {typeof children === "function"
+                ? children({ isOpen, selected, toggle: () => setIsOpen(!isOpen) })
+                : null}
+            {isOpen && (
+                <MenuVariant2
+                    data={options}
+                    onSelectOption={handleSelect} />
             )}
         </div>
     );
 };
 
-export default IconOptionBtn;
+export default DropDownV2;

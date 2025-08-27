@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import IconWrap from '../other/icon'
-import { NumberDial, PhoneNormal, PhoneNormalFill, PhoneRestrict } from '../../../assets/icon/PhoneIcons'
+import { NumberDial, PhoneNormal, PhoneNormalFill } from '../../../assets/icon/PhoneIcons'
 import { Active, Disable } from '../../../assets/icon/ActiveStatusIcon'
 import { CloseIcon, HeadSet } from '../../../assets/icon/ActionIcons'
-import IconOptionBtn from '../button/iconOptionBtn'
 import BasicSwitch from '../button/switch'
 import DropDown from '../button/Dropdown'
 import PhoneBtnLine from '../other/phoneBtnLine'
@@ -11,9 +10,13 @@ import CallInfo from '../parts/callInfo'
 import NormalButton from '../button/NormalButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 import InputWithIcon from '../input/InputWithIcon'
+import { setCurrent } from '../../../ultils/helper'
+import DropDownV2 from '../button/iconOptionBtn'
+import { deviceTypes } from '../../../assets/object/data'
+import { ChervonDown } from '../../../assets/icon/NewStyleIcon'
 
 const CSCallModal = () => {
-    const { online, callStatus, updateCallInfo } = useCall();
+    const { online, isCall, serviceList, currentDevice, currentServiceId } = useCall();
 
     const [showNumpad, setShowNumPad] = useState(true)
     const [phone, setPhone] = useState('')
@@ -21,26 +24,24 @@ const CSCallModal = () => {
     const toggleNumPad = () => {
         setShowNumPad(!showNumpad)
     }
+
     useEffect(() => {
-        if (callStatus !== 'initial') {
-            setShowNumPad(false);
-        }
-    }, [callStatus]);
+        if (isCall) { setShowNumPad(false); }
+    }, [isCall]);
 
     const calOutAction = () => {
-        setShowNumPad(false)
-        const phoneInfo = {
-            name: phone,
-            phone: phone,
-        }
-        // console.log('Phone Info:', phoneInfo);
-        updateCallInfo(phoneInfo)
-        csCallout(phone)
+        csCallout(phone, currentServiceId)
+        // setShowNumPad(false)
     }
 
     const handlePhoneBtnClick = (val) => {
         setPhone(prev => prev + val);
     };
+
+    const chooseCurrentById = (id) => {
+        const newService = setCurrent(serviceList, id)
+        window.store.dispatch({ type: "call/setServiceList", payload: newService })
+    }
 
     return (
         <div className='CS-Call'>
@@ -57,7 +58,21 @@ const CSCallModal = () => {
             <div className="modal-content">
                 <div className="sub-content">
                     <div className="left-side">
-                        <IconOptionBtn options={options} />
+                        <DropDownV2
+                            options={deviceTypes}
+                            currentType={currentDevice}
+                            onSelect={(opt) => changeDevice(opt.type)}
+                        >
+                            {({ selected, toggle, isOpen }) => (
+                                <button
+                                    className="icon-dropdown-btn"
+                                    onClick={toggle}
+                                >
+                                    {selected && <selected.icon size={20} />}
+                                    <ChervonDown />
+                                </button>
+                            )}
+                        </DropDownV2>
                         <div className="detail">
                             <div className="line"></div>
                             <BasicSwitch switchStatus={false} switchText={'Tự động tiếp nhận'} />
@@ -73,7 +88,7 @@ const CSCallModal = () => {
                 {showNumpad ?
                     <div className="main-content">
                         <div className="call-out-seting">
-                            <DropDown />
+                            <DropDown options={serviceList} setCurrent={chooseCurrentById} />
                         </div>
                         <div className="call-out-input">
                             <InputWithIcon label={'Tới số'} fIcon={PhoneNormal} updateValue={setPhone} outvalue={phone} />
@@ -88,29 +103,7 @@ const CSCallModal = () => {
                         </div>
                         <NormalButton text='Gọi' style={{ color: '#D9E1FC', backgroundColor: '#3D55CC' }} onClick={calOutAction} />
                     </div>
-                    : callStatus !== 'initial' ?
-                        <CallInfo />
-                        : <div style={{ display: 'flex', padding: '64px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '24px', alignSelf: 'stretch' }}>
-                            <div style={{ display: 'flex', width: '322px', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
-                                <IconWrap icon={PhoneRestrict} fill={'#5C6073'} additionalStyle={{
-                                    borderRadius: '999px',
-                                    display: 'flex',
-                                    padding: 'var(--space-16px, 16px)',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    gap: '8px',
-                                    backgroundColor: 'rgba(151, 154, 168, 0.10)',
-                                    cursor: 'default'
-                                }} />
-                                <div style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: 'var(--space-4px, 4px)',
-                                    alignSelf: 'stretch'
-                                }}><p className='primary-text'>Không có cuộc gọi đến</p></div>
-                            </div>
-                        </div>}
+                    : <CallInfo />}
             </div >
         </div >
     )

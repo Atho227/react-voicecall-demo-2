@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
 import SmallModal from '../modals/SmallModal'
 import BadgeWrapper from '../other/badge'
-import { togglePermission } from '../../../ultils/changeStatus/changeStatus'
 import BasicSwitch from '../button/switch'
-import IconBtnMultiStages from '../button/iconButtonMultiStage'
-import { PhoneCalling, PhoneNormal, PhoneRestrict, } from '../../../assets/icon/PhoneIcons'
 import { Active, Disable } from '../../../assets/icon/ActiveStatusIcon'
 import { useCall } from '../../../hooks/CallHook/useCall'
 import IconButton from '../button/IconButton'
+import { PhoneCalling, PhoneNormal, PhoneRestrict } from '../../../assets/icon/NewStyleIcon'
 
 const StatusBar = ({ }) => {
-    const { permission, online, setPermission, callStatus, setOnline } = useCall();
-
+    const { permission, online, setOnline, isCall } = useCall();
     return (
         <SmallModal>
             <BasicSwitch switchStatus={permission} switchText={'Quyền gọi'}
@@ -43,11 +40,11 @@ const StatusBar = ({ }) => {
                 </div>
             </div >
             {!permission ?
-                <IconButton icon={PhoneRestrict} style={{ borderRadius: '0', backgroundColor: "auto", }} /> :
-                callStatus === 'initial' ?
-                    < IconButton icon={PhoneNormal} style={{ borderRadius: '0', backgroundColor: "auto", }} /> :
-                    callStatus === 'calling' || callStatus === 'ringing' ?
-                        <IconButton icon={PhoneCalling} style={{ borderRadius: '0', backgroundColor: "auto", }} /> : ''
+                <IconButton Icon={PhoneRestrict} fill='#FF451C' size={19} style={{ borderRadius: '0' }} />
+                : isCall ?
+                    < IconButton Icon={PhoneCalling} fill='#4BCC2E' size={19} style={{ borderRadius: '0' }} />
+                    :
+                    < IconButton Icon={PhoneNormal} fill='#3D55CC' size={19} style={{ borderRadius: '0' }} />
             }
         </SmallModal >
     )

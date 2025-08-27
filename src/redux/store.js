@@ -8,3 +8,7 @@ export const store = configureStore({
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
+
+if (typeof window !== 'undefined') {
+    window.store = store;
+}

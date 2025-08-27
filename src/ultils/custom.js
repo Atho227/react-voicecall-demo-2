@@ -10,41 +10,67 @@ window.unload = function () {
 
 // custom.js - Implement các hàm callback từ tài liệu
 function csCallRinging(phone) {
-    console.log(`ringing csVoice : ${JSON.stringify(window.csVoice, null, 2)}`);
     console.log(`csCallRinging: ${phone}`);
-    const phoneInfo = { name: phone, phone: phone }
-    window.receiveCall()
-    window.updateCallInfo(phoneInfo)
+
+    const isCallout = window.csVoice?.isCallout;
+    if (isCallout) {
+        console.warn("isCallout:", isCallout);
+        window.store.dispatch({ type: "call/isCallOut", payload: true });
+        const callInfo = window.csVoice?.callInfo;
+        if (!callInfo || callInfo === undefined) {
+            console.warn("callInfo chưa sẵn sàng:", callInfo);
+            return;
+        }
+        console.log("callInfo sẵn sàng 1:", callInfo);
+        console.log("callInfo sẵn sàng 2:", callInfo.callerName);
+        const phoneInfo = {
+            name: callInfo.callerName,
+            phone: callInfo.caller,
+        };
+        window.store.dispatch({ type: "call/callInfo", payload: phoneInfo });
+    } else {
+        console.warn("isCallout:", isCallout);
+        window.store.dispatch({ type: "call/isAnswer", payload: true });
+        window.store.dispatch({
+            type: "call/callInfo", payload: {
+                name: phone,
+                phone: phone,
+            }
+        });
+    }
+    window.store.dispatch({ type: "call/isCall", payload: true });
+    window.store.dispatch({ type: "call/isRinging", payload: true });
 }
+
 
 function csAcceptCall() {
     console.log('Cuộc gọi được chấp nhận');
-    window.startCall()
-    // window.acceptCall()
+    if (!window.csVoice.isCallout) {
+        window.store.dispatch({ type: "call/isRinging", payload: false })
+    }
 }
 
 function csEndCall() {
     console.log('Cuộc gọi kết thúc');
-    window.CallEnded()
+    window.store.dispatch({ type: "call/endCall" })
 }
 
 function csMuteCall() {
     console.log('csMuteCall');
-    window.toggleMute(true)
+    // window.toggleMute(true)
 }
 
 function csUnMuteCall() {
     console.log('csUnMuteCall');
-    window.toggleMute(false)
 }
 function csHoldCall() {
     console.log('gọi được hold');
-    window.toggleHold(true)
+    window.store.dispatch({ type: "call/isHolding", payload: true })
 }
 
 function csUnHoldCall() {
     console.log('gọi bị unhold');
-    window.toggleHold(false)
+    window.store.dispatch({ type: "call/isHolding", payload: false })
 }
 
 function showCalloutInfo(number) {
@@ -53,26 +79,26 @@ function showCalloutInfo(number) {
 }
 
 function showCalloutError(errorCode, sipCode) {
-    console.log('showCalloutError');
+    console.log('showCalloutError:', errorCode, sipCode);
     // Đóng popup hoặc reset UI
 }
 
 function csShowEnableVoice(isEnable) {
     console.log(`csShowEnableVoice : ${isEnable}`);
-    window.setPermission(isEnable)
+    window.store.dispatch({ type: "call/permission", payload: isEnable })
 }
 
 function csShowCallStatus(status) {
     console.log(`csShowCallStatus : ${status}`);
-    window.setOnline(status === 'Online')
+    window.store.dispatch({ type: "call/online", payload: status === 'Online' })
 }
 function csCustomerAccept() {
     console.log('csCustomerAccept');
-    window.acceptCall()
+    window.store.dispatch({ type: "call/isRinging", payload: false })
 }
 function csShowDeviceType(type) {
     console.log(`csShowDeviceType : ${type}`);
-    // Đóng popup hoặc reset UI
+    window.store.dispatch({ type: "call/currentDevice", payload: type })
 }
 function csCurrentCallId(callId) {
     console.log(`csCurrentCallId : ${callId}`);
@@ -85,9 +111,11 @@ function csInitError(errorCode) {
 
 function csInitComplete() {
     console.log('Kết nối thành công');
+    // console.log('csVoice ban đầu:', JSON.stringify(window.csVoice.callInfo))
+    window.firstLoadPage()
 }
 function csListTransferAgent(listTransferAgent) {
-    console.log('csListTransferAgent');
+    console.log(`csListTransferAgent : ${JSON.stringify(listTransferAgent)}`);
 }
 function csTransferCallError(error, tranferedAgentInfo) {
     console.log('csTransferCallError');

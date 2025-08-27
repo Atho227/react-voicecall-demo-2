@@ -1,5 +1,19 @@
 import { useSelector, useDispatch } from "react-redux";
-import { acceptCall, CallEnded, receiveCall, setBusy, setOnline, setPermission, setService, startCall, toggleHold, toggleMute, updateCallInfo } from "../../redux/CallRedux/CallSlice";
+import {
+    permission,
+    online,
+    isCall,
+    isRinging,
+    isCallOut,
+    isAnswer,
+    callInfo,
+    setServiceList,
+    currentServiceId,
+    currentDevice,
+    isMuting,
+    isHolding,
+    endCall
+} from "../../redux/CallRedux/CallSlice";
 
 export const useCall = () => {
     const call = useSelector(state => state.call);
@@ -7,16 +21,22 @@ export const useCall = () => {
 
     return {
         ...call,
-        startCall: () => dispatch(startCall()),
-        receiveCall: () => dispatch(receiveCall()),   // info: {callerId...}
-        acceptCall: () => dispatch(acceptCall()),
-        CallEnded: () => dispatch(CallEnded()),
-        setBusy: () => dispatch(setBusy()),
-        toggleMute: (bol) => dispatch(toggleMute(bol)),
-        toggleHold: (bol) => dispatch(toggleHold(bol)),
-        setPermission: (val) => dispatch(setPermission(val)), // val: true/false
-        setOnline: (val) => dispatch(setOnline(val)),         // val: true/false
-        setService: (id) => dispatch(setService(id)),         // ví dụ: 'zoom'
-        updateCallInfo: (info) => dispatch(updateCallInfo(info)), // info: {key: value}
+
+        // các action tương ứng
+        setPermission: (val) => dispatch(permission(val)),
+        setOnline: (val) => dispatch(online(val)),
+        setIsCall: (val) => dispatch(isCall(val)),
+        setIsRinging: (val) => dispatch(isRinging(val)),
+        setIsCallOut: (val) => dispatch(isCallOut(val)),
+        setIsAnswer: (val) => dispatch(isAnswer(val)),
+        updateCallInfo: (info) => dispatch(callInfo(info)),
+        setServiceList: (list) => dispatch(setServiceList(list)),
+        setCurrentServiceId: (id) => dispatch(currentServiceId(id)),
+        setCurrentDevice: (device) => dispatch(currentDevice(device)),
+        toggleMute: (val) => dispatch(isMuting(val)),
+        toggleHold: (val) => dispatch(isHolding(val)),
+
+        // end call
+        endCall: () => dispatch(endCall()),
     };
 };

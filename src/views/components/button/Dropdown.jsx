@@ -1,17 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import IconWrap from '../other/icon'
-import { PhoneCallOut } from '../../../assets/icon/PhoneIcons'
 import { ChervonDown } from '../../../assets/icon/ActionIcons'
+import OptionsMenu from '../modals/Menu'
+import { PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
 
-const DropDown = ({ options }) => {
+const DropDown = ({ options, setCurrent }) => {
+    const [showMenu, setShowMenu] = useState(false)
+    const isLoading = !options // chỉ cần check thẳng prop
     return (
-        <div className='input'>
-            <div className="label"><span className='small-text'>Gọi từ dịch vụ</span></div>
-            <div className="input-wrapper">
+        <div className='input' style={{ position: 'relative' }}>
+            <div className="label">
+                <span className='small-text'>Gọi từ dịch vụ</span>
+            </div>
+
+            <div className="input-wrapper" onClick={() => !isLoading && setShowMenu(!showMenu)}>
                 <IconWrap icon={PhoneCallOut} />
-                <input disabled className='input-area' type="text" value={'Dịch vụ mặc định'} />
+                <p className='input-area'>
+                    {isLoading
+                        ? 'Đang tải...'
+                        : options?.find(s => s.isCurrent)?.descriptions || 'Chưa có dịch vụ'
+                    }
+                </p>
                 <IconWrap icon={ChervonDown} />
             </div>
+
+            {showMenu && !isLoading && (
+                <OptionsMenu style={{ width: '100%' }} data={options} setCurrent={setCurrent} setShowMenu={setShowMenu} />
+            )}
         </div>
     )
 }
