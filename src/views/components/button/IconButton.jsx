@@ -1,24 +1,25 @@
 import React from 'react'
-import IconWrap from '../other/icon'
 
-const IconButton = ({ icon, onClick, style, iconStyle, fill, size }) => {
+const IconButton = ({ Icon, size = 24, fill = "#3D55CC", style = {}, ...props }) => {
     return (
-        <div
-            onClick={() => onClick()}
+        <button
             style={{
-                borderRadius: "999px",
                 display: "flex",
-                padding: "8px",
                 justifyContent: "center",
                 alignItems: "center",
-                gap: "8px",
+                padding: "8px",
+                borderRadius: "999px",
                 backgroundColor: "rgba(61, 85, 204, 0.10)",
-                ...style
+                border: "none",
+                cursor: "pointer",
+                ...style   // 👈 dòng này cho phép override
             }}
+            {...props}
         >
-            <IconWrap icon={icon} additionalStyle={{ ...iconStyle }} fill={fill} size={size} />
-        </div>
+            <Icon size={size} fill={fill} />
+        </button>
     )
 }
+
 
 export default IconButton

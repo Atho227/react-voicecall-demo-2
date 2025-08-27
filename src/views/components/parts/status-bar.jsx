@@ -41,10 +41,10 @@ const StatusBar = ({ }) => {
                 </div>
             </div >
             {!permission ?
-                <IconButton icon={PhoneRestrict} style={{ borderRadius: '0', backgroundColor: "auto", }} /> :
+                <IconButton Icon={PhoneRestrict} style={{ borderRadius: '0', backgroundColor: "auto", }} /> :
                 isCall ?
-                    < IconButton icon={PhoneCalling} style={{ borderRadius: '0', backgroundColor: "auto", }} /> :
-                    < IconButton icon={PhoneNormal} style={{ borderRadius: '0', backgroundColor: "auto", }} />
+                    < IconButton Icon={PhoneCalling} style={{ borderRadius: '0', backgroundColor: "auto", }} /> :
+                    < IconButton Icon={PhoneNormal} style={{ borderRadius: '0', backgroundColor: "auto", }} />
             }
         </SmallModal >
     )

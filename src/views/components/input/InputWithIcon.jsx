@@ -31,7 +31,7 @@ const InputWithIcon = ({ label, fIcon, updateValue, outvalue }) => {
                     }}
                 />
                 <IconButton
-                    icon={Backspace}
+                    Icon={Backspace}
                     onClick={handleBackspace}
                     style={{
                         width: '24px', height: '24px', backgroundColor: "",

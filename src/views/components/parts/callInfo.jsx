@@ -72,17 +72,11 @@ const CallInfo = ({ }) => {
                 {!isRinging ?
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch' }}>
                         {/* <IconOptionBtn options={options} btnStyle={{ borderRadius: '999px', backgroundColor: 'rgba(61, 85, 204, 0.10)' }} fill={'#3D55CC'} /> */}
-                        {!isMuting ? <IconButton icon={Microphone} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => muteCall()} /> :
-                            <IconButton icon={MicrophoneSplash} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center', }} style={{ backgroundColor: '#3D55CC' }} onClick={() => muteCall()} />}
+                        {!isMuting ? <IconButton Icon={Microphone} onClick={() => muteCall()} /> :
+                            <IconButton Icon={MicrophoneSplash} onClick={() => muteCall()} />}
                         {isHolding ?
-                            <IconButton icon={PauseFill} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} style={{ backgroundColor: '#3D55CC' }}
-                                onClick={() => {
-                                    holdCall();
-                                }} /> :
-                            <IconButton icon={Pause} iconStyle={{ width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                                onClick={() => {
-                                    holdCall();
-                                }} />
+                            <IconButton Icon={PauseFill} onClick={() => { holdCall(); }} /> :
+                            <IconButton Icon={Pause} onClick={() => { holdCall(); }} />
                         }
                         <NormalButton text='Kết thúc' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }}
                             onClick={() => {
