@@ -3,12 +3,12 @@ import IconWrap from '../other/icon'
 import { CallSignal, UserIcon } from '../../../assets/icon/ActiveStatusIcon'
 import { PhoneDisconnect, PhoneNormal, PhoneRestrict } from '../../../assets/icon/PhoneIcons'
 import NormalButton from '../button/NormalButton'
-import { CallTransfer, Pause, PauseFill } from '../../../assets/icon/ActionIcons'
+import { CallTransfer, } from '../../../assets/icon/ActionIcons'
 import IconButton from '../button/IconButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 import { getServiceInfoById } from '../../../ultils/helper'
 import ToggleIconButton from '../button/ToggleIconButton'
-import { Microphone, MicrophoneSlash } from '../../../assets/icon/NewStyleIcon'
+import { Microphone, MicrophoneSlash, PauseFill, PauseIcon } from '../../../assets/icon/NewStyleIcon'
 
 const CallInfo = ({ }) => {
     const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId } = useCall()
@@ -86,11 +86,14 @@ const CallInfo = ({ }) => {
                             IconInitial={Microphone}
                             IconAfter={MicrophoneSlash}
                         />
-                        {isHolding ?
-                            <IconButton Icon={PauseFill} onClick={() => { holdCall(); }} /> :
-                            <IconButton Icon={Pause} onClick={() => { holdCall(); }} />
-                        }
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                        <ToggleIconButton
+                            isToggle={isHolding}
+                            onClick={() => holdCall()}
+                            IconInitial={PauseIcon}
+                            IconAfter={PauseFill}
+                            size={20}
+                        />
+                        <div style={{ display: 'flex', flexDirection: 'column', flex: '1' }}>
                             <NormalButton text='Kết thúc' icon={PhoneDisconnect}
                                 style={{ backgroundColor: '#FF451C', color: '#FFE7D1', }}
                                 onClick={() => endCall()} />
