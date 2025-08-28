@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import IconWrap from '../other/icon'
 import { CallSignal, UserIcon } from '../../../assets/icon/ActiveStatusIcon'
-import { PhoneDisconnect, PhoneNormal, PhoneRestrict } from '../../../assets/icon/PhoneIcons'
+import { PhoneDisconnect, PhoneRestrict } from '../../../assets/icon/PhoneIcons'
 import NormalButton from '../button/NormalButton'
 import { CallTransfer, } from '../../../assets/icon/ActionIcons'
 import IconButton from '../button/IconButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 import { getServiceInfoById } from '../../../ultils/helper'
 import ToggleIconButton from '../button/ToggleIconButton'
-import { Microphone, MicrophoneSlash, PauseFill, PauseIcon } from '../../../assets/icon/NewStyleIcon'
+import { Microphone, MicrophoneSlash, PauseFill, PauseIcon, PhoneNormal } from '../../../assets/icon/NewStyleIcon'
 
 const CallInfo = ({ }) => {
     const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId } = useCall()
@@ -40,7 +40,7 @@ const CallInfo = ({ }) => {
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <IconWrap icon={PhoneNormal} fill={'#5C6073'} />
+                        <IconWrap icon={PhoneNormal} fill={'#5C6073'} size={20} />
                         <p className='secondary-text bold' >{currentService}</p>
                     </div>
                 </div>
@@ -58,11 +58,11 @@ const CallInfo = ({ }) => {
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    <p className='secondary-text bold'>{callInfo?.name}</p>
+                                    <p className='secondary-text bold'>{callInfo?.name || 'Nguyen Van A'}</p>
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                    <IconWrap icon={PhoneNormal} fill={'#5C6073'} additionalStyle={{ width: '16px', height: '16px' }} />
-                                    <p className='small-text'>{callInfo?.phone}</p>
+                                    <IconWrap icon={PhoneNormal} fill={'#5C6073'} size={16} />
+                                    <p className='small-text'>{callInfo?.phone || '1234567890'}</p>
                                 </div>
                             </div>
                         </div>
