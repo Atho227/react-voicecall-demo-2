@@ -35,8 +35,6 @@ export const useCall = () => {
         setCurrentDevice: (device) => dispatch(currentDevice(device)),
         toggleMute: (val) => dispatch(isMuting(val)),
         toggleHold: (val) => dispatch(isHolding(val)),
-
-        // end call
         endCall: () => dispatch(endCall()),
     };
 };
