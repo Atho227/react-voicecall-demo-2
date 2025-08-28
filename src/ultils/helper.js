@@ -23,7 +23,7 @@ export const serviceObjectFit = (obj) => {
 };
 
 const firstLoadPage = () => {
-    const rawServices = window.csVoice.getCalloutServices(); // array
+    const rawServices = window.csVoice.getCalloutServices();
     const services = rawServices.map((item) => serviceObjectFit(item))
     const defaultServiceId = services.find(s => s.isCurrent).id;
 
@@ -76,7 +76,7 @@ export function createPayload(id) {
 }
 
 export function setLoggedStatus(isLoggedIn) {
-    window.store.dispatch({ type: "auth/SetLoginStatus", payload: isLoggedIn })
+    window.store.dispatch({ type: "auth/setLoginStatus", payload: isLoggedIn })
 }
 
 window.firstLoadPage = firstLoadPage

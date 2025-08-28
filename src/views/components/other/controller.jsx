@@ -3,9 +3,8 @@ import { useCall } from '../../../hooks/CallHook/useCall'
 
 import NormalButton from '../button/NormalButton'
 import ToggleIconButton from '../button/ToggleIconButton'
-import { onReloaded, setCurrent } from '../../../ultils/helper'
-import { ChervonDown, Microphone, MicrophoneSlash } from '../../../assets/icon/NewStyleIcon'
-import { deviceTypes } from '../../../assets/object/data'
+import { onReloaded } from '../../../ultils/helper'
+import { Microphone, MicrophoneSlash } from '../../../assets/icon/NewStyleIcon'
 
 const Controller = () => {
     const { receiveCall, serviceList } = useCall()
