@@ -75,9 +75,9 @@ export function createPayload(id) {
     return { "ipphone": id };
 }
 
-export function statusLogout() {
-    window.store.dispatch({ type: "auth/SetLoginStatus", payload: false })
+export function setLoggedStatus(isLoggedIn) {
+    window.store.dispatch({ type: "auth/SetLoginStatus", payload: isLoggedIn })
 }
 
 window.firstLoadPage = firstLoadPage
-window.statusLogout = statusLogout
+window.setLoggedStatus = setLoggedStatus
