@@ -1,4 +1,4 @@
-import { generateJWT } from "./mainUltils";
+import { generateJWT, getLocalstorage } from "./mainUltils";
 
 export const doStartCall = (state) => {
     console.log('debug', state.callDirection);
@@ -6,8 +6,9 @@ export const doStartCall = (state) => {
 };
 
 export const onReloaded = () => {
-    const token = import.meta.env.VITE_SIGN_TOKEN
-    const domain = import.meta.env.VITE_DOMAIN
+    const csInitInfo = getLocalstorage('csInitInfo', '')
+    const token = csInitInfo.token
+    const domain = csInitInfo.domain
     csInit(token, domain)
 }
 

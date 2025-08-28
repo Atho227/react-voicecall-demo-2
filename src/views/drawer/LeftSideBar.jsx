@@ -56,7 +56,7 @@ const LeftSideBar = () => {
             .catch(err => {
                 console.error("Login failed:", err);
             });
-        // onReloaded()
+        onReloaded()
         // csInit(loginInfo.token, loginInfo.domain)
     }
     return (
