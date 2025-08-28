@@ -3,12 +3,12 @@ import IconWrap from '../other/icon'
 import { CallSignal, UserIcon } from '../../../assets/icon/ActiveStatusIcon'
 import { PhoneDisconnect, PhoneNormal, PhoneRestrict } from '../../../assets/icon/PhoneIcons'
 import NormalButton from '../button/NormalButton'
-import IconOptionBtn from '../button/iconOptionBtn'
-import { CallTransfer, Microphone, MicrophoneSplash, Pause, PauseFill } from '../../../assets/icon/ActionIcons'
+import { CallTransfer, Pause, PauseFill } from '../../../assets/icon/ActionIcons'
 import IconButton from '../button/IconButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 import { getServiceInfoById } from '../../../ultils/helper'
 import ToggleIconButton from '../button/ToggleIconButton'
+import { Microphone, MicrophoneSlash } from '../../../assets/icon/NewStyleIcon'
 
 const CallInfo = ({ }) => {
     const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId } = useCall()
@@ -80,14 +80,11 @@ const CallInfo = ({ }) => {
             }}>
                 {!isRinging ?
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch', }}>
-                        {/* {!isMuting ?
-                            <IconButton Icon={Microphone} onClick={() => muteCall()} /> :
-                            <IconButton Icon={MicrophoneSplash} onClick={() => muteCall()} />} */}
                         <ToggleIconButton
                             isToggle={isMuting}
                             onClick={() => muteCall()}
                             IconInitial={Microphone}
-                            IconAfter={MicrophoneSplash}
+                            IconAfter={MicrophoneSlash}
                         />
                         {isHolding ?
                             <IconButton Icon={PauseFill} onClick={() => { holdCall(); }} /> :
