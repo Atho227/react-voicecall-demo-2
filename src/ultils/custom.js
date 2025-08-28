@@ -107,11 +107,15 @@ function csCurrentCallId(callId) {
 
 function csInitError(errorCode) {
     console.error(`Lỗi kết nối: ${errorCode}`);
+    if (errorCode) {
+        window.setLoggedStatus(false)
+    }
 }
 
 function csInitComplete() {
     console.log('Kết nối thành công');
     // console.log('csVoice ban đầu:', JSON.stringify(window.csVoice.callInfo))
+    window.setLoggedStatus(true)
     window.firstLoadPage()
 }
 function csListTransferAgent(listTransferAgent) {
