@@ -7,7 +7,7 @@ const initialState = {
     isCall: false,
     isRinging: false,
     isCallOut: false,
-    isAnswer: false,
+    isAnswer: true,
     callInfo: {},
     serviceList: [],
     currentServiceId: null,
