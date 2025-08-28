@@ -36,7 +36,6 @@ const firstLoadPage = () => {
         });
     }
 }
-window.firstLoadPage = firstLoadPage
 
 export function setCurrent(arr, id) {
     return arr.map(item => {
@@ -75,3 +74,10 @@ export function generateToken(aggentId, secret) {
 export function createPayload(id) {
     return { "ipphone": id };
 }
+
+export function statusLogout() {
+    window.store.dispatch({ type: "auth/SetLoginStatus", payload: false })
+}
+
+window.firstLoadPage = firstLoadPage
+window.statusLogout = statusLogout
