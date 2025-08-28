@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import IconWrap from '../other/icon'
 import { CallSignal, UserIcon } from '../../../assets/icon/ActiveStatusIcon'
 import { PhoneDisconnect, PhoneNormal, PhoneRestrict } from '../../../assets/icon/PhoneIcons'
@@ -7,10 +7,18 @@ import IconOptionBtn from '../button/iconOptionBtn'
 import { CallTransfer, Microphone, MicrophoneSplash, Pause, PauseFill } from '../../../assets/icon/ActionIcons'
 import IconButton from '../button/IconButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
+import { getServiceInfoById } from '../../../ultils/helper'
 
 const CallInfo = ({ }) => {
-    const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer } = useCall()
+    const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId } = useCall()
     const time = '00:00'
+
+    const [currentService, setCurrentService] = useState('Mặc định')
+    useEffect(() => {
+        const current = getServiceInfoById(currentServiceId)
+        setCurrentService(current.descriptions)
+        console.log('DEBUG đã chạy', current);
+    }, [isCall, currentServiceId])
 
     return (isCall ?
         <div style={{
@@ -32,7 +40,7 @@ const CallInfo = ({ }) => {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <IconWrap icon={PhoneNormal} fill={'#5C6073'} />
-                        <p className='secondary-text bold' >Dịch vụ mặc định</p>
+                        <p className='secondary-text bold' >{currentService}</p>
                     </div>
                 </div>
                 <div style={{ width: '328px', height: '1px', backgroundColor: '#DADCE5' }}></div>
@@ -71,7 +79,6 @@ const CallInfo = ({ }) => {
             }}>
                 {!isRinging ?
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch' }}>
-                        {/* <IconOptionBtn options={options} btnStyle={{ borderRadius: '999px', backgroundColor: 'rgba(61, 85, 204, 0.10)' }} fill={'#3D55CC'} /> */}
                         {!isMuting ? <IconButton Icon={Microphone} onClick={() => muteCall()} /> :
                             <IconButton Icon={MicrophoneSplash} onClick={() => muteCall()} />}
                         {isHolding ?
