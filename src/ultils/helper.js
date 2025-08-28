@@ -79,5 +79,9 @@ export function setLoggedStatus(isLoggedIn) {
     window.store.dispatch({ type: "auth/setLoginStatus", payload: isLoggedIn })
 }
 
+export function getServiceInfoById(serviceId) {
+    const serviceList = window.store.getState().call.serviceList
+    return serviceList.find(item => item.id === serviceId)
+}
 window.firstLoadPage = firstLoadPage
 window.setLoggedStatus = setLoggedStatus
