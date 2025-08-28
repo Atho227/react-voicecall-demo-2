@@ -31,7 +31,6 @@ const CSCallModal = () => {
 
     const calOutAction = () => {
         csCallout(phone, currentServiceId)
-        // setShowNumPad(false)
     }
 
     const handlePhoneBtnClick = (val) => {
@@ -41,6 +40,7 @@ const CSCallModal = () => {
     const chooseCurrentById = (id) => {
         const newService = setCurrent(serviceList, id)
         window.store.dispatch({ type: "call/setServiceList", payload: newService })
+        window.store.dispatch({ type: "call/currentServiceId", payload: id })
     }
 
     return (
