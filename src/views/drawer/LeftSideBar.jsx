@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { KeyIcon, List, Plugs, PlugsConnected } from '../../assets/icon/NewStyleIcon'
 import NormalButton from '../components/button/NormalButton'
 import NormalInput from '../components/input/Input';
-import { generateToken } from '../../ultils/helper';
+import { generateToken, onReloaded } from '../../ultils/helper';
 import { useLocalStorage } from '../../hooks/useLocalstorage';
 import { LoginApi } from '../../ultils/api/VoiceLoginApi';
+import { useAuthRedux } from '../../hooks/useAuthRedux';
 
 const LeftSideBar = () => {
+    const { isLoggedIn } = useAuthRedux()
     const [isExpanded, setIsExpanded] = useState(true);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isTokenCreation, setIsTokenCreation] = useState(false)
     const [tokenCreated, setTokenCreated] = useState(false)
 
@@ -55,6 +56,7 @@ const LeftSideBar = () => {
             .catch(err => {
                 console.error("Login failed:", err);
             });
+        // onReloaded()
         // csInit(loginInfo.token, loginInfo.domain)
     }
     return (
@@ -110,8 +112,8 @@ const LeftSideBar = () => {
                                 onChange={handleChangeLoginInfo}
                             />
                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '8px', width: '100%' }}>
-                                <NormalButton text='Đăng nhập' onClick={() => onLogin()} />
-                                {/* <NormalButton text='Tạo Token' onClick={() => setIsTokenCreation(!isTokenCreation)} /> */}
+                                {isLoggedIn ? <NormalButton text='Đã đăng nhập' />
+                                    : <NormalButton text='Đăng nhập' onClick={() => onLogin()} />}
                                 <p className='small-text'>Chưa có token ? <span className='bold link-text' onClick={() => setIsTokenCreation(!isTokenCreation)}>Tạo ngay</span></p>
                             </div>
                         </div>
@@ -166,7 +168,7 @@ const LeftSideBar = () => {
                             width: "100%",
                             alignSelf: 'auto',
                         }}
-                        onClick={() => setIsLoggedIn(!isLoggedIn)}
+                        onClick={() => { }}
                     />
                 )}
             </div>
