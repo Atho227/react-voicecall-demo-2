@@ -8,6 +8,7 @@ import { CallTransfer, Microphone, MicrophoneSplash, Pause, PauseFill } from '..
 import IconButton from '../button/IconButton'
 import { useCall } from '../../../hooks/CallHook/useCall'
 import { getServiceInfoById } from '../../../ultils/helper'
+import ToggleIconButton from '../button/ToggleIconButton'
 
 const CallInfo = ({ }) => {
     const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId } = useCall()
@@ -16,7 +17,7 @@ const CallInfo = ({ }) => {
     const [currentService, setCurrentService] = useState('Mặc định')
     useEffect(() => {
         const current = getServiceInfoById(currentServiceId)
-        setCurrentService(current.descriptions)
+        setCurrentService(current?.descriptions)
         console.log('DEBUG đã chạy', current);
     }, [isCall, currentServiceId])
 
@@ -78,21 +79,28 @@ const CallInfo = ({ }) => {
                 backgroundColor: '#F5F6FA',
             }}>
                 {!isRinging ?
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch' }}>
-                        {!isMuting ? <IconButton Icon={Microphone} onClick={() => muteCall()} /> :
-                            <IconButton Icon={MicrophoneSplash} onClick={() => muteCall()} />}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch', }}>
+                        {/* {!isMuting ?
+                            <IconButton Icon={Microphone} onClick={() => muteCall()} /> :
+                            <IconButton Icon={MicrophoneSplash} onClick={() => muteCall()} />} */}
+                        <ToggleIconButton
+                            isToggle={isMuting}
+                            onClick={() => muteCall()}
+                            IconInitial={Microphone}
+                            IconAfter={MicrophoneSplash}
+                        />
                         {isHolding ?
                             <IconButton Icon={PauseFill} onClick={() => { holdCall(); }} /> :
                             <IconButton Icon={Pause} onClick={() => { holdCall(); }} />
                         }
-                        <NormalButton text='Kết thúc' icon={PhoneDisconnect} style={{ height: '40px', backgroundColor: '#FF451C', color: '#FFE7D1', flex: '1 0 0', alignSelf: 'center' }}
-                            onClick={() => {
-                                endCall()
-                            }} />
+                        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                            <NormalButton text='Kết thúc' icon={PhoneDisconnect}
+                                style={{ backgroundColor: '#FF451C', color: '#FFE7D1', }}
+                                onClick={() => endCall()} />
+                        </div>
                     </div>
                     : isCallOut ?
-                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} style={{ backgroundColor: '#FF451C', color: '#FFE7D1' }}
-                            onClick={() => endCall()} />
+                        <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} onClick={() => endCall()} />
                         : isAnswer ? <div style={{
                             display: 'flex',
                             flexDirection: 'column',
