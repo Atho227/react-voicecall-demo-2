@@ -130,9 +130,12 @@ function csTransferCallSuccess(tranferedAgentInfo) {
     console.log('csTransferCallSuccess');
     window.store.dispatch({ type: "call/transferOk", payload: true })
 }
+
 function csNewCallTransferRequest(transferCall) {
-    console.log('csNewCallTransferRequest');
+    console.log(`csNewCallTransferRequest debug: ${transferCall}`);
+    window.store.dispatch({ type: "call/isReciveTransfer", payload: true })
 }
+
 function csTransferCallResponse(status) {
     console.log('csTransferCallResponse');
 }
