@@ -123,7 +123,7 @@ function csListTransferAgent(listTransferAgent) {
     window.updateOnlineAgentList(listTransferAgent)
 }
 function csTransferCallError(error, tranferedAgentInfo) {
-    console.log('csTransferCallError');
+    console.log(`csTransferCallError : ${error} and ${tranferedAgentInfo}`);
 }
 function csTransferCallSuccess(tranferedAgentInfo) {
     console.log('csTransferCallSuccess');
