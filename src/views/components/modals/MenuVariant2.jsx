@@ -1,7 +1,7 @@
 import React from 'react'
 
 const MenuVariant2 = ({ data, onSelectOption }) => {
-    const isLoading = !data // chỉ cần check thẳng prop
+    const isLoading = !data
     return (
         <div style={{
             position: 'absolute',

@@ -32,9 +32,23 @@ Dropdown.List = function ({ children }) {
     const { open } = useContext(DropdownContext);
     if (!open) return null;
     return (
-        <ul className="absolute mt-2 border rounded shadow-md bg-white z-50">
+        <div style={{
+            position: 'absolute',
+            top: 'calc(100% + 2px)', left: '0', transform: '',
+            display: 'flex',
+            flexDirection: 'column',
+            width: '302px',
+            padding: '8px',
+            alignItems: 'flex-start',
+            gap: '8px',
+            borderRadius: '8px',
+            border: '1px solid #DADCE5',
+            backgroundColor: '#FFF',
+            boxShadow: '0 3px 12px 0 rgba(0, 0, 0, 0.10)',
+            zIndex: '300',
+        }}>
             {children}
-        </ul>
+        </div>
     );
 };
 
@@ -44,12 +58,12 @@ Dropdown.Item = function ({ option, children }) {
     const isActive = value?.value === option.value;
 
     return (
-        <li
+        <div
             onClick={() => select(option)}
             className={`px-3 py-2 cursor-pointer hover:bg-gray-100 ${isActive ? "bg-gray-200 font-semibold" : ""
                 }`}
         >
             {children || option.label}
-        </li>
+        </div>
     );
 };
