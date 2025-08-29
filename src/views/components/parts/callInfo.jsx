@@ -7,9 +7,9 @@ import { CallTransfer, } from '../../../assets/icon/ActionIcons'
 import { useCall } from '../../../hooks/CallHook/useCall'
 import { getServiceInfoById } from '../../../ultils/helper'
 import ToggleIconButton from '../button/ToggleIconButton'
-import { ChervonDown, Microphone, MicrophoneSlash, PauseFill, PauseIcon, PhoneNormal } from '../../../assets/icon/NewStyleIcon'
-import DropDownV2 from '../button/iconOptionBtn'
-import { deviceTypes } from '../../../assets/object/data'
+import { ChervonDown, Microphone, MicrophoneSlash, PauseFill, PauseIcon, PhoneForward, PhoneNormal } from '../../../assets/icon/NewStyleIcon'
+import { Dropdown } from '../button/DropDownBtn'
+import { transferType } from '../../../assets/object/data'
 
 const CallInfo = ({ }) => {
     const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId } = useCall()
@@ -21,6 +21,11 @@ const CallInfo = ({ }) => {
         setCurrentService(current?.descriptions)
         console.log('DEBUG đã chạy', current);
     }, [isCall, currentServiceId])
+
+
+    const handleChange = (option) => {
+        console.log("Option được chọn:", option);
+    };
 
     return (isCall ?
         <div style={{
@@ -81,21 +86,57 @@ const CallInfo = ({ }) => {
             }}>
                 {!isRinging ?
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch', }}>
-                        <DropDownV2
-                            options={deviceTypes}
-                            currentType={1}
-                            onSelect={(opt) => changeDevice(opt.type)}
-                        >
-                            {({ selected, toggle, isOpen }) => (
-                                <button
-                                    className="icon-dropdown-btn"
-                                    onClick={toggle}
-                                >
-                                    {selected && <selected.icon size={20} />}
-                                    <ChervonDown />
-                                </button>
-                            )}
-                        </DropDownV2>
+                        <Dropdown value={options[0]} onChange={handleChange}>
+                            <Dropdown.Button>
+                                {(open) => (
+                                    <button style={{
+                                        display: 'inline-flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        padding: '8px',
+                                        borderRadius: '999px',
+                                        height: '40px',
+                                        backgroundColor: 'rgba(61, 85, 204, 0.1)',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s ease',
+                                    }}>
+                                        <PhoneForward size={20} fill='#3d55ccff' />
+                                        <ChervonDown size={20} fill='#3d55ccff' />
+                                    </button>
+                                )}
+                            </Dropdown.Button>
+
+                            <Dropdown.List>
+                                {options.map((opt) => (
+                                    <Dropdown.Item key={opt.id} option={opt} >
+                                        <div
+                                            key={opt.type}
+                                            className='hover' style={{
+                                                display: 'flex',
+                                                padding: '4px 12px',
+                                                alignItems: 'center',
+                                                alignSelf: 'stretch',
+                                                gap: '12px',
+                                                borderRadius: '4px',
+                                                backgroundColor: opt.choosen ? '#F5F6FA' : '',
+                                                minHeight: '32px',
+                                            }}>
+                                            <opt.icon size={16} />
+                                            <div style={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                justifyContent: 'center',
+                                                alignItems: 'flex-start',
+                                                flex: '1',
+                                            }}>
+                                                <p className='small-text bold' >{opt.title}</p>
+                                                <p className='small-text' style={{ color: '#787C91' }}>{opt.description}</p>
+                                            </div>
+                                        </div>
+                                    </Dropdown.Item>
+                                ))}
+                            </Dropdown.List>
+                        </Dropdown>
                         <ToggleIconButton
                             isToggle={isMuting}
                             onClick={() => muteCall()}
@@ -160,8 +201,4 @@ const CallInfo = ({ }) => {
 
 export default CallInfo
 
-const options = [
-    { icon: CallTransfer, title: 'Trao đổi nội bộ', subtitle: 'Trao đổi với chuyên viên khác' },
-    { icon: CallTransfer, title: 'Chuyển cho chuyên viên', subtitle: 'Chuyển đích danh một chuyên viên cụ thể' },
-    { icon: CallTransfer, title: 'Chuyển theo đầu số', subtitle: 'Chuyển cho một chuyên viên bất kỳ có kỹ năng đầu số' }
-];
+const options = transferType

@@ -55,12 +55,10 @@ Dropdown.List = function ({ children }) {
 // Option trong Dropdown
 Dropdown.Item = function ({ option, children }) {
     const { value, select } = useContext(DropdownContext);
-    const isActive = value?.value === option.value;
-
     return (
         <div
             onClick={() => select(option)}
-            className={`px-3 py-2 cursor-pointer hover:bg-gray-100 ${isActive ? "bg-gray-200 font-semibold" : ""}`}
+            style={{ width: '100%' }}
         >
             {children}
         </div>
