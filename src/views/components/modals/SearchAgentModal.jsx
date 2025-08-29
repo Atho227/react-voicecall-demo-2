@@ -7,12 +7,12 @@ import ListItem from '../other/ListItem';
 const SearchAgentModal = ({ setOpen, data = defaultData }) => {
     const [isShowMenu, setIsShowMenu] = useState(false)
     const [searchTerm, setSearchTerm] = useState("")
+    const [choosenAgent, setChoosenAgent] = useState(null)
 
     const handleClose = () => {
         setOpen(false);
     };
 
-    // lọc data theo username (hoặc email nếu muốn)
     const filteredData = useMemo(() => {
         if (!searchTerm) return data;
         return data.filter(item =>
@@ -20,6 +20,13 @@ const SearchAgentModal = ({ setOpen, data = defaultData }) => {
         )
     }, [data, searchTerm])
 
+    const onChooseAgent = (agent) => {
+        if (agent) {
+            setSearchTerm(agent.username);
+            setChoosenAgent(agent);
+            setIsShowMenu(false);
+        }
+    };
     return (
         <div className='modal'
             style={{ position: "fixed", backgroundColor: "rgba(0,0,0,0.3)", width: '100%', height: '100%', top: '0', left: '0', display: 'flex', justifyContent: 'center', alignItems: 'center   ' }}
@@ -60,7 +67,7 @@ const SearchAgentModal = ({ setOpen, data = defaultData }) => {
                         value={searchTerm}
                         onChange={(e) => {
                             setSearchTerm(e.target.value)
-                            setIsShowMenu(true) // mở menu khi gõ
+                            setIsShowMenu(true)
                         }}
                         onClick={() => setIsShowMenu(!isShowMenu)}
                     />
@@ -81,7 +88,9 @@ const SearchAgentModal = ({ setOpen, data = defaultData }) => {
                         }}>
                             {filteredData.length > 0 ? (
                                 filteredData.map(item => (
-                                    <ListItem key={item.id} data={item} />
+                                    <ListItem key={item.id} data={item}
+                                        onClick={onChooseAgent}
+                                    />
                                 ))
                             ) : (
                                 <p className="small-text">Không tìm thấy agent</p>
