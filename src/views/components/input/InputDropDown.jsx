@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ChervonDown } from '../../../assets/icon/NewStyleIcon'
 
-const InputDropDown = ({ label = false, placeHoder = '--Chọn--', onChange, ...props }) => {
+const InputDropDown = ({ label = false, placeHoder = '--Chọn--', value, onChange, ...props }) => {
     return (
         <div style={{
             display: "flex",
@@ -43,7 +43,7 @@ const InputDropDown = ({ label = false, placeHoder = '--Chọn--', onChange, ...
                     position: 'relative',
                 }}
                     {...props}>
-                    <input style={{ width: '90%' }} placeholder={placeHoder} />
+                    <input style={{ width: '90%' }} placeholder={placeHoder} value={value} onChange={onChange} />
                     <ChervonDown />
                 </div>
             </div>

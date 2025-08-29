@@ -2,19 +2,25 @@ import React from 'react'
 import IconWrap from './icon'
 import { UserIcon } from '../../../assets/icon/ActiveStatusIcon'
 
-const ListItem = ({ data }) => {
-    console.log('DEBUG:', data);
-
+const ListItem = ({ data, onClick, ...props }) => {
+    const handleClick = () => {
+        if (onClick) onClick(data)
+    }
     return (
-        <div className='hover' style={{
-            display: "flex",
-            height: "56px",
-            padding: "8px",
-            alignItems: "center",
-            gap: "16px",
-            alignSelf: "stretch",
-            borderRadius: '12px'
-        }}>
+        <div
+            className='hover'
+            style={{
+                display: "flex",
+                height: "56px",
+                padding: "8px",
+                alignItems: "center",
+                gap: "16px",
+                alignSelf: "stretch",
+                borderRadius: '12px'
+            }}
+            onClick={handleClick}
+            {...props}
+        >
             <div style={{
                 display: "flex",
                 alignItems: "center",
@@ -28,7 +34,16 @@ const ListItem = ({ data }) => {
                     justifyContent: "center",
                     alignItems: "center",
                 }}>
-                    <div style={{ width: '40px', height: '40px', flexShirk: '0', borderRadius: '99px', backgroundColor: '#DADCE5', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <div style={{
+                        width: '40px',
+                        height: '40px',
+                        flexShrink: '0',
+                        borderRadius: '99px',
+                        backgroundColor: '#DADCE5',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
                         <IconWrap icon={UserIcon} />
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { CloseIcon } from '../../../assets/icon/NewStyleIcon';
 import NormalButton from '../button/NormalButton';
 import InputDropDown from '../input/InputDropDown';
@@ -6,11 +6,19 @@ import ListItem from '../other/ListItem';
 
 const SearchAgentModal = ({ setOpen, data = defaultData }) => {
     const [isShowMenu, setIsShowMenu] = useState(false)
-    const [isLoadingData, setIsLoadingData] = useState(true)
+    const [searchTerm, setSearchTerm] = useState("")
 
     const handleClose = () => {
         setOpen(false);
     };
+
+    // lọc data theo username (hoặc email nếu muốn)
+    const filteredData = useMemo(() => {
+        if (!searchTerm) return data;
+        return data.filter(item =>
+            item.username.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+    }, [data, searchTerm])
 
     return (
         <div className='modal'
@@ -20,70 +28,71 @@ const SearchAgentModal = ({ setOpen, data = defaultData }) => {
                 style={{
                     display: "flex",
                     width: "350px",
-                    padding: "0 var(--space-inset-24px, 24px) var(--space-24px, 24px) var(--space-inset-24px, 24px)",
+                    padding: "0 24px 24px 24px",
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "flex-start",
                     gap: "16px",
-                    borderRadius: "var(--radius-medium,12px)", // hoặc nếu có token CSS khác thì thay vào
+                    borderRadius: "12px",
                     border: "1px solid var(--border-neutral-neutral-light, #DADCE5)",
-                    background: "var(--background-neutral-container, #FFF)",
+                    background: "#FFF",
                     boxShadow: "0 3px 12px 0 rgba(0, 0, 0, 0.10)",
                 }}
                 onClick={(e) => { e.stopPropagation() }} >
                 <div style={{
                     display: "flex",
-                    padding: "var(--space-inset-12px, 12px) 0",
+                    padding: "12px 0",
                     justifyContent: "space-between",
                     alignItems: "center",
                     alignSelf: "stretch",
                     borderBottom: "1px solid var(--modal-divider, #DADCE5)",
                 }}>
-                    <div style={{
-                        display: "flex",
-                        width: "364px",
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                    }}>
-                        <div style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "var(--space-4px, 4px)",
-                            alignSelf: "stretch",
-                        }}>
-                            <p className='primary-text bold'>Chọn Agent để chuyển tiếp</p>
-                        </div>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <p className='primary-text bold'>Chọn Agent để chuyển tiếp</p>
+                    <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={handleClose}>
                         <CloseIcon />
                     </div>
                 </div>
+
                 <div className="m-content" style={{ position: 'relative' }}>
-                    <InputDropDown label='Chọn Agent' placeHoder='--Tìm theo tên người dùng--' onClick={() => setIsShowMenu(!isShowMenu)} />
+                    <InputDropDown
+                        label='Chọn Agent'
+                        placeHoder='--Tìm theo tên người dùng--'
+                        value={searchTerm}
+                        onChange={(e) => {
+                            setSearchTerm(e.target.value)
+                            setIsShowMenu(true) // mở menu khi gõ
+                        }}
+                        onClick={() => setIsShowMenu(!isShowMenu)}
+                    />
                     {isShowMenu &&
                         <div style={{
                             position: 'absolute', top: '101%', width: '100%',
                             display: "flex",
-                            paddingBottom: "var(--space-4px, 4px)",
+                            paddingBottom: "4px",
                             flexDirection: "column",
                             alignItems: "center",
                             borderRadius: "12px",
-                            border: "1px solid var(--border-neutral-neutral-light, #DADCE5)",
-                            background: "var(--background-container, #FFF)",
-                            boxShadow: "0 3px 12px 0 rgba(0, 0, 0, 0.10)", // elevation-2
+                            border: "1px solid #DADCE5",
+                            background: "#FFF",
+                            boxShadow: "0 3px 12px 0 rgba(0, 0, 0, 0.10)",
                             padding: '8px',
-                            height: '200px',
-                            overflowY: 'auto'
+                            maxHeight: '200px',
+                            overflowY: 'auto',
                         }}>
-                            {data.map(item => {
-                                return <ListItem key={item.id} data={item} />
-                            })}
+                            {filteredData.length > 0 ? (
+                                filteredData.map(item => (
+                                    <ListItem key={item.id} data={item} />
+                                ))
+                            ) : (
+                                <p className="small-text">Không tìm thấy agent</p>
+                            )}
                         </div>
                     }
                 </div>
-                <div className="m-btn-group">
+
+                <div className="m-btn-group" style={{ display: "flex", gap: "8px", alignSelf: "stretch" }}>
                     <NormalButton text='Áp dụng' style={{ backgroundColor: '#3D55CC', color: '#D9E1FC' }} />
-                    <NormalButton text='Hủy' />
+                    <NormalButton text='Hủy' onClick={handleClose} />
                 </div>
             </div>
         </div>
