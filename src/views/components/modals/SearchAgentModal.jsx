@@ -1,6 +1,7 @@
 import React from 'react'
 import IconWrap from '../other/icon';
 import { CloseIcon } from '../../../assets/icon/NewStyleIcon';
+import NormalButton from '../button/NormalButton';
 
 const SearchAgentModal = ({ setOpen }) => {
 
@@ -54,8 +55,13 @@ const SearchAgentModal = ({ setOpen }) => {
                         <CloseIcon />
                     </div>
                 </div>
-                <div className="m-content"></div>
-                <div className="m-btn-group"></div>
+                <div className="m-content">
+
+                </div>
+                <div className="m-btn-group">
+                    <NormalButton text='Áp dụng' style={{ backgroundColor: '#3D55CC', color: '#D9E1FC' }} />
+                    <NormalButton text='Hủy' />
+                </div>
             </div>
         </div>
     )

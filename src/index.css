@@ -570,3 +570,20 @@ button {
 .link-text:hover {
   text-decoration: underline;
 }
+
+.m-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+  border-radius: var(--Corner-Medium, 12px);
+  border: 1px solid var(--table-border, #DADCE5);
+}
+
+.m-btn-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-inline-8px, 8px);
+}
