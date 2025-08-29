@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
 import { Dropdown } from '../button/DropDownBtn'
-import { deviceTypes } from '../../../assets/object/data';
-import { ChervonDown } from '../../../assets/icon/NewStyleIcon';
+import { transferType } from '../../../assets/object/data';
+import { ChervonDown, PhoneForward } from '../../../assets/icon/NewStyleIcon';
 
-const options = deviceTypes
+const options = transferType
 
 const Controller = () => {
-    const [lang, setLang] = useState(options[0]);
+    const [currentOption, setLang] = useState(options.find(item => item.choosen));
 
     const handleChange = (option) => {
         console.log("Option được chọn:", option);
@@ -20,7 +20,7 @@ const Controller = () => {
             maxWidth: '150px',
             width: '360px',
         }}>
-            <Dropdown value={lang} onChange={handleChange}>
+            <Dropdown value={currentOption} onChange={handleChange}>
                 <Dropdown.Button>
                     {(open) => (
                         <button style={{
@@ -34,7 +34,7 @@ const Controller = () => {
                             cursor: 'pointer',
                             transition: 'all 0.3s ease',
                         }}>
-                            <lang.icon size={20} fill='#3d55ccff' />
+                            <PhoneForward size={20} fill='#3d55ccff' />
                             <ChervonDown size={20} fill='#3d55ccff' />
                         </button>
                     )}
@@ -42,7 +42,7 @@ const Controller = () => {
 
                 <Dropdown.List>
                     {options.map((opt) => (
-                        <Dropdown.Item key={opt.type} option={opt} >
+                        <Dropdown.Item key={opt.id} option={opt} >
                             <div
                                 key={opt.type}
                                 className='hover' style={{
@@ -52,7 +52,7 @@ const Controller = () => {
                                     gap: '12px',
                                     alignSelf: 'stretch',
                                     borderRadius: '4px',
-                                    backgroundColor: opt.isCurrent ? '#F5F6FA' : '',
+                                    backgroundColor: opt.choosen ? '#F5F6FA' : '',
                                     minHeight: '32px',
                                 }}>
                                 <opt.icon size={16} />

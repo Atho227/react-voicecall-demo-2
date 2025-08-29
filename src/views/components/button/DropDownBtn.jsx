@@ -12,7 +12,7 @@ export function Dropdown({ children, value, onChange }) {
 
     return (
         <DropdownContext.Provider value={{ open, setOpen, value, select }}>
-            <div className="relative inline-block">{children}</div>
+            <div>{children}</div>
         </DropdownContext.Provider>
     );
 }
@@ -21,7 +21,7 @@ export function Dropdown({ children, value, onChange }) {
 Dropdown.Button = function ({ children }) {
     const { open, setOpen } = useContext(DropdownContext);
     return (
-        <div onClick={() => setOpen(!open)} className="cursor-pointer select-none">
+        <div onClick={() => setOpen(!open)}>
             {typeof children === "function" ? children(open) : children}
         </div>
     );
@@ -60,10 +60,9 @@ Dropdown.Item = function ({ option, children }) {
     return (
         <div
             onClick={() => select(option)}
-            className={`px-3 py-2 cursor-pointer hover:bg-gray-100 ${isActive ? "bg-gray-200 font-semibold" : ""
-                }`}
+            className={`px-3 py-2 cursor-pointer hover:bg-gray-100 ${isActive ? "bg-gray-200 font-semibold" : ""}`}
         >
-            {children || option.label}
+            {children}
         </div>
     );
 };
