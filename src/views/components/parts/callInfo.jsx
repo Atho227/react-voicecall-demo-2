@@ -3,7 +3,6 @@ import IconWrap from '../other/icon'
 import { CallSignal, UserIcon } from '../../../assets/icon/ActiveStatusIcon'
 import { PhoneDisconnect, PhoneRestrict } from '../../../assets/icon/PhoneIcons'
 import NormalButton from '../button/NormalButton'
-import { CallTransfer, } from '../../../assets/icon/ActionIcons'
 import { useCall } from '../../../hooks/CallHook/useCall'
 import { getServiceInfoById } from '../../../ultils/helper'
 import ToggleIconButton from '../button/ToggleIconButton'
@@ -22,9 +21,13 @@ const CallInfo = ({ }) => {
         console.log('DEBUG đã chạy', current);
     }, [isCall, currentServiceId])
 
-
-    const handleChange = (option) => {
+    const [isSearchAgentMenu, setIssearcAgentMenu] = useState(false)
+    const handleTransfering = (option) => {
         console.log("Option được chọn:", option);
+        if (option.id === 1) {
+            console.log("Option 1 được chọn:", option.id);
+            setIssearcAgentMenu(true)
+        }
     };
 
     return (isCall ?
@@ -86,7 +89,7 @@ const CallInfo = ({ }) => {
             }}>
                 {!isRinging ?
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch', }}>
-                        <Dropdown value={options[0]} onChange={handleChange}>
+                        <Dropdown value={options[0]} onChange={handleTransfering}>
                             <Dropdown.Button>
                                 {(open) => (
                                     <button style={{
@@ -195,6 +198,8 @@ const CallInfo = ({ }) => {
                     alignSelf: 'stretch'
                 }}><p className='primary-text'>Không có cuộc gọi đến</p></div>
             </div>
+
+            {isSearchAgentMenu && 'Hello'}
         </div>
     )
 }
