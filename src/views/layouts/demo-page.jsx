@@ -21,7 +21,7 @@ const MainLayout = ({ }) => {
             <StatusBar />
             {showNumdial ? <CSCallModal /> : ''}
             {showCallingModal ? <CallingModal /> : ''}
-            {showTransferModal && <TransferingAcceptionModal />}
+            {showTransferModal && <TransferingAcceptionModal setOpen={setShowTransferModal} />}
         </div>
     )
 }
