@@ -22,7 +22,7 @@ const CallInfo = ({ }) => {
         console.log('DEBUG đã chạy', current);
     }, [isCall, currentServiceId])
 
-    const [isSearchAgentMenu, setIssearcAgentMenu] = useState(true)
+    const [isSearchAgentMenu, setIssearcAgentMenu] = useState(false)
 
     const handleTransfering = (option) => {
         console.log("Option được chọn:", option);
@@ -34,7 +34,7 @@ const CallInfo = ({ }) => {
     };
 
     return (
-        <div>
+        <div style={{ width: '100%' }} >
             {isCall ?
                 <div style={{
                     display: 'flex',
@@ -205,7 +205,13 @@ const CallInfo = ({ }) => {
                         </div>
                     </div>
                 </div >}
-            {isSearchAgentMenu && <SearchAgentModal setOpen={setIssearcAgentMenu} data={onlineAgentList} />}
+            {isSearchAgentMenu &&
+                <SearchAgentModal setOpen={setIssearcAgentMenu} data={onlineAgentList}
+                    onApply={(agent) => {
+                        console.log(agent)
+                        csTransferCallAgent(agent.id)
+                    }}
+                />}
         </div>
     )
 }

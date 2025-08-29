@@ -4,10 +4,10 @@ import { doStartCall } from "../../ultils/helper";
 const initialState = {
     permission: false,
     online: false,
-    isCall: true,
+    isCall: false,
     isRinging: false,
-    isCallOut: true,
-    isAnswer: true,
+    isCallOut: false,
+    isAnswer: false,
     callInfo: {},
     serviceList: [],
     currentServiceId: null,
