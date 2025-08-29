@@ -12,6 +12,9 @@ const MainLayout = ({ }) => {
     const [showNumdial, setShowNumdial] = useState(true)
     const [showTransferModal, setShowTransferModal] = useState(false)
 
+    useEffect(() => {
+        if (isReciveTransfer) setShowTransferModal(isReciveTransfer)
+    }, [isReciveTransfer])
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 'auto', gap: '8px', backgroundColor: 'white', color: 'black', position: 'absolute', top: '50px', left: '40%' }}>
