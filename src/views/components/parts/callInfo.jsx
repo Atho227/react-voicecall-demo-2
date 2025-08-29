@@ -12,7 +12,8 @@ import { transferType } from '../../../assets/object/data'
 import SearchAgentModal from '../modals/SearchAgentModal'
 
 const CallInfo = ({ }) => {
-    const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId, onlineAgentList } = useCall()
+    const { callInfo,
+        isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId, onlineAgentList, transferOk } = useCall()
     const time = '00:00'
 
     const [currentService, setCurrentService] = useState('Mặc định')
@@ -32,6 +33,13 @@ const CallInfo = ({ }) => {
             setIssearcAgentMenu(true)
         }
     };
+
+    useEffect(() => {
+        if (transferOk) {
+            setIssearcAgentMenu(false)
+            window.store.dispatch({ type: "call/transferOk", payload: false })
+        }
+    }, [transferOk])
 
     return (
         <div style={{ width: '100%' }} >

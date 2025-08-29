@@ -57,11 +57,12 @@ function csEndCall() {
 
 function csMuteCall() {
     console.log('csMuteCall');
-    // window.toggleMute(true)
+    window.store.dispatch({ type: "call/isMuting", payload: true })
 }
 
 function csUnMuteCall() {
     console.log('csUnMuteCall');
+    window.store.dispatch({ type: "call/isMuting", payload: false })
 }
 function csHoldCall() {
     console.log('gọi được hold');
@@ -127,6 +128,7 @@ function csTransferCallError(error, tranferedAgentInfo) {
 }
 function csTransferCallSuccess(tranferedAgentInfo) {
     console.log('csTransferCallSuccess');
+    window.store.dispatch({ type: "call/transferOk", payload: true })
 }
 function csNewCallTransferRequest(transferCall) {
     console.log('csNewCallTransferRequest');
