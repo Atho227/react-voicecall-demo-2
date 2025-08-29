@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { PhoneCallOut, UserCirle } from '../../../assets/icon/NewStyleIcon'
+import { PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
 
 const OptionsMenu = ({ data, setCurrent, setShowMenu, style, }) => {
     const isLoading = !data // chỉ cần check thẳng prop

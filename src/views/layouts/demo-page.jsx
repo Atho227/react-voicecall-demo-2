@@ -19,7 +19,7 @@ const MainLayout = ({ }) => {
     const [showCallingModal, setShowCallingModal] = useState(false)
     const [showNumdial, setShowNumdial] = useState(true)
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 'auto', gap: '8px', backgroundColor: 'white', color: 'black', position: 'absolute', top: '50px', left: '50%', transform: 'translatex(-50%)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 'auto', gap: '8px', backgroundColor: 'white', color: 'black', position: 'absolute', top: '50px', left: '40%' }}>
             <StatusBar />
             {showNumdial ? <CSCallModal /> : ''}
             {showCallingModal ? <CallingModal /> : ''}
