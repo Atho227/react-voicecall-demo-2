@@ -3,8 +3,9 @@ import { CloseIcon } from '../../../assets/icon/NewStyleIcon';
 import NormalButton from '../button/NormalButton';
 import InputDropDown from '../input/InputDropDown';
 
-const SearchAgentModal = ({ setOpen, data }) => {
+const SearchAgentModal = ({ setOpen, data = defaultData }) => {
     const [isShowMenu, setIsShowMenu] = useState(false)
+    const [isLoadingData, setIsLoadingData] = useState(true)
 
     const handleClose = () => {
         setOpen(false);
@@ -56,10 +57,20 @@ const SearchAgentModal = ({ setOpen, data }) => {
                         <CloseIcon />
                     </div>
                 </div>
-                <div className="m-content">
-                    <InputDropDown label='Chọn Agent' onClick={() => setIsShowMenu(!isShowMenu)} />
+                <div className="m-content" style={{ position: 'relative' }}>
+                    <InputDropDown label='Chọn Agent' placeHoder='--Tìm agent theo tên người dùng--' onClick={() => setIsShowMenu(!isShowMenu)} />
                     {isShowMenu &&
-                        <div style={{}}>
+                        <div style={{
+                            position: 'absolute', top: '101%', width: '100%',
+                            display: "flex",
+                            paddingBottom: "var(--space-4px, 4px)",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            borderRadius: "12px",
+                            border: "1px solid var(--border-neutral-neutral-light, #DADCE5)",
+                            background: "var(--background-container, #FFF)",
+                            boxShadow: "0 3px 12px 0 rgba(0, 0, 0, 0.10)", // elevation-2
+                        }}>
                             Hello
                         </div>
                     }
@@ -74,3 +85,12 @@ const SearchAgentModal = ({ setOpen, data }) => {
 }
 
 export default SearchAgentModal
+
+const defaultData = [
+    { id: 1212, username: '454545451214', email: '454545451214@gmail.com', avatarUrl: null },
+    { id: 1213, username: 'thaopt', email: '454545451214@gmail.com', avatarUrl: null },
+    { id: 1214, username: 'hung33', email: '454545451214@gmail.com', avatarUrl: null },
+    { id: 1215, username: 'thaopt', email: '454545451214@gmail.com', avatarUrl: null },
+    { id: 1216, username: 'hung33', email: '454545451214@gmail.com', avatarUrl: null },
+    { id: 1217, username: 'thaopt', email: '454545451214@gmail.com', avatarUrl: null },
+]
