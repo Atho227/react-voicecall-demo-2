@@ -16,7 +16,7 @@ const initialState = {
     isHolding: false,
     onlineAgentList: [],
     transferOk: false,
-    isReciveTransfer: false,
+    isReciveTransfer: true,
 };
 
 const callSlice = createSlice({
