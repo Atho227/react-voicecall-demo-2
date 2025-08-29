@@ -534,6 +534,19 @@ button {
   /* 142.857% */
 }
 
+.tiny-text {
+  color: var(--foreground-neutral-neutral-dark, #787C91);
+  text-align: center;
+  font-feature-settings: 'calt' off;
+
+  /* Tiny-text-10/Regular */
+  font-family: var(--typeface-family-text, Inter);
+  font-size: var(--typeface-size-body-xxs, 10px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .bold {
   font-weight: 600;
 }

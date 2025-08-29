@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { CloseIcon } from '../../../assets/icon/NewStyleIcon';
 import NormalButton from '../button/NormalButton';
 import InputDropDown from '../input/InputDropDown';
+import ListItem from '../other/ListItem';
 
 const SearchAgentModal = ({ setOpen, data = defaultData }) => {
     const [isShowMenu, setIsShowMenu] = useState(false)
@@ -58,7 +59,7 @@ const SearchAgentModal = ({ setOpen, data = defaultData }) => {
                     </div>
                 </div>
                 <div className="m-content" style={{ position: 'relative' }}>
-                    <InputDropDown label='Chọn Agent' placeHoder='--Tìm agent theo tên người dùng--' onClick={() => setIsShowMenu(!isShowMenu)} />
+                    <InputDropDown label='Chọn Agent' placeHoder='--Tìm theo tên người dùng--' onClick={() => setIsShowMenu(!isShowMenu)} />
                     {isShowMenu &&
                         <div style={{
                             position: 'absolute', top: '101%', width: '100%',
@@ -70,8 +71,13 @@ const SearchAgentModal = ({ setOpen, data = defaultData }) => {
                             border: "1px solid var(--border-neutral-neutral-light, #DADCE5)",
                             background: "var(--background-container, #FFF)",
                             boxShadow: "0 3px 12px 0 rgba(0, 0, 0, 0.10)", // elevation-2
+                            padding: '8px',
+                            height: '200px',
+                            overflowY: 'auto'
                         }}>
-                            Hello
+                            {data.map(item => {
+                                return <ListItem key={item.id} data={item} />
+                            })}
                         </div>
                     }
                 </div>
