@@ -7,7 +7,9 @@ import { CallTransfer, } from '../../../assets/icon/ActionIcons'
 import { useCall } from '../../../hooks/CallHook/useCall'
 import { getServiceInfoById } from '../../../ultils/helper'
 import ToggleIconButton from '../button/ToggleIconButton'
-import { Microphone, MicrophoneSlash, PauseFill, PauseIcon, PhoneNormal } from '../../../assets/icon/NewStyleIcon'
+import { ChervonDown, Microphone, MicrophoneSlash, PauseFill, PauseIcon, PhoneNormal } from '../../../assets/icon/NewStyleIcon'
+import DropDownV2 from '../button/iconOptionBtn'
+import { deviceTypes } from '../../../assets/object/data'
 
 const CallInfo = ({ }) => {
     const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId } = useCall()
@@ -79,6 +81,21 @@ const CallInfo = ({ }) => {
             }}>
                 {!isRinging ?
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch', }}>
+                        <DropDownV2
+                            options={deviceTypes}
+                            currentType={1}
+                            onSelect={(opt) => changeDevice(opt.type)}
+                        >
+                            {({ selected, toggle, isOpen }) => (
+                                <button
+                                    className="icon-dropdown-btn"
+                                    onClick={toggle}
+                                >
+                                    {selected && <selected.icon size={20} />}
+                                    <ChervonDown />
+                                </button>
+                            )}
+                        </DropDownV2>
                         <ToggleIconButton
                             isToggle={isMuting}
                             onClick={() => muteCall()}

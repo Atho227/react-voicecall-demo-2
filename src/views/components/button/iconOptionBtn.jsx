@@ -32,7 +32,7 @@ const DropDownV2 = ({ options, onSelect, currentType, children }) => {
             "DropDownV2: expected a function-as-children, but got:",
             children
         );
-        console.trace(); // hiện stack để biết được nó render từ component nào
+        console.trace();
     }
     return (
         <div ref={ref} style={{ position: "relative", display: "inline-block" }}>
