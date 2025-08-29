@@ -1,34 +1,37 @@
 import React, { useEffect, useState } from 'react'
-import { useCall } from '../../../hooks/CallHook/useCall'
 
-import NormalButton from '../button/NormalButton'
-import ToggleIconButton from '../button/ToggleIconButton'
-import { onReloaded } from '../../../ultils/helper'
-import { Microphone, MicrophoneSlash } from '../../../assets/icon/NewStyleIcon'
+import { Dropdown } from '../button/DropDownBtn'
+
+const options = [
+    { value: "vn", label: "Vietnamese" },
+    { value: "en", label: "English" },
+    { value: "jp", label: "Japanese" }
+];
 
 const Controller = () => {
-    const { receiveCall, serviceList } = useCall()
-    const [iconToggle, setIconToggle] = useState(false)
+    const [lang, setLang] = useState(options[0]);
 
     return (
         <div style={{
-            position: 'absolute', top: '50px', left: '50px', display: 'flex', gap: '8px', flexWrap: 'wrap',
+            position: 'absolute', top: '50px', right: '50px', display: 'flex', gap: '8px', flexWrap: 'wrap',
             maxWidth: '150px',
             width: '360px',
         }}>
-            <NormalButton text='csInit' onClick={() => onReloaded()} />
-            <NormalButton text='Kích hoạt thoại' onClick={() => csEnableCall()} />
-            <NormalButton text='Gọi đến' onClick={() => receiveCall()} />
-            <ToggleIconButton
-                onClick={() => {
-                    holdCall()
-                    setIconToggle(!iconToggle)
-                }}
-                isToggle={iconToggle}
-                IconInitial={Microphone}
-                IconAfter={MicrophoneSlash}
-                mainColor='#67BF7F'
-            />
+            <Dropdown value={lang} onChange={setLang}>
+                <Dropdown.Button>
+                    {(open) => (
+                        <button className="px-4 py-2 border rounded">
+                            {lang.label} {open ? "▲" : "▼"}
+                        </button>
+                    )}
+                </Dropdown.Button>
+
+                <Dropdown.List>
+                    {options.map((opt) => (
+                        <Dropdown.Item key={opt.value} option={opt} />
+                    ))}
+                </Dropdown.List>
+            </Dropdown>
         </div>
     )
 }

@@ -12,7 +12,7 @@ function App() {
     <div>
       <LeftSideBar />
       <MainLayout />
-      {/* <Controller /> */}
+      <Controller />
     </div>
   )
 }
