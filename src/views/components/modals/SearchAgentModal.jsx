@@ -1,4 +1,6 @@
 import React from 'react'
+import IconWrap from '../other/icon';
+import { CloseIcon } from '../../../assets/icon/NewStyleIcon';
 
 const SearchAgentModal = ({ setOpen }) => {
 
@@ -49,9 +51,11 @@ const SearchAgentModal = ({ setOpen }) => {
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-
+                        <CloseIcon />
                     </div>
                 </div>
+                <div className="m-content"></div>
+                <div className="m-btn-group"></div>
             </div>
         </div>
     )
