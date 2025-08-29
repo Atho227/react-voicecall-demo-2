@@ -1,9 +1,10 @@
-import React from 'react'
-import IconWrap from '../other/icon';
+import React, { useState } from 'react'
 import { CloseIcon } from '../../../assets/icon/NewStyleIcon';
 import NormalButton from '../button/NormalButton';
+import InputDropDown from '../input/InputDropDown';
 
-const SearchAgentModal = ({ setOpen }) => {
+const SearchAgentModal = ({ setOpen, data }) => {
+    const [isShowMenu, setIsShowMenu] = useState(false)
 
     const handleClose = () => {
         setOpen(false);
@@ -16,7 +17,7 @@ const SearchAgentModal = ({ setOpen }) => {
             <div
                 style={{
                     display: "flex",
-                    width: "540px",
+                    width: "350px",
                     padding: "0 var(--space-inset-24px, 24px) var(--space-24px, 24px) var(--space-inset-24px, 24px)",
                     flexDirection: "column",
                     justifyContent: "center",
@@ -56,7 +57,12 @@ const SearchAgentModal = ({ setOpen }) => {
                     </div>
                 </div>
                 <div className="m-content">
-
+                    <InputDropDown label='Chọn Agent' onClick={() => setIsShowMenu(!isShowMenu)} />
+                    {isShowMenu &&
+                        <div style={{}}>
+                            Hello
+                        </div>
+                    }
                 </div>
                 <div className="m-btn-group">
                     <NormalButton text='Áp dụng' style={{ backgroundColor: '#3D55CC', color: '#D9E1FC' }} />
