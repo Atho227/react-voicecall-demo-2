@@ -4,7 +4,7 @@ import NormalButton from '../button/NormalButton';
 import InputDropDown from '../input/InputDropDown';
 import ListItem from '../other/ListItem';
 
-const SearchAgentModal = ({ setOpen, data = defaultData }) => {
+const SearchAgentModal = ({ setOpen, data = defaultData, onApply }) => {
     const [isShowMenu, setIsShowMenu] = useState(false)
     const [searchTerm, setSearchTerm] = useState("")
     const [choosenAgent, setChoosenAgent] = useState(null)
@@ -100,7 +100,7 @@ const SearchAgentModal = ({ setOpen, data = defaultData }) => {
                 </div>
 
                 <div className="m-btn-group" style={{ display: "flex", gap: "8px", alignSelf: "stretch" }}>
-                    <NormalButton text='Áp dụng' style={{ backgroundColor: '#3D55CC', color: '#D9E1FC' }} />
+                    <NormalButton text='Áp dụng' style={{ backgroundColor: '#3D55CC', color: '#D9E1FC' }} onClick={() => onApply(choosenAgent)} />
                     <NormalButton text='Hủy' onClick={handleClose} />
                 </div>
             </div>

@@ -83,5 +83,24 @@ export function getServiceInfoById(serviceId) {
     const serviceList = window.store.getState().call.serviceList
     return serviceList.find(item => item.id === serviceId)
 }
+
+export function updateOnlineAgentList(list) {
+    console.log('Running');
+
+    if (!Array.isArray(list)) return [];
+    const mappedList = list.map(agent => mapAgentObj(agent));
+    window.store.dispatch({ type: "call/onlineAgentList", payload: mappedList })
+}
+
+export function mapAgentObj(agent) {
+    return {
+        id: agent.ipPhone || null,
+        username: agent.userName || null,
+        email: agent.userName || null,
+        avatarUrl: null
+    };
+}
+
 window.firstLoadPage = firstLoadPage
 window.setLoggedStatus = setLoggedStatus
+window.updateOnlineAgentList = updateOnlineAgentList

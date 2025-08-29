@@ -12,7 +12,7 @@ import { transferType } from '../../../assets/object/data'
 import SearchAgentModal from '../modals/SearchAgentModal'
 
 const CallInfo = ({ }) => {
-    const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId } = useCall()
+    const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId, onlineAgentList } = useCall()
     const time = '00:00'
 
     const [currentService, setCurrentService] = useState('Mặc định')
@@ -28,6 +28,7 @@ const CallInfo = ({ }) => {
         console.log("Option được chọn:", option);
         if (option.id === 1) {
             console.log("Option 1 được chọn:", option.id);
+            getTransferAgent()
             setIssearcAgentMenu(true)
         }
     };
@@ -204,7 +205,7 @@ const CallInfo = ({ }) => {
                         </div>
                     </div>
                 </div >}
-            {isSearchAgentMenu && <SearchAgentModal setOpen={setIssearcAgentMenu} />}
+            {isSearchAgentMenu && <SearchAgentModal setOpen={setIssearcAgentMenu} data={onlineAgentList} />}
         </div>
     )
 }

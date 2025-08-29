@@ -120,6 +120,7 @@ function csInitComplete() {
 }
 function csListTransferAgent(listTransferAgent) {
     console.log(`csListTransferAgent : ${JSON.stringify(listTransferAgent)}`);
+    window.updateOnlineAgentList(listTransferAgent)
 }
 function csTransferCallError(error, tranferedAgentInfo) {
     console.log('csTransferCallError');
