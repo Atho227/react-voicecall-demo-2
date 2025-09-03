@@ -78,6 +78,8 @@ const callSlice = createSlice({
             state.callInfo = {}
             state.isMuting = false
             state.isHolding = false
+            state.isReciveTransfer = false
+            transferOk = false
         },
     },
 });

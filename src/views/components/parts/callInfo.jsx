@@ -101,7 +101,7 @@ const CallInfo = ({ }) => {
                         backgroundColor: '#F5F6FA',
                     }}>
                         {!isRinging ?
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch', }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch', position: 'relative' }}>
                                 <Dropdown value={options[0]} onChange={handleTransfering}>
                                     <Dropdown.Button>
                                         {(open) => (
@@ -121,7 +121,6 @@ const CallInfo = ({ }) => {
                                             </button>
                                         )}
                                     </Dropdown.Button>
-
                                     <Dropdown.List>
                                         {options.map((opt) => (
                                             <Dropdown.Item key={opt.id} option={opt} >
@@ -173,7 +172,9 @@ const CallInfo = ({ }) => {
                                 </div>
                             </div>
                             : isCallOut ?
-                                <NormalButton text='Hủy cuộc gọi' icon={PhoneDisconnect} onClick={() => endCall()} />
+                                <NormalButton text='Hủy cuộc gọi'
+                                    style={{ backgroundColor: '#FF451C', color: '#FFE7D1', }}
+                                    icon={PhoneDisconnect} onClick={() => endCall()} />
                                 : isAnswer ? <div style={{
                                     display: 'flex',
                                     flexDirection: 'column',
