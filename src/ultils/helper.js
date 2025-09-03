@@ -1,3 +1,4 @@
+import { testCallInfo } from "../assets/object/data";
 import { generateJWT, getLocalstorage } from "./mainUltils";
 
 export const doStartCall = (state) => {
@@ -85,8 +86,6 @@ export function getServiceInfoById(serviceId) {
 }
 
 export function updateOnlineAgentList(list) {
-    console.log('Running');
-
     if (!Array.isArray(list)) return [];
     const mappedList = list.map(agent => mapAgentObj(agent));
     window.store.dispatch({ type: "call/onlineAgentList", payload: mappedList })
@@ -99,6 +98,26 @@ export function mapAgentObj(agent) {
         email: agent.userName || null,
         avatarUrl: null
     };
+}
+
+export function mapCallObj(call) {
+    if (!call.call_id) {
+        console.log("Missing call_id in call object:", call);
+        return null;
+    }
+    return {
+        call_id: call.call_id,
+        type: call.call_type,
+        service: call.called || null,
+        customer: call.caller || null,
+    };
+}
+
+export function getCallsArr() {
+    const calls = testCallInfo
+    if (!Array.isArray(calls)) return [];
+    const mappedCalls = calls.map(agent => mapCallObj(agent));
+    return mappedCalls
 }
 
 window.firstLoadPage = firstLoadPage

@@ -1,6 +1,4 @@
 import React from 'react'
-import IconWrap from './icon'
-import { UserIcon } from '../../../assets/icon/ActiveStatusIcon'
 import NormalButton from '../button/NormalButton'
 import { PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
 
@@ -53,7 +51,7 @@ const HistoryCallItem = ({ data, onClick, ...props }) => {
                         alignItems: "center",
                         gap: "var(--space-4px, 4px)",
                     }}>
-                        <p className='tiny-text'>{data?.customer || 'email123@gmail.com'}</p>
+                        <p className='secondary-text'>{`Khách ${data?.customer}` || 'email123@gmail.com'}</p>
                     </div>
                 </div>
                 <NormalButton text='Chi tiết' onClick={handleClick} style={{ alignSelf: 'auto' }} />
