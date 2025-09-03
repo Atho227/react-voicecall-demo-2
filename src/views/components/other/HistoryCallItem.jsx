@@ -1,10 +1,12 @@
-import React from 'react'
-import NormalButton from '../button/NormalButton'
+import React, { useState } from 'react'
 import { InfoIcon, PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
+import DetailCallModal from '../modals/DetailCallModal'
 
 const HistoryCallItem = ({ data, onClick, ...props }) => {
+    const [showModal, setShowModal] = useState(false)
     const handleClick = () => {
-        if (onClick) onClick(data)
+        // if (onClick) onClick(data)
+        setShowModal(!showModal)
     }
     return (
         <div
@@ -66,6 +68,7 @@ const HistoryCallItem = ({ data, onClick, ...props }) => {
                     <InfoIcon onClick={handleClick} fill='#3D55CC' style={{ cursor: 'pointer' }} />
                 </div>
             </div>
+            {showModal && <DetailCallModal isOpen={showModal} onClose={() => setShowModal(false)} call_id={data.call_id} />}
         </div>
     )
 }
