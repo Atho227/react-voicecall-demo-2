@@ -4,6 +4,7 @@ import { hexToRgb } from '../../../ultils/renderComponentUtils';
 
 const ToggleIconButton = ({
     mainColor = '#3D55CC',
+    secColor = '#F5F6FA',
     size = 24,
     IconInitial = StarOutline,
     IconAfter = StarFill,
@@ -40,7 +41,7 @@ const ToggleIconButton = ({
             }}
         >
             {isToggle
-                ? <IconAfter size={size} fill={'#F5F6FA'} />
+                ? <IconAfter size={size} fill={secColor} />
                 : <IconInitial size={size} fill={mainColor} />}
         </button>
     )

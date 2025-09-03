@@ -50,37 +50,38 @@ const DetailCallModal = ({ isOpen, onClose, data }) => {
                             <p className='primary-text bold'>Ticket ID: <span className='primary-text'>{data.ticket_id}</span></p>
                         </div>
                     </div>
-                    <div style={{
-                        display: 'flex',
-                        padding: 'var(--space-16px, 16px) 16px',
-                        flexDirection: 'column',
-                        // alignItems: 'flex-start',
-                        gap: 'var(--space-16px, 16px)',
-                        alignSelf: 'stretch',
-                    }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <div style={{
-                                display: "flex",
-                                // padding: "0 var(--space-16px, 16px)",
-                                alignItems: "center",
-                                gap: "8px",
-                                alignSelf: "stretch"
-                            }}>
-                                <p className='primary-text bold' >Ghi âm cuộc gọi</p>
+                    {data.path &&
+                        <div style={{
+                            display: 'flex',
+                            padding: 'var(--space-16px, 16px) 16px',
+                            flexDirection: 'column',
+                            // alignItems: 'flex-start',
+                            gap: 'var(--space-16px, 16px)',
+                            alignSelf: 'stretch',
+                        }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <div style={{
+                                    display: "flex",
+                                    // padding: "0 var(--space-16px, 16px)",
+                                    alignItems: "center",
+                                    gap: "8px",
+                                    alignSelf: "stretch"
+                                }}>
+                                    <p className='primary-text bold' >Ghi âm cuộc gọi</p>
+                                </div>
+                                <div style={{
+                                    display: "flex",
+                                    padding: "var(--space-8px, 8px) var(--space-16px, 16px)",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    gap: "var(--space-8px, 8px)",
+                                    alignSelf: "stretch",
+                                    width: '100%',
+                                }}>
+                                    <AudioPlay audioURL={data.path} />
+                                </div>
                             </div>
-                            <div style={{
-                                display: "flex",
-                                padding: "var(--space-8px, 8px) var(--space-16px, 16px)",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                gap: "var(--space-8px, 8px)",
-                                alignSelf: "stretch",
-                                width: '100%',
-                            }}>
-                                <AudioPlay audioURL={data.path} />
-                            </div>
-                        </div>
-                    </div>
+                        </div>}
                 </div>
             </div>
         </div>,

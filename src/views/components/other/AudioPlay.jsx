@@ -1,4 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
+import IconButton from "../button/IconButton";
+import { ArrowClockwise, ArrowCounterClockwise, PauseFill, PlayFill } from "../../../assets/icon/NewStyleIcon";
+import ToggleIconButton from "../button/ToggleIconButton";
 
 const AudioPlay = ({ audioURL }) => {
     const audioRef = useRef(null);
@@ -61,22 +64,25 @@ const AudioPlay = ({ audioURL }) => {
                 onLoadedMetadata={handleLoadedMetadata}
                 onTimeUpdate={handleTimeUpdate}
             />
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', position: 'relative' }}>
-                <input
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', position: 'relative', height: '24px' }}>
+                <input className="slider"
                     type="range"
                     min={0}
                     max={duration}
                     step={0.1}
                     value={currentTime}
                     onChange={handleProgressChange}
+                    style={{
+                        '--slider-value': `${(currentTime / duration) * 100}%`
+                    }}
                 />
-                <p className="secondary-text" style={{ position: 'absolute', left: '0' }}>{formatTime(currentTime)}</p>
-                <p className="secondary-text" style={{ position: 'absolute', right: '0' }}>{formatTime(duration)}</p>
+                <p className="secondary-text" style={{ position: 'absolute', left: '0', top: '5px' }}>{formatTime(currentTime)}</p>
+                <p className="secondary-text" style={{ position: 'absolute', right: '0', top: '5px' }}>{formatTime(duration)}</p>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <button onClick={() => skip(-10)}>⏪ 10s</button>
-                <button onClick={togglePlayPause}>{isPlaying ? "⏸" : "▶️"}</button>
-                <button onClick={() => skip(10)}>10s ⏩</button>
+            <div style={{ display: "flex", justifyContent: 'center', alignItems: "center", gap: "8px", }}>
+                <IconButton Icon={ArrowCounterClockwise} onClick={() => skip(-10)} />
+                <ToggleIconButton IconInitial={PauseFill} IconAfter={PlayFill} style={{ backgroundColor: 'transparent' }} isToggle={!isPlaying} onClick={togglePlayPause} secColor="#3D55CC" />
+                <IconButton Icon={ArrowClockwise} onClick={() => skip(10)} />
             </div>
         </div>
     );

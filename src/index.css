@@ -607,3 +607,65 @@ button {
   gap: 4px;
   justify-content: stretch;
 }
+
+/* Slider chung */
+.slider {
+  -webkit-appearance: none;
+  /* Chrome/Safari */
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background: #ddd;
+  /* Màu mặc định của track */
+  outline: none;
+  /* bỏ viền khi focus */
+}
+
+/* Track fill cho Chrome/Safari */
+.slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #3D55CC 0%, #3D55CC var(--slider-value), #ddd var(--slider-value), #ddd 100%);
+}
+
+/* Track fill cho Firefox */
+.slider::-moz-range-track {
+  height: 8px;
+  border-radius: 4px;
+  background: #ddd;
+}
+
+/* Thumb cho Chrome/Safari */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 4px;
+  height: 4px;
+  background: #3D55CC;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Thumb cho Firefox */
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #4caf50;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Optional: Focus effect */
+.slider:focus {
+  outline: none;
+}
+
+/* Optional: Hover effect */
+.slider:hover::-webkit-slider-thumb {
+  transform: scale(1.1);
+}
+
+.slider:hover::-moz-range-thumb {
+  transform: scale(1.1);
+}
