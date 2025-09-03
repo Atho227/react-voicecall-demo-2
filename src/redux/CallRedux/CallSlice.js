@@ -79,7 +79,7 @@ const callSlice = createSlice({
             state.isMuting = false
             state.isHolding = false
             state.isReciveTransfer = false
-            transferOk = false
+            state.transferOk = false
         },
     },
 });

@@ -10,7 +10,8 @@ const TransferingAcceptionModal = ({ setOpen }) => {
     return (
         <div className='modal'
             style={{ position: "fixed", backgroundColor: "rgba(0,0,0,0.3)", width: '100%', height: '100%', top: '0', left: '0', display: 'flex', justifyContent: 'center', alignItems: 'center   ' }}
-            onClick={handleClose}>
+        // onClick={handleClose}
+        >
             <div
                 style={{
                     display: "flex",
@@ -44,7 +45,10 @@ const TransferingAcceptionModal = ({ setOpen }) => {
                 </div>
                 <div className="m-btn-group" style={{ display: "flex", gap: "8px", alignSelf: "stretch" }}>
                     <NormalButton text='Chấp nhận' style={{ backgroundColor: '#3D55CC', color: '#D9E1FC' }}
-                        onClick={() => { responseTransferAgent(1) }} />
+                        onClick={() => {
+                            responseTransferAgent(1)
+                            handleClose()
+                        }} />
                     <NormalButton text='Từ chối' onClick={() => {
                         responseTransferAgent(0)
                         handleClose()
