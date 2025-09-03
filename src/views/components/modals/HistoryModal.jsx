@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { CloseIcon, PhoneCallOut, PhoneForward, PhoneNormal } from '../../../assets/icon/NewStyleIcon'
+import { CloseIcon, PhoneCallOut, PhoneForward, PhoneNormal, PhoneRestrict } from '../../../assets/icon/NewStyleIcon'
 import TabItem from '../other/TabItem'
 import HistoryCallItem from '../other/HistoryCallItem'
 import { getCallsArr } from '../../../ultils/helper'
+import IconWrap from '../other/icon'
 
 const HistoryModal = () => {
     const [tabIndex, setTabIndex] = useState(0)
@@ -70,17 +71,28 @@ const HistoryModal = () => {
                                     <HistoryCallItem data={item} key={item.call_id} />
                                 ))
                             ) : (
-                                <div
-                                    style={{
-                                        padding: "16px",
-                                        width: "100%",
-                                        textAlign: "center",
-                                        color: "#999"
-                                    }}
-                                >
-                                    Không có lịch sử cuộc gọi
-                                </div>
-                            )
+                                <div style={{ display: 'flex', padding: '64px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '24px', alignSelf: 'stretch' }}>
+                                    <div style={{ display: 'flex', width: 'auto', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
+                                        <IconWrap icon={PhoneRestrict} fill={'#5C6073'} additionalStyle={{
+                                            borderRadius: '999px',
+                                            display: 'flex',
+                                            padding: 'var(--space-16px, 16px)',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            gap: '8px',
+                                            backgroundColor: 'rgba(151, 154, 168, 0.10)',
+                                            cursor: 'default'
+                                        }} />
+                                        <div style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            gap: 'var(--space-4px, 4px)',
+                                            alignSelf: 'stretch'
+                                        }}><p className='primary-text'>Không có lịch sử</p>
+                                        </div>
+                                    </div>
+                                </div>)
                         })()}
                     </div>
                 </div>
