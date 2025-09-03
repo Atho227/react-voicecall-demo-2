@@ -51,7 +51,7 @@ export async function apiCallHistory() {
 
 export function formatRelativeTime(inputTime) {
     const now = new Date();
-    const date = new Date(inputTime.replace(" ", "T")); // chuyển "2025-09-01 15:58:44" thành ISO
+    const date = new Date(inputTime.replace(" ", "T"));
 
     const sameDay =
         now.getFullYear() === date.getFullYear() &&

@@ -6,28 +6,38 @@ import { getCallsArr } from '../../../ultils/helper'
 import IconWrap from '../other/icon'
 import LoadingSpinner from '../other/LoadingSpinner'
 
-const HistoryModal = () => {
-    const [tabIndex, setTabIndex] = useState(0)
-    const [callHistory, setCallHistory] = useState(null)
+const HistoryModal = ({ data, isLoading }) => {
     const [loading, setLoading] = useState(true)
+    const [tabIndex, setTabIndex] = useState(1)
+    const [callHistory, setCallHistory] = useState(null)
+    const [lastFetchTime, setLastFetchTime] = useState(null)
+
+    const fetchData = async () => {
+        setLoading(true)
+        try {
+            const newData = await getCallsArr()
+            const newTime = Date.now()
+            setCallHistory(newData)
+            setLastFetchTime(newTime)
+        } catch (err) {
+            console.error("Error fetching call history:", err)
+            setCallHistory([])
+        } finally {
+            setLoading(false)
+        }
+    }
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true)
-            try {
-                const newData = await getCallsArr()
-                console.log("DEBUG:", newData);
-                setCallHistory(newData)
-            } catch (err) {
-                console.error("Error fetching call history:", err)
-                setCallHistory([])
-            } finally {
-                setLoading(false)
-            }
-        }
+        const needFetch =
+            !callHistory ||
+            !lastFetchTime ||
+            Date.now() - lastFetchTime > 5 * 60 * 1000
 
-        fetchData()
-    }, [])
+        if (needFetch) {
+            console.log("DEBUG:", needFetch)
+            fetchData()
+        }
+    }, [lastFetchTime, callHistory])
 
     return (
         <div style={{
