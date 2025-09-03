@@ -27,15 +27,15 @@ export async function apiCallHistory() {
     const payload = {
         agent_id: '5000'
     }
+    const query = new URLSearchParams(payload).toString();
 
     try {
-        const response = await fetch(`https://test2.caresoft.vn/${conditions.domain}/thirdParty/login`, {
-            method: "POST",
+        const response = await fetch(`https://test.caresoft.vn/${conditions.domain}/api/v1/calls?${query}`, {
+            method: "GET",
             headers: {
                 "Authorization": `Bearer ${conditions.apiToken}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(payload),
         });
 
         if (!response.ok) {

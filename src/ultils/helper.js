@@ -1,5 +1,5 @@
 import { testCallInfo } from "../assets/object/data";
-import { generateJWT, getLocalstorage } from "./mainUltils";
+import { apiCallHistory, generateJWT, getLocalstorage } from "./mainUltils";
 
 export const doStartCall = (state) => {
     console.log('debug', state.callDirection);
@@ -113,13 +113,18 @@ export function mapCallObj(call) {
     };
 }
 
-export function getCallsArr() {
-    const calls = testCallInfo
-    if (!Array.isArray(calls)) return [];
-    const mappedCalls = calls.map(agent => mapCallObj(agent));
-    return mappedCalls
+export async function getCallsArr() {
+    try {
+        const data = await apiCallHistory();
+        console.log('API', data);
+        const calls = data.calls
+        if (!Array.isArray(calls)) return [];
+        return calls.map(agent => mapCallObj(agent));
+    } catch (err) {
+        console.error("Error in getCallsArr:", err);
+        return [];
+    }
 }
-
 window.firstLoadPage = firstLoadPage
 window.setLoggedStatus = setLoggedStatus
 window.updateOnlineAgentList = updateOnlineAgentList

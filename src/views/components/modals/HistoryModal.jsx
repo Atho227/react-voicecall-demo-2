@@ -12,10 +12,21 @@ const HistoryModal = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        setLoading(true)
-        const newData = getCallsArr()
-        setCallHistory(newData)
-        setLoading(false)
+        const fetchData = async () => {
+            setLoading(true)
+            try {
+                const newData = await getCallsArr()
+                console.log("DEBUG:", newData);
+                setCallHistory(newData)
+            } catch (err) {
+                console.error("Error fetching call history:", err)
+                setCallHistory([])
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchData()
     }, [])
 
     return (
