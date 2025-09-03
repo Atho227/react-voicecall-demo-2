@@ -2,6 +2,7 @@ import React from 'react'
 import IconWrap from './icon'
 import { UserIcon } from '../../../assets/icon/ActiveStatusIcon'
 import NormalButton from '../button/NormalButton'
+import { PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
 
 const HistoryCallItem = ({ data, onClick, ...props }) => {
     const handleClick = () => {
@@ -34,18 +35,7 @@ const HistoryCallItem = ({ data, onClick, ...props }) => {
                     justifyContent: "center",
                     alignItems: "center",
                 }}>
-                    <div style={{
-                        width: '40px',
-                        height: '40px',
-                        flexShrink: '0',
-                        borderRadius: '99px',
-                        backgroundColor: '#DADCE5',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
-                        <IconWrap icon={UserIcon} />
-                    </div>
+                    <PhoneCallOut />
                 </div>
                 <div style={{
                     display: "flex",
@@ -55,7 +45,7 @@ const HistoryCallItem = ({ data, onClick, ...props }) => {
                     flex: "1 0 0",
                     borderRadius: '12px',
                 }}>
-                    <p className='secondary-text bold'>{data?.username || 'User Name'}</p>
+                    <p className='secondary-text bold'>{`Dịch vụ ${data?.service}` || 'User Name'}</p>
                     <div style={{
                         display: "flex",
                         minHeight: "16px",
@@ -63,7 +53,7 @@ const HistoryCallItem = ({ data, onClick, ...props }) => {
                         alignItems: "center",
                         gap: "var(--space-4px, 4px)",
                     }}>
-                        <p className='tiny-text'>{data?.email || 'email123@gmail.com'}</p>
+                        <p className='tiny-text'>{data?.customer || 'email123@gmail.com'}</p>
                     </div>
                 </div>
                 <NormalButton text='Chi tiết' onClick={handleClick} style={{ alignSelf: 'auto' }} />
