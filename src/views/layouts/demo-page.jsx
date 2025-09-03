@@ -17,7 +17,7 @@ const MainLayout = ({ }) => {
     }, [isReciveTransfer])
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 'auto', gap: '8px', backgroundColor: 'white', color: 'black', position: 'absolute', top: '50px', left: '40%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 'auto', gap: '8px', backgroundColor: 'white', color: 'black' }}>
             <StatusBar />
             {showNumdial ? <CSCallModal /> : ''}
             {showCallingModal ? <CallingModal /> : ''}

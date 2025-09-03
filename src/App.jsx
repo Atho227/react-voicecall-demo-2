@@ -9,7 +9,7 @@ function App() {
     onReloaded();
   }, [])
   return (
-    <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '64px' }}>
+    <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '64px', minHeight: '100vh' }}>
       <LeftSideBar />
       <MainLayout />
       <Controller />
