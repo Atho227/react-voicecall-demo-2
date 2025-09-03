@@ -5,39 +5,14 @@ import HistoryCallItem from '../other/HistoryCallItem'
 import { getCallsArr } from '../../../ultils/helper'
 import IconWrap from '../other/icon'
 import LoadingSpinner from '../other/LoadingSpinner'
+import IconButton from '../button/IconButton'
 
-const HistoryModal = ({ data, isLoading }) => {
-    const [loading, setLoading] = useState(true)
+const HistoryModal = ({ data, isLoading = true, setOpen }) => {
     const [tabIndex, setTabIndex] = useState(1)
-    const [callHistory, setCallHistory] = useState(null)
-    const [lastFetchTime, setLastFetchTime] = useState(null)
 
-    const fetchData = async () => {
-        setLoading(true)
-        try {
-            const newData = await getCallsArr()
-            const newTime = Date.now()
-            setCallHistory(newData)
-            setLastFetchTime(newTime)
-        } catch (err) {
-            console.error("Error fetching call history:", err)
-            setCallHistory([])
-        } finally {
-            setLoading(false)
-        }
-    }
-
-    useEffect(() => {
-        const needFetch =
-            !callHistory ||
-            !lastFetchTime ||
-            Date.now() - lastFetchTime > 5 * 60 * 1000
-
-        if (needFetch) {
-            console.log("DEBUG:", needFetch)
-            fetchData()
-        }
-    }, [lastFetchTime, callHistory])
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <div style={{
@@ -56,7 +31,7 @@ const HistoryModal = ({ data, isLoading }) => {
                     <div className="primary-text">Lịch sử gọi</div>
                 </div>
                 <div className="action-btn">
-                    <CloseIcon size={20} />
+                    <IconButton Icon={CloseIcon} size={20} onClick={handleClose} fill='black' />
                 </div>
             </div>
             <div className="modal-content">
@@ -84,7 +59,7 @@ const HistoryModal = ({ data, isLoading }) => {
                     minHeight: "200px",
                     overflowY: 'auto'
                 }}>
-                    {loading ? (
+                    {isLoading ? (
                         <LoadingSpinner />
                     ) : (
                         <div style={{
@@ -95,7 +70,7 @@ const HistoryModal = ({ data, isLoading }) => {
                             alignSelf: "stretch"
                         }}>
                             {(() => {
-                                const filtered = callHistory?.filter(item => item.type === tabIndex) || []
+                                const filtered = data?.filter(item => item.type === tabIndex) || []
                                 return filtered.length > 0 ? (
                                     filtered.map(item => (
                                         <HistoryCallItem data={item} key={item.id} />
