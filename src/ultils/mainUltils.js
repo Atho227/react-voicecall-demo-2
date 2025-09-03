@@ -48,3 +48,43 @@ export async function apiCallHistory() {
         throw error;
     }
 }
+
+export function formatRelativeTime(inputTime) {
+    const now = new Date();
+    const date = new Date(inputTime.replace(" ", "T")); // chuyển "2025-09-01 15:58:44" thành ISO
+
+    const sameDay =
+        now.getFullYear() === date.getFullYear() &&
+        now.getMonth() === date.getMonth() &&
+        now.getDate() === date.getDate();
+
+    if (sameDay) {
+        return date.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" });
+    }
+
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1);
+    const isYesterday =
+        date.getFullYear() === yesterday.getFullYear() &&
+        date.getMonth() === yesterday.getMonth() &&
+        date.getDate() === yesterday.getDate();
+
+    if (isYesterday) {
+        return "Hôm qua";
+    }
+
+    const startOfWeek = new Date(now);
+    startOfWeek.setDate(now.getDate() - now.getDay() + 1); // thứ 2
+    startOfWeek.setHours(0, 0, 0, 0);
+
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    endOfWeek.setHours(23, 59, 59, 999);
+
+    if (date >= startOfWeek && date <= endOfWeek) {
+        return date.toLocaleDateString("en-US", { weekday: "long" }); // Monday, Tuesday...
+    }
+
+    return date.toLocaleDateString("vi-VN");
+}
+

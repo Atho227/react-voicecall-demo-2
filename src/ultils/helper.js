@@ -1,5 +1,5 @@
 import { testCallInfo } from "../assets/object/data";
-import { apiCallHistory, generateJWT, getLocalstorage } from "./mainUltils";
+import { apiCallHistory, formatRelativeTime, generateJWT, getLocalstorage } from "./mainUltils";
 
 export const doStartCall = (state) => {
     console.log('debug', state.callDirection);
@@ -101,11 +101,14 @@ export function mapAgentObj(agent) {
 }
 
 export function mapCallObj(call) {
-    if (!call.call_id) {
+    if (!call.id) {
         console.log("Missing call_id in call object:", call);
         return null;
     }
+    const time = formatRelativeTime(call.end_time)
     return {
+        id: call.id,
+        end_time: time,
         call_id: call.call_id,
         type: call.call_type,
         service: call.called || null,
@@ -125,6 +128,7 @@ export async function getCallsArr() {
         return [];
     }
 }
+
 window.firstLoadPage = firstLoadPage
 window.setLoggedStatus = setLoggedStatus
 window.updateOnlineAgentList = updateOnlineAgentList
