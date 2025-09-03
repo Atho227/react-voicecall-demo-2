@@ -14,10 +14,8 @@ const HistoryModal = () => {
     useEffect(() => {
         setLoading(true)
         const newData = getCallsArr()
-        setTimeout(() => {
-            setCallHistory(newData)
-            setLoading(false)
-        }, 500)
+        setCallHistory(newData)
+        setLoading(false)
     }, [])
 
     return (
