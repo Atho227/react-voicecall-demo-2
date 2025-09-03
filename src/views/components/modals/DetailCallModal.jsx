@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { CloseIcon, PhoneNormal } from '../../../assets/icon/NewStyleIcon';
 import IconButton from '../button/IconButton';
+import AudioPlay from '../other/AudioPlay';
 
 const DetailCallModal = ({ isOpen, onClose, data }) => {
     if (!isOpen) return null;
@@ -53,7 +54,7 @@ const DetailCallModal = ({ isOpen, onClose, data }) => {
                         display: 'flex',
                         padding: 'var(--space-16px, 16px) 16px',
                         flexDirection: 'column',
-                        alignItems: 'flex-start',
+                        // alignItems: 'flex-start',
                         gap: 'var(--space-16px, 16px)',
                         alignSelf: 'stretch',
                     }}>
@@ -73,9 +74,10 @@ const DetailCallModal = ({ isOpen, onClose, data }) => {
                                 flexDirection: "column",
                                 alignItems: "center",
                                 gap: "var(--space-8px, 8px)",
-                                alignSelf: "stretch"
+                                alignSelf: "stretch",
+                                width: '100%',
                             }}>
-
+                                <AudioPlay audioURL={data.path} />
                             </div>
                         </div>
                     </div>
