@@ -115,7 +115,6 @@ function csInitError(errorCode) {
 
 function csInitComplete() {
     console.log('Kết nối thành công');
-    // console.log('csVoice ban đầu:', JSON.stringify(window.csVoice.callInfo))
     window.setLoggedStatus(true)
     window.firstLoadPage()
 }
@@ -127,7 +126,7 @@ function csTransferCallError(error, tranferedAgentInfo) {
     console.log(`csTransferCallError : ${error} and ${tranferedAgentInfo}`);
 }
 function csTransferCallSuccess(tranferedAgentInfo) {
-    console.log('csTransferCallSuccess');
+    console.log(`tranferedAgentInfo : ${tranferedAgentInfo}`);
     window.store.dispatch({ type: "call/transferOk", payload: true })
 }
 
