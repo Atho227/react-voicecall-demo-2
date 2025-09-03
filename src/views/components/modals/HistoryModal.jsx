@@ -4,14 +4,20 @@ import TabItem from '../other/TabItem'
 import HistoryCallItem from '../other/HistoryCallItem'
 import { getCallsArr } from '../../../ultils/helper'
 import IconWrap from '../other/icon'
+import LoadingSpinner from '../other/LoadingSpinner'
 
 const HistoryModal = () => {
     const [tabIndex, setTabIndex] = useState(0)
     const [callHistory, setCallHistory] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        setLoading(true)
         const newData = getCallsArr()
-        setCallHistory(newData)
+        setTimeout(() => {
+            setCallHistory(newData)
+            setLoading(false)
+        }, 500)
     }, [])
 
     return (
@@ -51,50 +57,49 @@ const HistoryModal = () => {
                         <p className="small-text bold" style={{ color: tabIndex === 0 ? '#3D55CC' : undefined }}>Gọi vào</p>
                     </TabItem>
                 </div>
-                <div style={{
+                <div className='tab-content' style={{
                     display: "flex",
                     alignItems: "flex-start",
                     flex: "1 0 0",
-                    alignSelf: "stretch"
+                    alignSelf: "stretch",
+                    minHeight: "200px",
+                    overflowY: 'auto'
                 }}>
-                    <div style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                        flex: "1 0 0",
-                        alignSelf: "stretch"
-                    }}>
-                        {(() => {
-                            const filtered = callHistory?.filter(item => item.type === tabIndex) || []
-                            return filtered.length > 0 ? (
-                                filtered.map(item => (
-                                    <HistoryCallItem data={item} key={item.call_id} />
-                                ))
-                            ) : (
-                                <div style={{ display: 'flex', padding: '64px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '24px', alignSelf: 'stretch' }}>
-                                    <div style={{ display: 'flex', width: 'auto', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
-                                        <IconWrap icon={PhoneRestrict} fill={'#5C6073'} additionalStyle={{
-                                            borderRadius: '999px',
-                                            display: 'flex',
-                                            padding: 'var(--space-16px, 16px)',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            gap: '8px',
-                                            backgroundColor: 'rgba(151, 154, 168, 0.10)',
-                                            cursor: 'default'
-                                        }} />
-                                        <div style={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            alignItems: 'center',
-                                            gap: 'var(--space-4px, 4px)',
-                                            alignSelf: 'stretch'
-                                        }}><p className='primary-text'>Không có lịch sử</p>
+                    {loading ? (
+                        <LoadingSpinner />
+                    ) : (
+                        <div style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-start",
+                            flex: "1 0 0",
+                            alignSelf: "stretch"
+                        }}>
+                            {(() => {
+                                const filtered = callHistory?.filter(item => item.type === tabIndex) || []
+                                return filtered.length > 0 ? (
+                                    filtered.map(item => (
+                                        <HistoryCallItem data={item} key={item.call_id} />
+                                    ))
+                                ) : (
+                                    <div style={{ display: 'flex', margin: 'auto', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '24px', alignSelf: 'stretch' }}>
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
+                                            <IconWrap icon={PhoneRestrict} fill={'#5C6073'} additionalStyle={{
+                                                borderRadius: '999px',
+                                                display: 'flex',
+                                                padding: 'var(--space-16px, 16px)',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                backgroundColor: 'rgba(151, 154, 168, 0.10)',
+                                                cursor: 'default'
+                                            }} />
+                                            <p className='primary-text'>Không có lịch sử</p>
                                         </div>
                                     </div>
-                                </div>)
-                        })()}
-                    </div>
+                                )
+                            })()}
+                        </div>
+                    )}
                 </div>
             </div>
         </div >
