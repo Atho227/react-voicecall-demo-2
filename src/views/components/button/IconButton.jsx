@@ -11,7 +11,7 @@ const IconButton = ({ Icon, size = 24, fill = "#3D55CC", style = {}, ...props })
                 borderRadius: "999px",
                 border: "none",
                 cursor: "pointer",
-                ...style   // 👈 dòng này cho phép override
+                ...style
             }}
             {...props}
         >
