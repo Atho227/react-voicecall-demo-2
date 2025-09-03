@@ -149,7 +149,6 @@ export async function getSigleCall(call_id) {
     }
 }
 
-
 window.firstLoadPage = firstLoadPage
 window.setLoggedStatus = setLoggedStatus
 window.updateOnlineAgentList = updateOnlineAgentList

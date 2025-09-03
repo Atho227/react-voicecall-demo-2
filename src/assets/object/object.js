@@ -5,7 +5,3 @@ export const conditions = {
 export const payload = {
     agent_id: '5000'
 }
-export const sigleCallPayload = {
-    agent_id: '5000',
-    
-}
