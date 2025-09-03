@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
 
 const OptionsMenu = ({ data, setCurrent, setShowMenu, style, }) => {
-    const isLoading = !data // chỉ cần check thẳng prop
+    const isLoading = !data
     return (
         <div style={{ position: 'absolute', top: 'calc(100% + 2px)', left: '50%', transform: 'translateX(-50%)', display: 'flex', width: '248px', padding: '8px', alignItems: 'flex-start', gap: '8px', borderRadius: '8px', backgroundColor: '#FFF', boxShadow: '0 1px 8px 0 rgba(0, 0, 0, 0.12)', ...style }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', flex: '1 0 0' }}>

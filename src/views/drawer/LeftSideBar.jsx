@@ -62,6 +62,8 @@ const LeftSideBar = () => {
         <div
             className="sidebar"
             style={{
+                position: 'absolute',
+                left: '0', top: '0',
                 width: isExpanded ? "250px" : "64px",
                 backgroundColor: "#FFF",
                 display: "flex",
