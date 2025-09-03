@@ -68,7 +68,7 @@ const HistoryCallItem = ({ data, onClick, ...props }) => {
                     <InfoIcon onClick={handleClick} fill='#3D55CC' style={{ cursor: 'pointer' }} />
                 </div>
             </div>
-            {showModal && <DetailCallModal isOpen={showModal} onClose={() => setShowModal(false)} call_id={data.call_id} />}
+            {showModal && <DetailCallModal isOpen={showModal} onClose={() => setShowModal(false)} data={data} />}
         </div>
     )
 }

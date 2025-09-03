@@ -108,9 +108,8 @@ export function mapCallObj(call) {
     }
     const time = formatRelativeTime(call.end_time)
     return {
-        id: call.id,
+        ...call,
         end_time: time,
-        call_id: call.call_id,
         type: call.call_type,
         service: call.called || null,
         customer: call.caller || null,

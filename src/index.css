@@ -502,7 +502,7 @@ button {
   font-family: var(--typeface-family-text, Inter);
   font-size: var(--typeface-size-body-m, 16px);
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   line-height: var(--typeface-line-height-body-m, 24px);
   /* 150% */
 }
@@ -599,4 +599,11 @@ button {
   display: flex;
   align-items: center;
   gap: var(--space-inline-8px, 8px);
+}
+
+.call_detail_section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: stretch;
 }
