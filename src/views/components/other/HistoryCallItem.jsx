@@ -1,6 +1,6 @@
 import React from 'react'
 import NormalButton from '../button/NormalButton'
-import { PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
+import { InfoIcon, PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
 
 const HistoryCallItem = ({ data, onClick, ...props }) => {
     const handleClick = () => {
@@ -8,10 +8,9 @@ const HistoryCallItem = ({ data, onClick, ...props }) => {
     }
     return (
         <div
-            className='hover'
             style={{
                 display: "flex",
-                height: "56px",
+                height: "64px",
                 padding: "8px",
                 alignItems: "center",
                 gap: "16px",
@@ -32,6 +31,7 @@ const HistoryCallItem = ({ data, onClick, ...props }) => {
                     height: "40px",
                     justifyContent: "center",
                     alignItems: "center",
+                    position: 'relative'
                 }}>
                     <PhoneCallOut />
                 </div>
@@ -43,7 +43,12 @@ const HistoryCallItem = ({ data, onClick, ...props }) => {
                     flex: "1 0 0",
                     borderRadius: '12px',
                 }}>
-                    <p className='secondary-text bold'>{`Dịch vụ ${data?.service}` || 'User Name'}</p>
+                    <p className='secondary-text bold' style={{
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        maxWidth: '145px'
+                    }}>{`${data?.service}` || 'User Name'}</p>
                     <div style={{
                         display: "flex",
                         minHeight: "16px",
@@ -51,10 +56,15 @@ const HistoryCallItem = ({ data, onClick, ...props }) => {
                         alignItems: "center",
                         gap: "var(--space-4px, 4px)",
                     }}>
-                        <p className='secondary-text'>{`Khách ${data?.customer}` || 'email123@gmail.com'}</p>
+                        <p className='secondary-text' style={{ textOverflow: 'ellipsis' }}>{`${data?.customer}` || 'email123@gmail.com'}</p>
                     </div>
                 </div>
-                <NormalButton text='Chi tiết' onClick={handleClick} style={{ alignSelf: 'auto' }} />
+                <div style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px'
+                }}>
+                    <p className='tiny-text' style={{}}>{data.end_time}</p>
+                    <InfoIcon onClick={handleClick} fill='#3D55CC' style={{ cursor: 'pointer' }} />
+                </div>
             </div>
         </div>
     )

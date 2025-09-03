@@ -88,7 +88,7 @@ const HistoryModal = () => {
                                 const filtered = callHistory?.filter(item => item.type === tabIndex) || []
                                 return filtered.length > 0 ? (
                                     filtered.map(item => (
-                                        <HistoryCallItem data={item} key={item.call_id} />
+                                        <HistoryCallItem data={item} key={item.id} />
                                     ))
                                 ) : (
                                     <div style={{ display: 'flex', margin: 'auto', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '24px', alignSelf: 'stretch' }}>
