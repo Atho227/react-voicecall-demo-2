@@ -1,4 +1,5 @@
 import { testCallInfo } from "../assets/object/data";
+import { conditions, payload } from "../assets/object/object";
 import { apiCallHistory, formatRelativeTime, generateJWT, getLocalstorage } from "./mainUltils";
 
 export const doStartCall = (state) => {
@@ -118,16 +119,36 @@ export function mapCallObj(call) {
 
 export async function getCallsArr() {
     try {
-        const data = await apiCallHistory();
-        console.log('API', data);
-        const calls = data.calls
+        const data = await apiCallHistory(conditions, payload);
+        const calls = data.calls;
         if (!Array.isArray(calls)) return [];
-        return calls.map(agent => mapCallObj(agent));
+        const mappedCalls = calls.map(agent => mapCallObj(agent));
+        const callMap = new Map();
+        for (const call of mappedCalls) {
+            const existing = callMap.get(call.call_id);
+            if (!existing || call.id > existing.id) {
+                callMap.set(call.call_id, call);
+            }
+        }
+        return Array.from(callMap.values());
     } catch (err) {
         console.error("Error in getCallsArr:", err);
         return [];
     }
 }
+
+export async function getSigleCall(call_id) {
+    const siglePayload = { call_id: call_id }
+    try {
+        const data = await apiCallHistory(conditions, siglePayload);
+        const calls = data.calls;
+        return calls;
+    } catch (err) {
+        console.error("Error in getCallsArr:", err);
+        return [];
+    }
+}
+
 
 window.firstLoadPage = firstLoadPage
 window.setLoggedStatus = setLoggedStatus

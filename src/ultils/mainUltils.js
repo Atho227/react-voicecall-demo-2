@@ -19,16 +19,8 @@ export const setLocalstorage = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
 };
 
-export async function apiCallHistory() {
-    const conditions = {
-        domain: import.meta.env.VITE_DOMAIN,
-        apiToken: import.meta.env.VITE_API_TOKEN,
-    }
-    const payload = {
-        agent_id: '5000'
-    }
+export async function apiCallHistory(conditions, payload) {
     const query = new URLSearchParams(payload).toString();
-
     try {
         const response = await fetch(`https://test.caresoft.vn/${conditions.domain}/api/v1/calls?${query}`, {
             method: "GET",
