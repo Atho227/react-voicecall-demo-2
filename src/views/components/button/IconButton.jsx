@@ -2,7 +2,7 @@ import React from 'react'
 
 const IconButton = ({ Icon, size = 24, fill = "#3D55CC", style = {}, ...props }) => {
     return (
-        <button
+        <button className='hover'
             style={{
                 display: "flex",
                 justifyContent: "center",
