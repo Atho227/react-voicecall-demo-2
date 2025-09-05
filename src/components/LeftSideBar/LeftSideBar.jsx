@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { KeyIcon, List, Plugs, PlugsConnected } from '../../assets/icon/NewStyleIcon'
-import NormalButton from '../../components/button/NormalButton'
-import NormalInput from '../../components/input/Input';
+import NormalButton from '../button/NormalButton'
+import NormalInput from '../input/Input';
 import { generateToken, onReloaded } from '../../ultils/helper';
 import { useLocalStorage } from '../../hooks/useLocalstorage';
 import { LoginApi } from '../../ultils/api/VoiceLoginApi';
-import { useAuthRedux } from '../../hooks/useAuthRedux';
+import { useSelector } from 'react-redux';
 
 const LeftSideBar = () => {
-    const { isLoggedIn } = useAuthRedux()
+    const { isLoggedIn } = useSelector(state => state.auth)
     const [isExpanded, setIsExpanded] = useState(true);
     const [isTokenCreation, setIsTokenCreation] = useState(false)
     const [tokenCreated, setTokenCreated] = useState(false)

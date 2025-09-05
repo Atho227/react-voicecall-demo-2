@@ -1,5 +1,5 @@
 import React from 'react'
-import LeftSideBar from '../views/drawer/LeftSideBar'
+import LeftSideBar from '../components/LeftSideBar/LeftSideBar'
 import './MainLayout.css'
 
 const MainLayout = (props) => {
