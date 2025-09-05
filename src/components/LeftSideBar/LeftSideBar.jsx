@@ -7,6 +7,7 @@ import { generateToken, onReloaded } from '../../ultils/helper';
 import { useLocalStorage } from '../../hooks/useLocalstorage';
 import { LoginApi } from '../../ultils/api/VoiceLoginApi';
 import { useSelector } from 'react-redux';
+import NavItem from './NavItem';
 
 const LeftSideBar = () => {
     const { isLoggedIn } = useSelector(state => state.auth)
@@ -64,30 +65,9 @@ const LeftSideBar = () => {
             className="sidebar"
             style={{ width: isExpanded ? "250px" : "64px", }}
         >
-            <div style={{
-                height: "64px",
-                display: "flex",
-                alignItems: "center",
-                gap: "20px",
-                borderBottom: "1px solid #ccc",
-            }}
-            >
-                <button aria-label="Toggle sidebar"
-                    style={{ height: '64px', padding: '20px' }}
-                    onClick={() => setIsExpanded(!isExpanded)}>
-                    <List size={24} />
-                </button>
-                {isExpanded && <p style={{ flex: 1, textAlign: "center" }} className='primary-text bold'>Side Panel</p>}
-            </div>
-            <div style={{ flex: '1 0 0', overflowY: 'auto', borderBottom: "1px solid #ccc", display: 'flex', flexDirection: 'column', gap: '8px', padding: '20px' }}>
-                <div style={{ display: 'flex', gap: '20px', alignItems: "center", }}>
-                    <KeyIcon />
-                    {isExpanded &&
-                        <div style={{ flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
-                            <p className='primary-text bold'>Thông tin đăng nhập</p>
-                        </div>
-                    }
-                </div>
+            <NavItem Icon={List} text={'Support Panel'} isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} style={{ borderBottom: '1px solid #ccc' }} />
+            <div style={{ flex: '1 0 0', width: '100%', overflowY: 'auto', borderBottom: "1px solid #ccc", display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <NavItem Icon={KeyIcon} text={'Thông tin đăng nhập'} isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} />
                 {isExpanded &&
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>

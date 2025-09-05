@@ -7,4 +7,21 @@
     flex-direction: column;
     border-right: 1px solid #ccc;
     transition: all 0.3s ease;
+    align-items: start;
+}
+
+.nav-item {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 64px;
+    transition: all 0.3s ease;
+}
+
+.nav-item-btn {
+    width: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
