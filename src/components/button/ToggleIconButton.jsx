@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { StarFill, StarOutline } from '../../../assets/icon/NewStyleIcon'
-import { hexToRgb } from '../../../ultils/renderComponentUtils';
+import { StarFill, StarOutline } from '../../assets/icon/NewStyleIcon'
+import { hexToRgb } from '../../ultils/renderComponentUtils';
 
 const ToggleIconButton = ({
     mainColor = '#3D55CC',

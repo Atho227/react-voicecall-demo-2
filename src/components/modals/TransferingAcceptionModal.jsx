@@ -1,5 +1,5 @@
 import React from 'react'
-import { CloseIcon } from '../../../assets/icon/NewStyleIcon';
+import { CloseIcon } from '../../assets/icon/NewStyleIcon';
 import NormalButton from '../button/NormalButton';
 
 const TransferingAcceptionModal = ({ setOpen }) => {
