@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import StatusBar from '../components/parts/status-bar'
-import CSCallModal from '../components/modals/csCallModal'
-import CallingModal from '../components/modals/CallingModal'
+import StatusBar from '../../components/parts/status-bar'
+import CSCallModal from '../../components/modals/csCallModal'
+import CallingModal from '../../components/modals/CallingModal'
 import { useCall } from '../../hooks/CallHook/useCall'
-import TransferingAcceptionModal from '../components/modals/TransferingAcceptionModal'
+import TransferingAcceptionModal from '../../components/modals/TransferingAcceptionModal'
 
 const MainLayout = ({ }) => {
     const { isReciveTransfer } = useCall();

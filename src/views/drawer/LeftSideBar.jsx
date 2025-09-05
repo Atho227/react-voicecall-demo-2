@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { KeyIcon, List, Plugs, PlugsConnected } from '../../assets/icon/NewStyleIcon'
-import NormalButton from '../components/button/NormalButton'
-import NormalInput from '../components/input/Input';
+import NormalButton from '../../components/button/NormalButton'
+import NormalInput from '../../components/input/Input';
 import { generateToken, onReloaded } from '../../ultils/helper';
 import { useLocalStorage } from '../../hooks/useLocalstorage';
 import { LoginApi } from '../../ultils/api/VoiceLoginApi';

@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import SmallModal from '../modals/SmallModal'
 import BadgeWrapper from '../other/badge'
 import BasicSwitch from '../button/switch'
-import { Active, Disable } from '../../../assets/icon/ActiveStatusIcon'
-import { useCall } from '../../../hooks/CallHook/useCall'
+import { Active, Disable } from '../../assets/icon/ActiveStatusIcon'
+import { useCall } from '../../hooks/CallHook/useCall'
 import IconButton from '../button/IconButton'
-import { PhoneCalling, PhoneNormal, PhoneRestrict } from '../../../assets/icon/NewStyleIcon'
+import { PhoneCalling, PhoneNormal, PhoneRestrict } from '../../assets/icon/NewStyleIcon'
 
 const StatusBar = ({ }) => {
     const { permission, online, setOnline, isCall } = useCall();

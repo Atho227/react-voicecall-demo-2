@@ -1,21 +1,24 @@
-import { useEffect, useState } from 'react'
-import MainLayout from '../views/layouts/demo-page'
-import Controller from '../views/components/other/controller'
-import LeftSideBar from '../views/drawer/LeftSideBar'
+import { Suspense, useEffect, useState } from 'react'
 import { onReloaded } from '../ultils/helper'
-import CallHistory from '../views/drawer/CallHistory'
+
+import MainLayout from '../views/layouts/demo-page'
+import LoadingSpinner from '../components/other/LoadingSpinner'
+import MainView from '../views/MainView/MainView'
 
 function App() {
   useEffect(() => {
     onReloaded();
   }, [])
+
+  let renderContent
+  renderContent = <MainView />
+
   return (
-    <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '64px', minHeight: '100vh' }}>
-      <LeftSideBar />
-      <MainLayout />
-      <CallHistory />
-      {/* <Controller /> */}
-    </div>
+    <>
+      <Suspense fallback={<LoadingSpinner />}>
+        <MainLayout mainContent={renderContent} />
+      </Suspense>
+    </>
   )
 }
 
