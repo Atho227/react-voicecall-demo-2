@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './LeftSideBar.css'
 import { KeyIcon, List, Plugs, PlugsConnected } from '../../assets/icon/NewStyleIcon'
 import NormalButton from '../button/NormalButton'
 import NormalInput from '../input/Input';
@@ -61,17 +62,7 @@ const LeftSideBar = () => {
     return (
         <div
             className="sidebar"
-            style={{
-                position: 'absolute',
-                left: '0', top: '0',
-                width: isExpanded ? "250px" : "64px",
-                backgroundColor: "#FFF",
-                display: "flex",
-                flexDirection: "column",
-                height: "100vh",
-                minHeight: "730px",
-                border: "1px solid #DADCE5",
-            }}
+            style={{ width: isExpanded ? "250px" : "64px", }}
         >
             <div style={{
                 height: "64px",
