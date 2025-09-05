@@ -1,9 +1,9 @@
 import { Suspense, useEffect, useState } from 'react'
 import { onReloaded } from '../ultils/helper'
 
-import MainLayout from '../views/layouts/demo-page'
 import LoadingSpinner from '../components/other/LoadingSpinner'
-import MainView from '../views/MainView/MainView'
+import MainLayout from '../layouts/MainLayout'
+import MainView from '../views/layouts/demo-page'
 
 function App() {
   useEffect(() => {
@@ -14,11 +14,11 @@ function App() {
   renderContent = <MainView />
 
   return (
-    <>
+    <div>
       <Suspense fallback={<LoadingSpinner />}>
         <MainLayout mainContent={renderContent} />
       </Suspense>
-    </>
+    </div>
   )
 }
 

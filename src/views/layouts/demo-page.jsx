@@ -5,7 +5,7 @@ import CallingModal from '../../components/modals/CallingModal'
 import { useCall } from '../../hooks/CallHook/useCall'
 import TransferingAcceptionModal from '../../components/modals/TransferingAcceptionModal'
 
-const MainLayout = ({ }) => {
+const MainView = ({ }) => {
     const { isReciveTransfer } = useCall();
 
     const [showCallingModal, setShowCallingModal] = useState(false)
@@ -26,4 +26,4 @@ const MainLayout = ({ }) => {
     )
 }
 
-export default MainLayout
+export default MainView
