@@ -60,21 +60,23 @@ const LeftSideBar = () => {
             });
         onReloaded()
     }
+    let plugIcon;
+    if (isLoggedIn) {
+        plugIcon = (props) => <PlugsConnected {...props} fill="#00994D" />;
+    } else {
+        plugIcon = (props) => <Plugs {...props} fill="#FF451C" />;
+    }
     return (
         <div
             className="sidebar"
             style={{ width: isExpanded ? "250px" : "64px", }}
         >
             <NavItem Icon={List} isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} style={{ borderBottom: '1px solid #ccc' }} >
-                <p className='primary-text bold nav-item-text'>
-                    Hỗ trợ đăng nhập
-                </p>
+                <p className='primary-text bold nav-item-text'>Hỗ trợ đăng nhập</p>
             </NavItem>
             <div style={{ flex: '1 0 0', width: '100%', overflowY: 'auto', borderBottom: "1px solid #ccc", display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <NavItem Icon={KeyIcon} isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} >
-                    <p className='primary-text bold nav-item-text'>
-                        Thông tin đăng nhập
-                    </p>
+                    <p className='primary-text bold nav-item-text'>Thông tin đăng nhập</p>
                 </NavItem>
                 {isExpanded &&
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px' }}>
@@ -127,32 +129,19 @@ const LeftSideBar = () => {
                     </div>
                 }
             </div>
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "20px",
-                    height: '64px',
-                    padding: "20px",
-                }}
-            >
-                <button>
-                    {isLoggedIn ? <PlugsConnected fill='#00994D' size='24' /> : <Plugs fill='#FF451C' size='24' />}
-                </button>
-                {isExpanded && (
+            <NavItem Icon={plugIcon} isExpanded={isExpanded}>
+                <div className='nav-item-text'>
                     <NormalButton
                         text={isLoggedIn ? "Đã đăng nhập" : "Chưa đăng nhập"}
                         style={{
                             backgroundColor: isLoggedIn ? "#4BCC2E" : "#3D55CC",
                             color: "#FFF",
-                            width: "100%",
-                            alignSelf: 'auto',
+                            width: '100%',
                         }}
-                        onClick={() => { }}
                     />
-                )}
-            </div>
-        </div>
+                </div>
+            </NavItem>
+        </div >
     );
 };
 
