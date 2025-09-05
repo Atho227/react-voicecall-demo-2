@@ -6,7 +6,7 @@ const MainLayout = (props) => {
     return (
         <div className='LayoutWithSideBar'>
             <LeftSideBar />
-            <div className='main-content'>
+            <div className='MainContent'>
                 {props.mainContent}
             </div>
         </div>
