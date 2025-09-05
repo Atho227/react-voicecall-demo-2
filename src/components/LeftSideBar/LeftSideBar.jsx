@@ -65,9 +65,17 @@ const LeftSideBar = () => {
             className="sidebar"
             style={{ width: isExpanded ? "250px" : "64px", }}
         >
-            <NavItem Icon={List} text={'Support Panel'} isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} style={{ borderBottom: '1px solid #ccc' }} />
+            <NavItem Icon={List} isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} style={{ borderBottom: '1px solid #ccc' }} >
+                <p className='primary-text bold nav-item-text'>
+                    Hỗ trợ đăng nhập
+                </p>
+            </NavItem>
             <div style={{ flex: '1 0 0', width: '100%', overflowY: 'auto', borderBottom: "1px solid #ccc", display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <NavItem Icon={KeyIcon} text={'Thông tin đăng nhập'} isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} />
+                <NavItem Icon={KeyIcon} isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} >
+                    <p className='primary-text bold nav-item-text'>
+                        Thông tin đăng nhập
+                    </p>
+                </NavItem>
                 {isExpanded &&
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
