@@ -66,6 +66,7 @@ const LeftSideBar = () => {
     } else {
         plugIcon = (props) => <Plugs {...props} fill="#FF451C" />;
     }
+
     return (
         <div
             className="sidebar"

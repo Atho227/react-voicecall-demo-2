@@ -4,6 +4,7 @@ import CSCallModal from '../../components/modals/csCallModal'
 import CallingModal from '../../components/modals/CallingModal'
 import { useCall } from '../../hooks/CallHook/useCall'
 import TransferingAcceptionModal from '../../components/modals/TransferingAcceptionModal'
+import Controller from "../../components/other/controller.jsx";
 
 const MainView = ({ }) => {
     const { isReciveTransfer } = useCall();
@@ -22,6 +23,7 @@ const MainView = ({ }) => {
             {showNumdial ? <CSCallModal /> : ''}
             {showCallingModal ? <CallingModal /> : ''}
             {showTransferModal && <TransferingAcceptionModal setOpen={setShowTransferModal} />}
+            <Controller />
         </div>
     )
 }

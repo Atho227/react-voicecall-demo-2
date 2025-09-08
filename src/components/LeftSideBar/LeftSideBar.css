@@ -17,10 +17,12 @@
     align-items: center;
     height: 64px;
     transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 .nav-item-btn {
     width: 64px;
+    min-width: 64px;
     display: flex;
     justify-content: center;
     align-items: center;

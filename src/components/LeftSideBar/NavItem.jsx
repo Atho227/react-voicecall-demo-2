@@ -7,7 +7,7 @@ const NavItem = ({ Icon, children, isExpanded = true, style, onClick }) => {
             <button className='nav-item-btn' onClick={onClick}>
                 <Icon size={24} />
             </button>
-            {isExpanded && children}
+            {children}
         </div>
     )
 }
