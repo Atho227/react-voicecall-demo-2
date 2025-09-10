@@ -1,8 +1,9 @@
 import React from 'react'
+import { Box } from '@mui/material'
 
 const SidebarForm = ({ children, sx = {} }) => {
     return (
-        <Box>
+        <Box sx={{}}>
             {children}
         </Box>
     )
