@@ -5,5 +5,5 @@ const MainView = () => {
         <div>MainView</div>
     )
 }
-// 1
+// 2
 export default MainView
