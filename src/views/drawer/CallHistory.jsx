@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import IconButton from '../components/button/IconButton'
+import IconButton from '../../components/button/IconButton'
 import { ClockClockwise } from '../../assets/icon/NewStyleIcon'
-import HistoryModal from '../components/modals/HistoryModal'
+import HistoryModal from '../../components/modals/HistoryModal'
 import { getCallsArr } from '../../ultils/helper'
 
 const CallHistory = () => {

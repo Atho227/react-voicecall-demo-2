@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { CloseIcon } from '../../../assets/icon/NewStyleIcon';
+import { CloseIcon } from '../../assets/icon/NewStyleIcon';
 import NormalButton from '../button/NormalButton';
 import InputDropDown from '../input/InputDropDown';
 import ListItem from '../other/ListItem';

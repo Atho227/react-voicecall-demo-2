@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import IconWrap from '../other/icon';
 import IconButton from '../button/IconButton';
-import { BackspaceIcon } from '../../../assets/icon/NewStyleIcon';
+import { BackspaceIcon } from '../../assets/icon/NewStyleIcon';
 
 const InputWithIcon = ({ label, fIcon, updateValue, outvalue }) => {
     const [value, setValue] = useState(outvalue);

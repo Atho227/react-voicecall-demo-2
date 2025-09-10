@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
+import { PhoneCallOut } from '../../assets/icon/NewStyleIcon'
 
 const OptionsMenu = ({ data, setCurrent, setShowMenu, style, }) => {
     const isLoading = !data

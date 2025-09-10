@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import IconButton from '../button/IconButton'
-import { PhoneNormalFill } from '../../../assets/icon/PhoneIcons'
+import { PhoneNormalFill } from '../../assets/icon/PhoneIcons'
 import NormalButton from '../button/NormalButton'
 import BasicSwitch from '../button/switch'
 

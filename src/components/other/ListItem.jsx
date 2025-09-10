@@ -1,6 +1,6 @@
 import React from 'react'
 import IconWrap from './icon'
-import { UserIcon } from '../../../assets/icon/ActiveStatusIcon'
+import { UserIcon } from '../../assets/icon/ActiveStatusIcon'
 
 const ListItem = ({ data, onClick, ...props }) => {
     const handleClick = () => {

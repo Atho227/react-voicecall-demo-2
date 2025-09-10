@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setLoginStatus } from "../redux/authSlice"
+import { setLoginStatus } from "../redux/slices/authSlice"
 
 export const useAuthRedux = () => {
     const auth = useSelector(state => state.auth)

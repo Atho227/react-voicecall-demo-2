@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ChervonDown } from '../../../assets/icon/NewStyleIcon'
+import { ChervonDown } from '../../assets/icon/NewStyleIcon'
 
 const InputDropDown = ({ label = false, placeHoder = '--Chọn--', value, onChange, ...props }) => {
     return (

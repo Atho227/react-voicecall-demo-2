@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import IconWrap from '../other/icon'
-import { ChervonDown } from '../../../assets/icon/ActionIcons'
+import { ChervonDown } from '../../assets/icon/ActionIcons'
 import OptionsMenu from '../modals/Menu'
-import { PhoneCallOut } from '../../../assets/icon/NewStyleIcon'
+import { PhoneCallOut } from '../../assets/icon/NewStyleIcon'
 
 const DropDown = ({ options, setCurrent }) => {
     const [showMenu, setShowMenu] = useState(false)

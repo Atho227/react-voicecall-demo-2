@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import './LeftSideBar.css'
 import { KeyIcon, List, Plugs, PlugsConnected } from '../../assets/icon/NewStyleIcon'
-import NormalButton from '../components/button/NormalButton'
-import NormalInput from '../components/input/Input';
+import NormalButton from '../button/NormalButton'
+import NormalInput from '../input/Input';
 import { generateToken, onReloaded } from '../../ultils/helper';
 import { useLocalStorage } from '../../hooks/useLocalstorage';
 import { LoginApi } from '../../ultils/api/VoiceLoginApi';
-import { useAuthRedux } from '../../hooks/useAuthRedux';
+import { useSelector } from 'react-redux';
+import NavItem from './NavItem';
 
 const LeftSideBar = () => {
-    const { isLoggedIn } = useAuthRedux()
+    const { isLoggedIn } = useSelector(state => state.auth)
     const [isExpanded, setIsExpanded] = useState(true);
     const [isTokenCreation, setIsTokenCreation] = useState(false)
     const [tokenCreated, setTokenCreated] = useState(false)
@@ -58,45 +60,25 @@ const LeftSideBar = () => {
             });
         onReloaded()
     }
+    let plugIcon;
+    if (isLoggedIn) {
+        plugIcon = (props) => <PlugsConnected {...props} fill="#00994D" />;
+    } else {
+        plugIcon = (props) => <Plugs {...props} fill="#FF451C" />;
+    }
+
     return (
         <div
             className="sidebar"
-            style={{
-                position: 'absolute',
-                left: '0', top: '0',
-                width: isExpanded ? "250px" : "64px",
-                backgroundColor: "#FFF",
-                display: "flex",
-                flexDirection: "column",
-                height: "100vh",
-                minHeight: "730px",
-                border: "1px solid #DADCE5",
-            }}
+            style={{ width: isExpanded ? "250px" : "64px", }}
         >
-            <div style={{
-                height: "64px",
-                display: "flex",
-                alignItems: "center",
-                gap: "20px",
-                borderBottom: "1px solid #ccc",
-            }}
-            >
-                <button aria-label="Toggle sidebar"
-                    style={{ height: '64px', padding: '20px' }}
-                    onClick={() => setIsExpanded(!isExpanded)}>
-                    <List size={24} />
-                </button>
-                {isExpanded && <p style={{ flex: 1, textAlign: "center" }} className='primary-text bold'>Side Panel</p>}
-            </div>
-            <div style={{ flex: '1 0 0', overflowY: 'auto', borderBottom: "1px solid #ccc", display: 'flex', flexDirection: 'column', gap: '8px', padding: '20px' }}>
-                <div style={{ display: 'flex', gap: '20px', alignItems: "center", }}>
-                    <KeyIcon />
-                    {isExpanded &&
-                        <div style={{ flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
-                            <p className='primary-text bold'>Thông tin đăng nhập</p>
-                        </div>
-                    }
-                </div>
+            <NavItem Icon={List} isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} style={{ borderBottom: '1px solid #ccc' }} >
+                <p className='primary-text bold nav-item-text'>Hỗ trợ đăng nhập</p>
+            </NavItem>
+            <div style={{ flex: '1 0 0', width: '100%', overflowY: 'auto', borderBottom: "1px solid #ccc", display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <NavItem Icon={KeyIcon} isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} >
+                    <p className='primary-text bold nav-item-text'>Thông tin đăng nhập</p>
+                </NavItem>
                 {isExpanded &&
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
@@ -148,32 +130,19 @@ const LeftSideBar = () => {
                     </div>
                 }
             </div>
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "20px",
-                    height: '64px',
-                    padding: "20px",
-                }}
-            >
-                <button>
-                    {isLoggedIn ? <PlugsConnected fill='#00994D' size='24' /> : <Plugs fill='#FF451C' size='24' />}
-                </button>
-                {isExpanded && (
+            <NavItem Icon={plugIcon} isExpanded={isExpanded}>
+                <div className='nav-item-text'>
                     <NormalButton
                         text={isLoggedIn ? "Đã đăng nhập" : "Chưa đăng nhập"}
                         style={{
                             backgroundColor: isLoggedIn ? "#4BCC2E" : "#3D55CC",
                             color: "#FFF",
-                            width: "100%",
-                            alignSelf: 'auto',
+                            width: '100%',
                         }}
-                        onClick={() => { }}
                     />
-                )}
-            </div>
-        </div>
+                </div>
+            </NavItem>
+        </div >
     );
 };
 
