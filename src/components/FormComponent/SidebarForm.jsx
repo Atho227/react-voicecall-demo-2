@@ -8,5 +8,5 @@ const SidebarForm = ({ children, sx = {} }) => {
         </Box>
     )
 }
- 
+
 export default SidebarForm
