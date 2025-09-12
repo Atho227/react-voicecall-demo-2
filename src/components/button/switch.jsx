@@ -9,6 +9,7 @@ const BasicSwitch = ({
 }) => {
     return (
         <div
+            aria-description='BasicSwitch'
             className={`switch-wrapper ${className}`}
             style={style}
             onClick={onClick}

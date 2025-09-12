@@ -1,6 +1,7 @@
 export const LoginApi = async (domain, token) => {
+    const url = import.meta.env.VITE_WEB_URL
     try {
-        const response = await fetch(`https://test2.caresoft.vn/${domain}/thirdParty/login`, {
+        const response = await fetch(`${url}/${domain}/thirdParty/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
