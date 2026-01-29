@@ -12,8 +12,7 @@ import { transferType } from '../../assets/object/data'
 import SearchAgentModal from '../modals/SearchAgentModal'
 
 const CallInfo = ({ }) => {
-    const { callInfo,
-        isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId, onlineAgentList, transferOk } = useCall()
+    const { callInfo, isMuting, isHolding, isCall, isRinging, isCallOut, isAnswer, currentServiceId, onlineAgentList, transferOk } = useCall()
     const time = '00:00'
 
     const [currentService, setCurrentService] = useState('Mặc định')
@@ -44,14 +43,7 @@ const CallInfo = ({ }) => {
     return (
         <div style={{ width: '100%' }} >
             {isCall ?
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    alignSelf: 'stretch',
-                    borderTop: '1px solid var(--border-neutral-neutral-light, #DADCE5)',
-                    background: 'var(--background-container, #FFF)',
-                }} >
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', alignSelf: 'stretch', borderTop: '1px solid var(--border-neutral-neutral-light, #DADCE5)', background: 'var(--background-container, #FFF)', }} >
                     <div style={{ display: 'flex', padding: '16px', flexDirection: 'column', alignItems: 'flex-start', gap: '16px', alignSelf: 'stretch' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px', alignSelf: 'stretch' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'stretch' }}>

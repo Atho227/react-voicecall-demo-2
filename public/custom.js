@@ -1,4 +1,4 @@
-// src/ultils/custom.js
+// custom.js
 
 window.unload = function () {
     csUnregister();

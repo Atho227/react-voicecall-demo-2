@@ -1,4 +1,3 @@
-import React from 'react'
 import LeftSideBar from '../components/LeftSideBar/LeftSideBar'
 import './MainLayout.css'
 

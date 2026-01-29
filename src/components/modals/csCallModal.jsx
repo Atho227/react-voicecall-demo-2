@@ -48,7 +48,7 @@ const CSCallModal = () => {
             <div className="modal-header">
                 <div className="heading">
                     <IconWrap icon={PhoneNormalFill} />
-                    <div className="primary-text">CS Call</div>
+                    <div className="primary-text">Call</div>
                     {online ? <Active /> : <Disable />}
                 </div>
                 <div className="action-btn">

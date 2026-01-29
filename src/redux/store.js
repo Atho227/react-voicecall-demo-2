@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import callReducer from '../redux/CallRedux/CallSlice'
-import authReducer from './slices/authSlice'
-import voiceReducer from '../redux/slices/voiceCallSlice'
-import logger from 'redux-logger';
+import callReducer from '../redux/CallRedux/CallSlice';
+import voiceReducer from '../redux/slices/voiceCallSlice';
+import authReducer from './slices/authSlice';
 
 export const store = configureStore({
     reducer: {
@@ -10,7 +9,7 @@ export const store = configureStore({
         call: callReducer,
         voiceCall: voiceReducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
 });
 
 window.store = store;

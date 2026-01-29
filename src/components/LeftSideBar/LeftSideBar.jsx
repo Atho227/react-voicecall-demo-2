@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import './LeftSideBar.css'
-import { KeyIcon, List, Plugs, PlugsConnected } from '../../assets/icon/NewStyleIcon'
-import NormalButton from '../button/NormalButton'
-import NormalInput from '../input/Input';
-import { generateToken, onReloaded } from '../../ultils/helper';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { KeyIcon, List, Plugs, PlugsConnected } from '../../assets/icon/NewStyleIcon';
 import { useLocalStorage } from '../../hooks/useLocalstorage';
 import { LoginApi } from '../../ultils/api/VoiceLoginApi';
-import { useSelector } from 'react-redux';
+import { generateToken, onReloaded } from '../../ultils/helper';
+import NormalButton from '../button/NormalButton';
+import NormalInput from '../input/Input';
+import './LeftSideBar.css';
 import NavItem from './NavItem';
 
 const LeftSideBar = () => {
@@ -60,6 +60,7 @@ const LeftSideBar = () => {
             });
         onReloaded()
     }
+
     let plugIcon;
     if (isLoggedIn) {
         plugIcon = (props) => <PlugsConnected {...props} fill="#00994D" />;
@@ -68,10 +69,7 @@ const LeftSideBar = () => {
     }
 
     return (
-        <div
-            className="sidebar"
-            style={{ width: isExpanded ? "250px" : "64px", }}
-        >
+        <div className="sidebar" style={{ width: isExpanded ? "250px" : "64px" }} >
             <NavItem Icon={List} isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} style={{ borderBottom: '1px solid #ccc' }} >
                 <p className='primary-text bold nav-item-text'>Hỗ trợ đăng nhập</p>
             </NavItem>
@@ -82,18 +80,8 @@ const LeftSideBar = () => {
                 {isExpanded &&
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', padding: '0 8px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
-                            <NormalInput
-                                label='Domain'
-                                name='domain'
-                                value={loginInfo.domain}
-                                onChange={handleChangeLoginInfo}
-                            />
-                            <NormalInput
-                                label='Đăng nhập Token'
-                                name='token'
-                                value={loginInfo.token}
-                                onChange={handleChangeLoginInfo}
-                            />
+                            <NormalInput label='Domain' name='domain' value={loginInfo.domain} onChange={handleChangeLoginInfo} />
+                            <NormalInput label='Đăng nhập Token' name='token' value={loginInfo.token} onChange={handleChangeLoginInfo} />
                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '8px', width: '100%' }}>
                                 {isLoggedIn ? <NormalButton text='Đã đăng nhập' />
                                     : <NormalButton text='Đăng nhập' onClick={() => onLogin()} />}
@@ -104,25 +92,14 @@ const LeftSideBar = () => {
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                                 <p className='primary-text bold'>Tạo Token</p>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
-                                    <NormalInput
-                                        label='Agent Id'
-                                        name='agent_id'
-                                        value={createTokenForm.agent_id}
-                                        onChange={handleChangeCreateTokenForm}
-                                    />
-                                    <NormalInput
-                                        label='Voice API Key'
-                                        name='secret'
-                                        value={createTokenForm.secret}
-                                        onChange={handleChangeCreateTokenForm}
-                                    />
+                                    <NormalInput label='Agent Id' name='agent_id' value={createTokenForm.agent_id} onChange={handleChangeCreateTokenForm} />
+                                    <NormalInput label='Voice API Key' name='secret' value={createTokenForm.secret} onChange={handleChangeCreateTokenForm} />
                                     <NormalButton text='Tạo Token ngay' onClick={createToken} />
                                 </div>
                                 {tokenCreated &&
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
                                         <NormalInput label={'Token của bạn'} value={token} disabled />
-                                        <span className='small-text bold link-text' style={{ position: 'absolute', top: '0', right: '4px' }}
-                                            onClick={() => handleCopy()}>Copy</span>
+                                        <span className='small-text bold link-text' style={{ position: 'absolute', top: '0', right: '4px' }} onClick={() => handleCopy()}>Copy</span>
                                     </div>
                                 }
                             </div>
@@ -132,14 +109,7 @@ const LeftSideBar = () => {
             </div>
             <NavItem Icon={plugIcon} isExpanded={isExpanded}>
                 <div className='nav-item-text'>
-                    <NormalButton
-                        text={isLoggedIn ? "Đã đăng nhập" : "Chưa đăng nhập"}
-                        style={{
-                            backgroundColor: isLoggedIn ? "#4BCC2E" : "#3D55CC",
-                            color: "#FFF",
-                            width: '100%',
-                        }}
-                    />
+                    <NormalButton text={isLoggedIn ? "Đã đăng nhập" : "Chưa đăng nhập"} style={{ backgroundColor: isLoggedIn ? "#4BCC2E" : "#3D55CC", color: "#FFF", width: '100%', }} />
                 </div>
             </NavItem>
         </div >

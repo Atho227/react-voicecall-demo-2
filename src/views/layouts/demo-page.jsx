@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import StatusBar from '../../components/parts/status-bar'
-import CSCallModal from '../../components/modals/csCallModal'
+import { useEffect, useState } from 'react'
 import CallingModal from '../../components/modals/CallingModal'
-import { useCall } from '../../hooks/CallHook/useCall'
+import CSCallModal from '../../components/modals/csCallModal'
 import TransferingAcceptionModal from '../../components/modals/TransferingAcceptionModal'
-import Controller from "../../components/other/controller.jsx";
+import StatusBar from '../../components/parts/status-bar'
+import { useCall } from '../../hooks/CallHook/useCall'
 
 const MainView = ({ }) => {
     const { isReciveTransfer } = useCall();
@@ -23,7 +22,6 @@ const MainView = ({ }) => {
             {showNumdial ? <CSCallModal /> : ''}
             {showCallingModal ? <CallingModal /> : ''}
             {showTransferModal && <TransferingAcceptionModal setOpen={setShowTransferModal} />}
-            {/* <Controller /> */}
         </div>
     )
 }
