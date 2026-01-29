@@ -23,7 +23,7 @@ const MainView = ({ }) => {
             {showNumdial ? <CSCallModal /> : ''}
             {showCallingModal ? <CallingModal /> : ''}
             {showTransferModal && <TransferingAcceptionModal setOpen={setShowTransferModal} />}
-            <Controller />
+            {/* <Controller /> */}
         </div>
     )
 }

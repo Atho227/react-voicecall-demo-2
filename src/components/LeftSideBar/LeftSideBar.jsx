@@ -80,7 +80,7 @@ const LeftSideBar = () => {
                     <p className='primary-text bold nav-item-text'>Thông tin đăng nhập</p>
                 </NavItem>
                 {isExpanded &&
-                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '12px', padding: '0 8px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
                             <NormalInput
                                 label='Domain'
